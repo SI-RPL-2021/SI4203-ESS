@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\STNK;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class STNKController extends Controller
+class kehilanganSTNK extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,7 +22,7 @@ class STNKController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function stnk()
+    public function index()
     {
         return view('pengguna.pages.stnk.laporan_kehilangan_stnk');
     }

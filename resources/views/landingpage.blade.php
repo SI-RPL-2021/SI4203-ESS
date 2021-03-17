@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;800&family=Red+Hat+Text:wght@400;500;700&display=swap" rel="stylesheet">
-    <title>Smart Parking</title>
+    <title>E-SS</title>
 </head>
 
 <body style="background-color: #E7EFF6;" id="home">
@@ -21,7 +21,7 @@
             <div class="nav-item">
                 <span class="navbar-brand ">E-SS</span>
             </div>
-            <div class=" navbar-nav ml-auto">
+            <!-- <div class=" navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link " href="#home">Awal </a>
                 </li>
@@ -31,7 +31,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Hubungi </a>
                 </li>
-            </div>
+            </div> -->
             <div class="navbar-nav ml-auto">
                 <div class="dropdown">
                     <a class="btn rounded-pill align-middle shadow-sm" href="{{ route('login') }}" aria-haspopup="true" aria-expanded="false" style="background-color: #63ACE5;">
@@ -42,6 +42,11 @@
         </nav>
     </header>
     <!-- penutup navbar -->
+
+    <!-- konten -->
+    <div class="container">
+        ASDSAD
+    </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

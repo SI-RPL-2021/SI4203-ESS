@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login | Smart Parkir</title>
+    <title> Masuk | E-SS </title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/sbadmin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">

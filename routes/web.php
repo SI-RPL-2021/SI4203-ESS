@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
-use App\Http\Controllers\SIMController;
-use App\Http\Controllers\STNKController;
+use App\Http\Controllers\STNK\kehilanganSTNK;
+use App\Http\Controllers\SIM\kehilanganSIM;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'landing_page'])->n
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', [App\Http\Controllers\RolesController::class, 'index'])->name('home');
-    Route::get('laporan_kehilangan_sim', [App\Http\Controllers\SIMController::class, 'sim'])->name('laporan_kehilangan_sim');
-    Route::get('laporan_kehilangan_stnk', [App\Http\Controllers\STNKController::class, 'stnk'])->name('laporan_kehilangan_stnk');
+    Route::get('laporan_kehilangan_sim', [App\Http\Controllers\SIM\kehilanganSIM::class, 'index'])->name('laporan_kehilangan_sim');
+    Route::get('laporan_kehilangan_stnk', [App\Http\Controllers\STNK\kehilanganSTNK::class, 'index'])->name('laporan_kehilangan_stnk');
 });
