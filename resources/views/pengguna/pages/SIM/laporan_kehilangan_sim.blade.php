@@ -1,103 +1,213 @@
 @extends('pengguna.templates.default')
 @section('content')
+<style>
+    input.invalid {
+        background-color: #ffdddd;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .tombol {
+        background-color: #4e73df;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        ;
+        cursor: pointer;
+        border-radius: 7px;
+    }
+
+    .tombol:hover {
+        opacity: 0.8;
+    }
+
+    #prevBtn {
+        background-color: #bbbbbb;
+    }
+
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #4e73df;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+    .step.active {
+        opacity: 1;
+    }
+
+    .step.finish {
+        background-color: #4e73df;
+    }
+</style>
+
+
 <div class="row">
     <div class="col-lg">
         <div class="card">
             <div class="card-header">
-                <h6 class="card-title">Laporan Kehilangan SIM</h6>
+                <h4 class="card-title">Laporan Kehilangan SIM</h4>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form id="regForm" action="{{ route('kehilanganSIM.store') }}" method="post">
                     @csrf
-                    <div class="form-group">
-                        <label for="nama">Nama Lengkap </label>
-                        <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama">
-                        @error('nama')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
+                    <div style="text-align:center;margin-top:20px;margin-bottom:20px;">
+                        <span class="step"></span>
+                        <span class="step"></span>
                     </div>
-                    <div class="form-group">
-                        <label for="ttl">Tempat, Tanggal Lahir</label>
-                        <input type="text" name="ttl" class="form-control @error('ttl') is-invalid @enderror" id="ttl">
-                        @error('ttl')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+
+
+                    <!-- form 1 -->
+
+                    <div class="tab">
+                        <h5>Formulir Pemohonan SIM</h5>
+                        <hr>
+                        <div class="row">
+                            <label class="col-form-label col-sm-2 pt-0" for="no_regis">Silahkan Download File Berikut </label>
                         </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="pekerjaan">Pekerjaan</label>
-                        <input type="text" name="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror" id="pekerjaan">
-                        @error('pekerjaan')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                        <div class="row col-sm-2 pt-0">
+                            <a class="btn btn-primary " href="/download">Download</a>
                         </div>
-                        @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="alamat_tinggal">Alamat Tinggal</label>
-                        <input type="text" name="alamat_tinggal" class="form-control @error('alamat_tinggal') is-invalid @enderror" id="palamat_tinggal">
-                        @error('alamat_tinggal')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+
+                    <div class="tab">
+                        <h5>Identitas Diri</h5>
+                        <hr>
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap </label>
+                            <input type="text" name="nama" class="form-control" id="nama">
                         </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="no_sim">No SIM</label>
-                        <input type="text" name="no_sim" class="form-control @error('no_sim') is-invalid @enderror" id="no_sim">
-                        @error('no_sim')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                        <div class="form-group">
+                            <label for="ttl">Tempat, Tanggal Lahir</label>
+                            <input type="text" name="ttl" class="form-control" id="ttl">
                         </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="no_regis">No Registrasi</label>
-                        <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis">
-                        @error('no_regis')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                        <div class="form-group">
+                            <label for="pekerjaan">Pekerjaan</label>
+                            <input type="text" name="pekerjaan" class="form-control" id="pekerjaan">
                         </div>
-                        @enderror
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="tgl_awal">Tanggal Berlaku</label>
-                            <input type="date" class="form-control @error('tgl_awal') is-invalid @enderror" id="tgl_awal" name="tgl_awal">
-                            @error('tgl_awal')
-                            <div class="invalid-feedback">
-                                {{ $message }}
+                        <div class="form-group">
+                            <label for="alamat_tinggal">Alamat Tinggal</label>
+                            <input type="text" name="alamat_tinggal" class="form-control" id="palamat_tinggal">
+                        </div>
+                        <div class="form-group">
+                            <label for="no_sim">No SIM</label>
+                            <input type="text" name="no_sim" class="form-control" id="no_sim">
+                        </div>
+                        <div class="form-group">
+                            <label for="no_regis">No Registrasi</label>
+                            <input type="text" name="no_regis" class="form-control" id="no_regis">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="tgl_awal">Tanggal Berlaku</label>
+                                <input type="date" class="form-control" id="tgl_awal" name="tgl_awal">
                             </div>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="tgl_akhir">Tanggal Berakhir</label>
-                            <input type="date" class="form-control @error('tgl_akhir') is-invalid @enderror" id="tgl_akhir" name="tgl_akhir">
-                            @error('tgl_akhir')
-                            <div class="invalid-feedback">
-                                {{ $message }}
+                            <div class="form-group col-md-6">
+                                <label for="tgl_akhir">Tanggal Berakhir</label>
+                                <input type="date" class="form-control" id="tgl_akhir" name="tgl_akhir">
                             </div>
-                            @enderror
                         </div>
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-2 pt-0">Silahkan upload file persyaratan</legend>
+                            </div>
+                            <div class="row col-sm-2 pt-0">
+                                <input type="file" name="file" class="custom-file-inpuit" id="file">
+                            </div>
+                        </fieldset>
                     </div>
-                    <div class="form-group">
-                        <label for="unggah_berkas">Unggah Berkas</label>
-                        <input type="text" name="unggah_berkas" class="form-control @error('unggah_berkas') is-invalid @enderror">
-                        @error('unggah_berkas')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn btn-block btn-primary">Proses</button>
+                    <div style="float:right;margin-top:50px;">
+                        <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>
+                        <button type="button" class="tombol" id="nextBtn" onclick="nextPrev(1)"> Selanjutnya </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
+    function showTab(n) {
+        // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Selesai";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Selanjutnya";
+        }
+        //... and run a function that will display the correct step indicator:
+        fixStepIndicator(n)
+    }
+
+    function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + n;
+        // if you have reached the end of the form...
+        if (currentTab >= x.length) {
+            // ... the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+    function validateForm() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
+            }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
+    }
+
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class on the current step:
+        x[n].className += " active";
+    }
+</script>
+
 @endsection

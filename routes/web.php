@@ -25,6 +25,19 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'landing_page'])->n
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', [App\Http\Controllers\RolesController::class, 'index'])->name('home');
-    Route::get('laporan_kehilangan_sim', [App\Http\Controllers\SIM\kehilanganSIM::class, 'index'])->name('laporan_kehilangan_sim');
-    Route::get('laporan_kehilangan_stnk', [App\Http\Controllers\STNK\kehilanganSTNK::class, 'index'])->name('laporan_kehilangan_stnk');
+
+    //sim -----------------------
+    Route::resource('kehilanganSIM', kehilanganSIM::class);
+
+    // stnk -----------------------
+
+    Route::resource('kehilanganSTNK', kehilanganSTNK::class);
+    Route::get('/download', function () {
+        $file = public_path() . "/suratketeranganhilang.pdf";
+        if (file_exists($file)) {
+            return Response::download($file, "Surat Keterangan Hilang.pdf", ['Content-Type: application/pdf']);
+        } else {
+            exit('File tidak bisa di download');
+        }
+    });
 });
