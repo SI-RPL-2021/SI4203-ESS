@@ -44,7 +44,7 @@ class LaporanKehilanganStnk extends Migration
             $table->string('perubahan');
             $table->string('persyaratan_khusus');
             $table->string('perpanjangan');
-            // $table->file('file');
+            $table->string('file');
             $table->rememberToken();
             $table->timestamps();
         });

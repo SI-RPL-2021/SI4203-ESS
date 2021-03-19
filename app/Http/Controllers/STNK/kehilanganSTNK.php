@@ -80,6 +80,7 @@ class kehilanganSTNK extends Controller
             'perubahan' => ['nullable'],
             'persyaratan_khusus' => ['nullable'],
             'perpanjangan ' => ['nullable'],
+            'file' => ['required'],
 
         ]);
 
@@ -113,7 +114,7 @@ class kehilanganSTNK extends Controller
         $laporankehilangan->perubahan = implode(",", $request->perubahan); //kacau
         $laporankehilangan->persyaratan_khusus = implode(",", $request->persyaratan_khusus);
         $laporankehilangan->perpanjangan = implode(",", $request->perpanjangan);
-        // $laporankehilangan->file = $request->file;
+        $laporankehilangan->file = $request->file;
         $laporankehilangan->save();
 
         return redirect()->route('kehilanganSTNK.index')->with('success', 'Laporan Kehilangan STNK Berhasil Dibuat');

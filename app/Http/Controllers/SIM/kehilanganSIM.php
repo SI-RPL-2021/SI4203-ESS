@@ -56,6 +56,7 @@ class kehilanganSIM extends Controller
             'no_regis' => ['required'],
             'tgl_awal' => ['required'],
             'tgl_akhir' => ['required'],
+            'file' => ['required'],
         ]);
 
 
@@ -71,11 +72,6 @@ class kehilanganSIM extends Controller
         $laporankehilangan->tgl_awal = $request->tgl_awal;
         $laporankehilangan->tgl_akhir = $request->tgl_akhir;
         $laporankehilangan->file = $request->file;
-        $laporankehilangan->file = $request->file;
-
-        $fileName = time() . '.' . $request->file->extension();
-        $request->file->move(public_path('file'), $fileName);
-
         $laporankehilangan->save();
 
         return redirect()->route('kehilanganSIM.index')->with('success', 'Laporan Kehilangan SIM Berhasil Dibuat');

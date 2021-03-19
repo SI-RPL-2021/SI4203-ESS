@@ -9,4 +9,5 @@ class laporan_kehilangan_sim extends Model
 {
     use HasFactory;
     protected $table = "laporan_kehilangan_sim";
+    protected $guarded = [];
 }
