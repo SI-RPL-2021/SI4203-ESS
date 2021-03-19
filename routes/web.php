@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\SIM\kehilanganSIM;
+use App\Http\Controllers\HistoryController;
 
 
 /*
@@ -30,9 +31,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('kehilanganSIM', kehilanganSIM::class);
 
     // stnk -----------------------
-
     Route::resource('kehilanganSTNK', kehilanganSTNK::class);
 
+    Route::resource('HistoryController', HistoryController::class);
     //download file
     Route::get('/download', function () {
         $file = public_path() . "/suratketeranganhilang.pdf";

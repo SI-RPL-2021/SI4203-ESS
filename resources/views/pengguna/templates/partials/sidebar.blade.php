@@ -11,7 +11,7 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('home') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-fw fa-home"></i>
             <span>Home</span></a>
     </li>
 
@@ -48,6 +48,16 @@
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Nav Item - History -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('HistoryController.index') }}">
+            <i class="fas fa-fw fa-history"></i>
+            <span>History</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class=" sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
