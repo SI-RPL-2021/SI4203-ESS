@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth']], function () {
     // stnk -----------------------
 
     Route::resource('kehilanganSTNK', kehilanganSTNK::class);
+
+    //download file
     Route::get('/download', function () {
         $file = public_path() . "/suratketeranganhilang.pdf";
         if (file_exists($file)) {

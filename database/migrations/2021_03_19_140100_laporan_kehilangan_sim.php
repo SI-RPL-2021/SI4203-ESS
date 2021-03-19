@@ -23,7 +23,7 @@ class LaporanKehilanganSim extends Migration
             $table->string('no_regis');
             $table->date('tgl_awal');
             $table->date('tgl_akhir');
-            // $table->file('file');
+            $table->string('file');
             $table->rememberToken();
             $table->timestamps();
         });
