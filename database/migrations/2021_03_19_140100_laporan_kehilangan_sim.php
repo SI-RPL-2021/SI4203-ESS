@@ -24,6 +24,7 @@ class LaporanKehilanganSim extends Migration
             $table->date('tgl_awal');
             $table->date('tgl_akhir');
             $table->string('file');
+            $table->string('jenis_pelayanan');
             $table->rememberToken();
             $table->timestamps();
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();

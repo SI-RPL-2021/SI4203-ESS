@@ -73,8 +73,16 @@
                     <div class="tab">
                         <h5>Formulir Pemohonan STNK</h5>
                         <hr>
-                        <label for="no_regis"> No Registrasi </label>
-                        <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis">
+                        <div class="form-group">
+                            <label for="no_regis"> No Registrasi </label>
+                            <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value=<?php
+                                                                                                                                                echo rand();
+                                                                                                                                                ?> readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="jenis_pelayanan">Pelayanan</label>
+                            <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Laporan Kehilangan STNK" readonly>
+                        </div>
                         <div class="row">
                             <label class="col-form-label col-sm-2 pt-0" for="no_regis">Silahkan Download File Berikut </label>
                         </div>
@@ -82,6 +90,7 @@
                             <a class="btn btn-primary " href="/download">Download</a>
                         </div>
                     </div>
+
 
                     <!-- form 2 -->
 
@@ -234,13 +243,13 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="baru[]" type="checkbox" id="1" value="hasil_lelang_temuan">
+                                        <input class="form-check-input" name="baru[]" type="checkbox" id="1" value="Hasil Lelang Temuan Ditjen Bea Cukai / Polri">
                                         <label class="form-check-label" for="1">Hasil Lelang Temuan Ditjen Bea Cukai / Polri</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="baru[]" type="checkbox" id="2" value="cbu">
+                                        <input class="form-check-input" name="baru[]" type="checkbox" id="2" value="CBU">
                                         <label class="form-check-label" for="2">CBU</label>
                                     </div>
                                 </div>
@@ -254,20 +263,21 @@
                             <div class="row" style="margin-top: 10px;">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="baru[]" type="checkbox" id="4" value="hasil_lelang_polri">
+                                        <input class="form-check-input" name="baru[]" type="checkbox" id="4" value="Hasil Lelang Ranmor
+                                            Dinas TNI / Polri">
                                         <label class="form-check-label" for="4">Hasil Lelang Ranmor
                                             Dinas TNI / Polri</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="baru[]" type="checkbox" id="5" value="lembaga_internasional">
+                                        <input class="form-check-input" name="baru[]" type="checkbox" id="5" value="Lembaga Internasional">
                                         <label class="form-check-label" for="5">Lembaga Internasional</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="baru[]" type="checkbox" id="6" value="ckd">
+                                        <input class="form-check-input" name="baru[]" type="checkbox" id="6" value="CKD">
                                         <label class="form-check-label" for="6">CKD</label>
                                     </div>
                                 </div>
@@ -281,39 +291,39 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="7" value="ganti_nama_pemilik">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="7" value="Ganti Nama Pemilik">
                                         <label class="form-check-label" for="7">Ganti Nama Pemilik</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="8" value="pindah_nama_pemilik">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="8" value="Pindah Nama Pemilik">
                                         <label class="form-check-label" for="8">Pindah Nama Pemilik</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="9" value="rubah_bentuk">
-                                        <label class="form-check-label" for="8">Rubah Bentuk</label>
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="31" value="Rubah Bentuk">
+                                        <label class="form-check-label" for="31">Rubah Bentuk</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 10px;">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="9" value="rubah_warna">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="9" value="Rubah Warna">
                                         <label class="form-check-label" for="9">Rubah Warna</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="10" value="ganti_mesin">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="10" value="Ganti Mesin">
                                         <label class="form-check-label" for="10">Ganti Mesin</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="11" value="rubah_fungsi">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="11" value="Rubah Fungsi">
                                         <label class="form-check-label" for="11">Rubah Fungsi</label>
                                     </div>
                                 </div>
@@ -321,19 +331,19 @@
                             <div class="row" style="margin-top: 10px;">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="12" value="stnk_hilang">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="12" value="STNK Hilang">
                                         <label class="form-check-label" for="12">STNK Hilang</label>
                                     </div>
                                 </div>
                                 <div class=" col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="13" value="stnk_rusak">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="13" value="STNK Rusak">
                                         <label class="form-check-label" for="13">STNK Rusak</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="14" value="hibah">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="14" value="Hibah / Waris">
                                         <label class="form-check-label" for="14">Hibah / Waris</label>
                                     </div>
                                 </div>
@@ -341,19 +351,19 @@
                             <div class="row" style="margin-top: 10px;">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="15" value="ganti_nomor_regis">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="15" value="Ganti Nomor Registrasi">
                                         <label class="form-check-label" for="15">Ganti Nomor Registrasi</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="16" value="badan_hukum">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="16" value="Badan Hukum">
                                         <label class="form-check-label" for="16">Badan Hukum</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="17" value="mutasi">
+                                        <input class="form-check-input" name="perubahan[]" type="checkbox" id="17" value="Mutasi Keluar Daerah">
                                         <label class="form-check-label" for="17">Mutasi Keluar Daerah</label>
                                     </div>
                                 </div>
@@ -367,19 +377,19 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="18" value="stnk_rahasia">
+                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="18" value="STNK Rahasia">
                                         <label class="form-check-label" for="18">STNK Rahasia</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="19" value="stnk_khusus">
+                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="19" value="STNK Khusus">
                                         <label class="form-check-label" for="19">STNK Khusus</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="20" value="dinas_tni">
+                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="20" value="Dinas TNI">
                                         <label class="form-check-label" for="20">Dinas TNI</label>
                                     </div>
                                 </div>
@@ -387,13 +397,13 @@
                             <div class="row" style="margin-top: 10px;">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="21" value="dinas_polri">
+                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="21" value="Dinas Polri">
                                         <label class="form-check-label" for="21">Dinas Polri</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="22" value="sipil">
+                                        <input class="form-check-input" name="persyaratan_khusus[]" type="checkbox" id="22" value="Sipil">
                                         <label class="form-check-label" for="22">Sipil</label>
                                     </div>
                                 </div>
@@ -406,13 +416,13 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perpanjangan[]" type="checkbox" id="23" value="stnk_rahasia">
+                                        <input class="form-check-input" name="perpanjangan[]" type="checkbox" id="23" value="Pengesahan STNK Tahunan">
                                         <label class="form-check-label" for="23">Pengesahan STNK Tahunan</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perpanjangan[]" type="checkbox" id="24" value="stnk_khusus">
+                                        <input class="form-check-input" name="perpanjangan[]" type="checkbox" id="24" value="Perpanjangan STNK 5 Tahunan">
                                         <label class="form-check-label" for="24">Perpanjangan STNK 5 Tahunan</label>
                                     </div>
                                 </div>
