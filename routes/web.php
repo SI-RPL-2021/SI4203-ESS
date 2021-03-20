@@ -8,7 +8,6 @@ use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SIM\pembuatanSIM;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

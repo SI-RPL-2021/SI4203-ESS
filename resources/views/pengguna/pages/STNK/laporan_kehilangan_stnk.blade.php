@@ -54,7 +54,7 @@
     <div class="col-lg">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Laporan Kehilangan STNK</h4>
+                <h4 class="card-title text-primary ">Laporan Kehilangan STNK</h4>
             </div>
             <div class="card-body">
                 <form id="regForm" action="{{ route('kehilanganSTNK.store') }}" method="post">
