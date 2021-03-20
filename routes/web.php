@@ -6,6 +6,7 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\SIM\pembuatanSIM;
 
 
 /*
@@ -29,6 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //sim -----------------------
     Route::resource('kehilanganSIM', kehilanganSIM::class);
+    Route::resource('buat', pembuatanSIM::class);
 
     // stnk -----------------------
     Route::resource('kehilanganSTNK', kehilanganSTNK::class);
