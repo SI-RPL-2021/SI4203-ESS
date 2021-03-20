@@ -7,7 +7,6 @@ use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\HistoryController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

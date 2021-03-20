@@ -72,6 +72,7 @@ class kehilanganSIM extends Controller
         $laporankehilangan->tgl_awal = $request->tgl_awal;
         $laporankehilangan->tgl_akhir = $request->tgl_akhir;
         $laporankehilangan->file = $request->file;
+        $laporankehilangan->user_id = auth()->user()->id;
         $laporankehilangan->save();
 
         return redirect()->route('kehilanganSIM.index')->with('success', 'Laporan Kehilangan SIM Berhasil Dibuat');

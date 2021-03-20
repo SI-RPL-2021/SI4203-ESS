@@ -26,6 +26,7 @@ class LaporanKehilanganSim extends Migration
             $table->string('file');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
