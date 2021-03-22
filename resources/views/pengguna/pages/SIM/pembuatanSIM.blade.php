@@ -64,6 +64,7 @@
                             <span class="step"></span>
                             <span class="step"></span>
                             <span class="step"></span>
+                            <span class="step"></span>
                             
                         </div>
 
@@ -340,6 +341,29 @@
                             </div>
                         </div>
 
+                        <div class="tab">
+                            <table class="table">
+                                <tbody>
+                                  <tr>
+                                   
+                                    <td>NIK/Nomor KTP</td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">2</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">3</th>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
 
                         
                         <div style="float:right;margin-top:50px;">

@@ -38,6 +38,7 @@ class PembuatanSim extends Migration
             $table->string('sertif');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

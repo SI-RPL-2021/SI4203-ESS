@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\SIM;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\pembuatan_sim;
+use Illuminate\Http\Request;
 
 class pembuatanSIM extends Controller
 {
@@ -26,7 +26,7 @@ class pembuatanSIM extends Controller
     public function index()
     {
         return view('pengguna.pages.sim.pembuatanSIM', [
-            'title' => 'Pembuatan SIM'
+            'title' => 'Pembuatan SIM',
         ]);
     }
 
@@ -58,7 +58,7 @@ class pembuatanSIM extends Controller
             'nama_KD' => ['required'],
             'alamat_KD' => ['required'],
             'telepon_KD' => ['required'],
-            'nama_ibu_KD' => ['required'], 
+            'nama_ibu_KD' => ['required'],
             'sertif' => ['required'],
         ]);
 
@@ -79,11 +79,12 @@ class pembuatanSIM extends Controller
         $pembuatanSIM->pendidikan = $request->pendidikan;
         $pembuatanSIM->pekerjaan = $request->pekerjaan;
         $pembuatanSIM->hubungan = $request->hubungan;
-        $pembuatanSIM->nama_KD = $request->nama_KD; 
+        $pembuatanSIM->nama_KD = $request->nama_KD;
         $pembuatanSIM->alamat_KD = $request->alamat_KD;
         $pembuatanSIM->telepon_KD = $request->telepon_KD;
         $pembuatanSIM->nama_ibu_KD = $request->nama_ibu_KD;
         $pembuatanSIM->sertif = $request->sertif;
+        $pembuatanSIM->user_id = auth()->user()->id;
         $pembuatanSIM->save();
 
         return redirect()->route('buat.index')->with('success', 'Pembutan SIM akan segera di proses');
@@ -96,26 +97,23 @@ class pembuatanSIM extends Controller
      * @return \Illuminate\Http\Response
      */
 
-public function create()
-{
-    //
-}
-
-/**
- * Store a newly created resource in storage.
- *
- * @param  \Illuminate\Http\Request  $request
- * @return \Illuminate\Http\Response
- * 
-     public function show($id)
+    public function create()
     {
         //
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        //
+    }
+    /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
