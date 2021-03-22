@@ -28,6 +28,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('buat.index') }}">Pembuatan</a>
                 <a class="collapse-item" href="{{ route('kehilanganSIM.index') }}">Laporan Kehilangan SIM</a>
+                <a class="collapse-item" href="{{ route('perpanjanganSIM.index') }}">Perpanjangan SIM</a>
             </div>
         </div>
     </li>
