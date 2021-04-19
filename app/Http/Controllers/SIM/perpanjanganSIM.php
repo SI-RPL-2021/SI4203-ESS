@@ -35,7 +35,7 @@ class perpanjanganSIM extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) 
     {
 
         $request->validate([
@@ -59,11 +59,11 @@ class perpanjanganSIM extends Controller
             'pendidikan' => ['required'],
             'pekerjaan' => ['required'],
             'hubungan' => ['required'], 
-            'nama_drt' => ['required'],
-            'alamat_drt' => ['required'],
-            'telepon_drt' => ['required'],
-            'nama_ibu_kandung' => ['required'],
-            'sekolah_mengemudi' => ['required'],
+            'nama_KD' => ['required'],
+            'alamat_KD' => ['required'],
+            'telepon_KD' => ['required'],
+            'nama_ibu_KD' => ['required'],
+            'sertif' => ['required'],
         ]);
 
         $perpanjanganSIM = new perpanjangan_sim;
@@ -87,10 +87,10 @@ class perpanjanganSIM extends Controller
         $perpanjanganSIM->pendidikan = $request->pendidikan;
         $perpanjanganSIM->pekerjaan = $request->pekerjaan;
         $perpanjanganSIM->hubungan = $request->hubungan;
-        $perpanjanganSIM->nama_drt = $request->nama_drt;
-        $perpanjanganSIM->alamat_drt = $request->alamat_drt;
-        $perpanjanganSIM->telepon_drt = $request->telepon_drt;
-        $perpanjanganSIM->nama_ibu_kandung = $request->nama_ibu_kandung;
+        $perpanjanganSIM->nama_KD = $request->nama_KD;
+        $perpanjanganSIM->alamat_KD = $request->alamat_KD;
+        $perpanjanganSIM->telepon_KD = $request->telepon_KD;
+        $perpanjanganSIM->nama_ibu_KD = $request->nama_ibu_KD;
         $perpanjanganSIM->sekolah_mengemudi = $request->sekolah_mengemudi;
         $perpanjanganSIM->save();
 

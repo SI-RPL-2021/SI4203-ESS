@@ -8,7 +8,7 @@ use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SIM\pembuatanSIM;
 use App\Http\Controllers\SIM\perpanjanganSIM;
-
+use App\Http\Controllers\STNK\pembuatanSTNK;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('perpanjanganSIM', perpanjanganSIM::class);
 
     // stnk -----------------------
+    Route::resource('pembuatanSTNK', pembuatanSTNK::class);
     Route::resource('kehilanganSTNK', kehilanganSTNK::class);
 
     Route::resource('HistoryController', HistoryController::class);

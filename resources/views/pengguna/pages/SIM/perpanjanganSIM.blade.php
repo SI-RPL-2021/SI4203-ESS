@@ -145,12 +145,7 @@
                             </div>
 
 
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Alamat SATPAS
-                                        Kedatangan</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="alamat_satpas_kedatangan" name="alamat_satpas_kedatangan"
-                                        class="form-control"></div>
-                            </div>
+    
 
                         </div>
 
@@ -310,7 +305,7 @@
                                     <div class="col col-md-3"><label for="text-input"
                                             class=" form-control-label">Nama</label>
                                     </div>
-                                    <div class="col-12 col-md-9"><input type="text" id="nama_drt" name="nama_drt"
+                                    <div class="col-12 col-md-9"><input type="text" id="nama_KD" name="nama_KD"
                                             class="form-control"></div>
                                 </div>
 
@@ -318,7 +313,7 @@
                                     <div class="col col-md-3"><label for="text-input"
                                             class=" form-control-label">Alamat</label>
                                     </div>
-                                    <div class="col-12 col-md-9"><input type="text" id="alamat_drt" name="alamat_drt"
+                                    <div class="col-12 col-md-9"><input type="text" id="alamat_KD" name="alamat_KD"
                                             class="form-control"></div>
                                 </div>
 
@@ -327,7 +322,7 @@
                                     <div class="col col-md-3"><label for="text-input"
                                             class=" form-control-label">Telepon</label>
                                     </div>
-                                    <div class="col-12 col-md-9"><input type="text" id="telepon_drt" name="telepon_drt"
+                                    <div class="col-12 col-md-9"><input type="text" id="telepon_KD" name="telepon_KD"
                                             class="form-control"></div>
                                 </div>
                            
@@ -338,9 +333,9 @@
                             <div class="card-body card-block">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Ibu
-                                            Kandung</label>
+                                            KD</label>
                                     </div>
-                                    <div class="col-12 col-md-9"><input type="text" id="nama_ibu_kandung" name="nama_ibu_kandung"
+                                    <div class="col-12 col-md-9"><input type="text" id="nama_ibu_KD" name="nama_ibu_KD"
                                             class="form-control">
                                     </div>
                                 </div>
