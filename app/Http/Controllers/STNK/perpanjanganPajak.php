@@ -4,7 +4,7 @@ namespace App\Http\Controllers\STNK;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\perpanjangan_pajak;
+use App\Models\perpanjangan_pajak1;
 
 class perpanjanganPajak extends Controller
 {
@@ -25,7 +25,7 @@ class perpanjanganPajak extends Controller
      */
     public function index()
     {
-        return view('pengguna.pages.stnk.perpanjanganPajak5', [
+        return view('pengguna.pages.stnk.perpanjanganPajak1', [
             'title' => 'Perpanjangan Pajak'
         ]);
     }
@@ -51,7 +51,7 @@ class perpanjanganPajak extends Controller
     {
 
         $request->validate([
-            'no_regis' => ['required', 'unique:perpanjangan_pajak5,no_regis'],
+            'no_regis' => ['required', 'unique:perpanjangan_pajak1,no_regis'],
             'jenis_surat' => ['required'],
             'jenis_permohonan' => ['required'],
             'status' => ['required'],
@@ -70,13 +70,13 @@ class perpanjanganPajak extends Controller
             'ke' => ['required'],
             'fungsi' => ['required'],
             'bahan_bakar' => ['required'],
-            'negara_asal' => ['required'], 
+            'negara_asal' => ['required'],
             'merk' => ['required'],
             'thn_pembuatan' => ['required'],
             'Silinder' => ['required'],
             'no_rangka' => ['required'],
             'no_mesin' => ['required'],
-            'mesintype' => ['required'], 
+            'mesintype' => ['required'],
             'warna' => ['required'],
             'Kemudi' => ['required'],
             'Sumbu ' => ['required'],
@@ -93,7 +93,7 @@ class perpanjanganPajak extends Controller
 
         ]);
 
-        $perpanjanganPajak = new perpanjangan_pajak5;
+        $perpanjanganPajak = new perpanjangan_pajak1;
         $perpanjanganPajak->no_regis = $request->no_regis;
         $perpanjanganPajak->jenis_surat = $request->jenis_surat;
         $perpanjanganPajak->jenis_permohonan = $request->jenis_permohonan;
@@ -111,7 +111,7 @@ class perpanjanganPajak extends Controller
         $perpanjanganPajak->alamat_kuasa = $request->alamat_kuasa;
         $perpanjanganPajak->npwp = $request->npwp;
         $perpanjanganPajak->ke = $request->ke;
-        $perpanjanganPajak->fungsi = $request->fungsi; 
+        $perpanjanganPajak->fungsi = $request->fungsi;
         $perpanjanganPajak->bahan_bakar = $request->bahan_bakar;
         $perpanjanganPajak->negara_asal = $request->negara_asal;
         $perpanjanganPajak->merk = $request->merk;
@@ -122,7 +122,7 @@ class perpanjanganPajak extends Controller
         $perpanjanganPajak->mesintype = $request->mesintype;
         $perpanjanganPajak->warna = $request->warna;
         $perpanjanganPajak->Kemudi = $request->Kemudi;
-        $perpanjanganPajak->Sumbu = $request->Sumbu; 
+        $perpanjanganPajak->Sumbu = $request->Sumbu;
         $perpanjanganPajak->roda = $request->roda;
         $perpanjanganPajak->TNKB = $request->TNKB;
         $perpanjanganPajak->jml_pintu = $request->jml_pintu;
@@ -131,13 +131,13 @@ class perpanjanganPajak extends Controller
         $perpanjanganPajak->regist_bpkb = $request->regist_bpkb;
         $perpanjanganPajak->import = $request->import;
         $perpanjanganPajak->mesintype = $request->mesintype;
-        $perpanjanganPajak->pengambilan = $request->pengambilan; 
+        $perpanjanganPajak->pengambilan = $request->pengambilan;
         $perpanjanganPajak->metode_pembayaran = $request->metode_pembayaran;
         $perpanjanganPajak->jenis_pelayanan = $request->jenis_pelayanan;
         $perpanjanganPajak->user_id = auth()->user()->id;
         $perpanjanganPajak->save();
 
-        return redirect()->route('perpanjanganPajak2.index')->with('success', 'Perpanjangan Pajak berhasil');
+        return redirect()->route('perpanjanganPajak1.index')->with('success', 'Perpanjangan Pajak berhasil');
     }
 
     /**

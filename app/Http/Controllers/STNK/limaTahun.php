@@ -90,7 +90,7 @@ class limaTahun extends Controller
             'no_regis' => ['required', 'unique:perpanjangan_pajak2,no_regis'],
             'pengambilan' => ['required'],
             'metode_pembayaran' => ['required'],
-            ]);
+        ]);
 
         $limaTahun = new perpanjangan_pajak2;
         $limaTahun->jenis_surat = $request->jenis_surat;
