@@ -246,15 +246,15 @@
                         <hr>
                         <div class="form-group">
                             <label for="no_regis"> No Registrasi </label>
-                            <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value=<?php echo rand(); ?>>
+                            <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value=<?php echo rand(); ?> readonly>
                         </div>
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="no_regis"> Nama </label>
-                            <input type="text" name="no_regis" class="form-control @error('nama') is-invalid @enderror" id="nama" value=                                                                           
-                        </div> --}}
+                            <input type="text" name="no_regis" class="form-control @error('nama') is-invalid @enderror" id="nama">
+                        </div>
                         <div class="form-group">
                             <label for="jenis_pelayanan">Pelayanan</label>
-                            <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Perpanjangan Pajak 1 Tahun">
+                            <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Perpanjangan Pajak 1 Tahun" readonly>
                         </div>
 
                         <div class="row form-group">
