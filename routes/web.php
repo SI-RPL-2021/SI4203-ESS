@@ -8,14 +8,11 @@ use App\Http\Controllers\STNK\satuTahun;
 use App\Http\Controllers\STNK\limaTahun;
 use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\SIM\pembuatanSIM;
-<<<<<<< HEAD
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\VerifDataUserController;
-
-=======
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\STNK\pembuatanSTNK;
->>>>>>> 27c25fab6647b6cc5fa7669e4bc0ff8db6ed4ec0
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
