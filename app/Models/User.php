@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(laporan_kehilangan_sim::class);
     }
+
+    public function laporan_kehilangan_stnk()
+    {
+        return $this->hasOne(laporan_kehilangan_stnk::class);
+    }
 }

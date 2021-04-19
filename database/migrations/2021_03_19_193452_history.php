@@ -15,8 +15,6 @@ class History extends Migration
     {
         Schema::create('history', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            // $table->foreignId('laporan_kehilangan_sim_id')->constrained('laporan_kehilangan_sim')->cascadeOnUpdate()->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

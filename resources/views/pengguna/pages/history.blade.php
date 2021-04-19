@@ -10,18 +10,27 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Nama</th>
                         <th>Pelayanan</th>
-                        <th>Tanggal Pengajuan</th>
+                        <th>Jenis Permohonan</th>
+                        <th>Tanggal Permohonan</th>
                         <th>No Registrasi</th>
                         <th>Cetak</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($items as $item)
+                    @foreach ($items1 as $item)
                     <tr>
-                        <td>{{ $item->nama }}</td>
-                        <td>{{ $item->no_sim }}</td>
+                        <td>{{ $item->jenis_pelayanan }}</td>
+                        <td>{{ $item->jenis_pelayanan }}</td>
+                        <td>{{ $item->created_at->formatLocalized('%d %B %Y') }}</td>
+                        <td>{{ $item->no_regis }}</td>
+                        <td><button class="btn btn-primary">Cetak</button></td>
+                    </tr>
+                    @endforeach
+                    @foreach ($items2 as $item)
+                    <tr>
+                        <td>{{ $item->jenis_pelayanan }}</td>
+                        <td>{{ $item-> perubahan}} , {{ $item-> perpanjangan}}</td>
                         <td>{{ $item->created_at->formatLocalized('%d %B %Y') }}</td>
                         <td>{{ $item->no_regis }}</td>
                         <td><button class="btn btn-primary">Cetak</button></td>

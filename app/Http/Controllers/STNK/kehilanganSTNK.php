@@ -51,7 +51,7 @@ class kehilanganSTNK extends Controller
     {
 
         $request->validate([
-            'no_regis' => ['required'],
+            'no_regis' => ['required', 'unique:laporan_kehilangan_stnk,no_regis'],
             'merk' => ['required'],
             'type' => ['required'],
             'jenis' => ['required'],
@@ -81,6 +81,7 @@ class kehilanganSTNK extends Controller
             'persyaratan_khusus' => ['nullable'],
             'perpanjangan ' => ['nullable'],
             'file' => ['required'],
+            'jenis_pelayanan' => ['required'],
 
         ]);
 
@@ -111,10 +112,12 @@ class kehilanganSTNK extends Controller
         $laporankehilangan->nmr_ktp = $request->nmr_ktp;
         $laporankehilangan->kitas = $request->kitas;
         $laporankehilangan->baru = implode(",", $request->baru);
-        $laporankehilangan->perubahan = implode(",", $request->perubahan); //kacau
-        $laporankehilangan->persyaratan_khusus = implode(",", $request->persyaratan_khusus);
-        $laporankehilangan->perpanjangan = implode(",", $request->perpanjangan);
+        $laporankehilangan->perubahan = implode(" ,", $request->perubahan); //kacau
+        $laporankehilangan->persyaratan_khusus = implode(", ", $request->persyaratan_khusus);
+        $laporankehilangan->perpanjangan = implode(" ,", $request->perpanjangan);
+        $laporankehilangan->jenis_pelayanan = $request->jenis_pelayanan;
         $laporankehilangan->file = $request->file;
+        $laporankehilangan->user_id = auth()->user()->id;
         $laporankehilangan->save();
 
         return redirect()->route('kehilanganSTNK.index')->with('success', 'Laporan Kehilangan STNK Berhasil Dibuat');

@@ -17,11 +17,12 @@ class HistoryController extends Controller
 
     public function index()
     {
-        $items = laporan_kehilangan_sim::orderBy('created_at', 'desc')->where('user_id', auth()->id())->get();
-
+        $items1 = laporan_kehilangan_sim::orderBy('created_at', 'desc')->where('user_id', auth()->id())->get();
+        $items2 = laporan_kehilangan_stnk::orderBy('created_at', 'desc')->where('user_id', auth()->id())->get();
         return view('pengguna.pages.history', [
             'title' => 'History',
-            'items' => $items
+            'items1' => $items1,
+            'items2' => $items2,
         ]);
     }
 

@@ -70,6 +70,16 @@
                     <div class="tab">
                         <h5>Formulir Pemohonan SIM</h5>
                         <hr>
+                        <div class="form-group">
+                            <label for="no_regis">No Registrasi</label>
+                            <input type="text" name="no_regis" class="form-control" id="no_regis" value=<?php
+                                                                                                        echo rand();
+                                                                                                        ?> readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="jenis_pelayanan">Pelayanan</label>
+                            <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Laporan Kehilangan SIM" readonly>
+                        </div>
                         <div class="row">
                             <label class="col-form-label col-sm-2 pt-0" for="no_regis">Silahkan Download File Berikut </label>
                         </div>
@@ -100,10 +110,6 @@
                         <div class="form-group">
                             <label for="no_sim">No SIM</label>
                             <input type="text" name="no_sim" class="form-control" id="no_sim">
-                        </div>
-                        <div class="form-group">
-                            <label for="no_regis">No Registrasi</label>
-                            <input type="text" name="no_regis" class="form-control" id="no_regis">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">

@@ -45,8 +45,10 @@ class LaporanKehilanganStnk extends Migration
             $table->string('persyaratan_khusus');
             $table->string('perpanjangan');
             $table->string('file');
+            $table->string('jenis_pelayanan');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

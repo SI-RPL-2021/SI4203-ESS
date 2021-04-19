@@ -53,10 +53,11 @@ class kehilanganSIM extends Controller
             'pekerjaan' => ['required'],
             'alamat_tinggal' => ['required'],
             'no_sim' => ['required'],
-            'no_regis' => ['required'],
+            'no_regis' => ['required', 'unique:laporan_kehilangan_sim,no_regis'],
             'tgl_awal' => ['required'],
             'tgl_akhir' => ['required'],
             'file' => ['required'],
+            'jenis_pelayanan' => ['required'],
         ]);
 
 
@@ -71,6 +72,7 @@ class kehilanganSIM extends Controller
         $laporankehilangan->no_regis = $request->no_regis;
         $laporankehilangan->tgl_awal = $request->tgl_awal;
         $laporankehilangan->tgl_akhir = $request->tgl_akhir;
+        $laporankehilangan->jenis_pelayanan = $request->jenis_pelayanan;
         $laporankehilangan->file = $request->file;
         $laporankehilangan->user_id = auth()->user()->id;
         $laporankehilangan->save();
