@@ -75,9 +75,7 @@
                         <hr>
                         <div class="form-group">
                             <label for="no_regis"> No Registrasi </label>
-                            <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value=<?php
-                                                                                                                                                echo rand();
-                                                                                                                                                ?> readonly>
+                            <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value=<?php echo rand();?> readonly>                                                            
                         </div>
                         <div class="form-group">
                             <label for="jenis_pelayanan">Pelayanan</label>
