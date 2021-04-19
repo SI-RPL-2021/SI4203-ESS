@@ -28,6 +28,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('buat.index') }}">Pembuatan</a>
                 <a class="collapse-item" href="{{ route('kehilanganSIM.index') }}">Laporan Kehilangan SIM</a>
+                <a class="collapse-item" href="{{ route('perpanjanganSIM.index') }}">Perpanjangan SIM</a>
             </div>
         </div>
     </li>
@@ -44,6 +45,7 @@
         <div id="collapseSTNK" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('kehilanganSTNK.index') }}">Laporan Kehilangan STNK</a>
+                <a class="collapse-item" href="{{ route('pembuatanSTNK.index') }}">Pembuatan STNK</a>
             </div>
         </div>
     </li>
