@@ -57,7 +57,7 @@
                 <h4 class="card-title text-primary ">Formulir Pemohonan Perpanjangan Pajak</h4>
             </div>
             <div class="card-body">
-                <form id="regForm" action="{{ route('perpanjanganPajak1.store') }}" method="post">
+                <form id="regForm" action="{{ route('satutahun.store') }}" method="post">
                     @csrf
                     <div style="text-align:center;margin-top:20px;margin-bottom:20px;">
                         <span class="step"></span>
