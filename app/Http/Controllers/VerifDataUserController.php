@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\laporan_kehilangan_sim;
 use App\Models\laporan_kehilangan_stnk;
 use App\Models\pembuatan_sim;
-use App\Models\History;
+use App\Models\Verif_Data_User;
 use App\Models\User;
 
-class HistoryController extends Controller
+class VerifDataUserController extends Controller
 {
     public function __construct()
     {
@@ -21,8 +22,8 @@ class HistoryController extends Controller
         $items1 = laporan_kehilangan_sim::orderBy('created_at', 'desc')->where('user_id', auth()->id())->get();
         $items2 = laporan_kehilangan_stnk::orderBy('created_at', 'desc')->where('user_id', auth()->id())->get();
         $items3 = pembuatan_sim::orderBy('created_at', 'desc')->where('user_id', auth()->id())->get();
-        return view('pengguna.pages.history', [
-            'title' => 'History',
+        return view('pengguna.pages.pihakinternal.VerifikasiDataUser', [
+            'title' => 'Verifikasi Data User',
             'items1' => $items1,
             'items2' => $items2,
             'items3' => $items3,
@@ -71,7 +72,14 @@ class HistoryController extends Controller
      */
     public function edit($id)
     {
-        //
+       
+           
+            DB::table('verif_data_user')->where('id',$request->id)->update([
+                'status' => $request->status,
+            ]);
+            
+            return redirect('/verif');
+        
     }
 
     /**
