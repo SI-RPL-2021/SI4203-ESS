@@ -342,7 +342,7 @@
                             </div>
 
                             <div class="card-header">
-                                <strong>Data Sertifikasi</strong>
+                                <strong>Data Sertifikasii</strong>
                             </div>
                             <div class="card-body card-block">
                                 <div class="row form-group">
@@ -357,6 +357,7 @@
                                         </select>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
