@@ -12,7 +12,6 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\VerifDataUserController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\STNK\pembuatanSTNK;
-use App\Http\Controllers\SIM\SimController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +36,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('verif', VerifDataUserController::class);
 
     //sim -----------------------
-    Route::resource('kehilangan-sim', kehilanganSIM::class);
-    Route::resource('pembuatan-sim', pembuatanSIM::class);
-    Route::get('/pembuatan-sim/{id}/set', [pembuatanSIM::class, 'status'])->name('pembuatan-sim.status');
+    Route::resource('kehilanganSIM', kehilanganSIM::class);
+    Route::resource('buat', pembuatanSIM::class);
     Route::resource('perpanjanganSIM', perpanjanganSIM::class);
 
     // stnk -----------------------
@@ -47,8 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('kehilanganSTNK', kehilanganSTNK::class);
     Route::resource('satutahun', satuTahun::class);
     Route::resource('limatahun', limaTahun::class);
-    Route::resource('HistoryController', HistoryController::class);
 
+    Route::resource('HistoryController', HistoryController::class);
     //download file
     Route::get('/download', function () {
         $file = public_path() . "/suratketeranganhilang.pdf";
