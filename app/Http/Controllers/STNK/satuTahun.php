@@ -17,7 +17,7 @@ class satuTahun extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'adminstnk']);
     }
 
     /**
@@ -91,7 +91,7 @@ class satuTahun extends Controller
             'metode_pembayaran' => ['required'],
             'jenis_pelayanan' => ['required'],
 
-            ]);
+        ]);
 
         $satuTahun = new perpanjangan_pajak1;
         $satuTahun->no_regis = $request->no_regis;
@@ -145,7 +145,6 @@ class satuTahun extends Controller
      */
     public function show($id, Request $req)
     {
-           
     }
     /**
      * Show the form for editing the specified resource.

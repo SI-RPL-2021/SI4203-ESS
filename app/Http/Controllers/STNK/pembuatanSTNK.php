@@ -15,7 +15,7 @@ class pembuatanSTNK extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'adminstnk']);
     }
 
     /**
@@ -71,7 +71,7 @@ class pembuatanSTNK extends Controller
             'nmr_pib' => ['required'],
             'nmr_sut' => ['required'],
             'nmr_tanda_pendaftaran' => ['required'],
-            'nama_lengkap_pemilik' => ['required'], 
+            'nama_lengkap_pemilik' => ['required'],
             'alamat_pemilik' => ['required'],
             'kode_pos' => ['required'],
             'nmr_telepon' => ['required'],

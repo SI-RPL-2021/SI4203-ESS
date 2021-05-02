@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SIM;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\laporan_kehilangan_sim;
+use App\Models\pembuatan_sim;
 
 class kehilanganSIM extends Controller
 {
@@ -13,10 +14,10 @@ class kehilanganSIM extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +25,18 @@ class kehilanganSIM extends Controller
      */
     public function index()
     {
-        return view('pengguna.pages.sim.laporan_kehilangan_sim', [
-            'title' => 'Laporan Kehilangan SIM'
+        if (auth()->user()->level === 'user') {
+            $sim = pembuatan_sim::where('user_id', auth()->id())->where('status', 3)->first();
+            $data = laporan_kehilangan_sim::where('user_id', auth()->id())->get();
+            if ($data->count() < 1) {
+                return redirect()->route('kehilangan-sim.create');
+            }
+        } else {
+            $data = laporan_kehilangan_sim::latest()->get();
+        }
+        return view('pengguna.pages.sim.kehilangan.index', [
+            'title' => 'Laporan Kehilangan SIM',
+            'data' => $data
         ]);
     }
 
@@ -36,7 +47,22 @@ class kehilanganSIM extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->level === 'user') {
+            $sim = pembuatan_sim::where('user_id', auth()->id())->where('status', 3)->first();
+            $data = laporan_kehilangan_sim::where('user_id', auth()->id())->first();
+            if (!$sim) {
+                return redirect()->route('pembuatan-sim.index');
+            }
+            if ($data !== NULL && $data->count() > 0) {
+                return redirect()->route('kehilangan-sim.index');
+            }
+        } else {
+            $sim = NULL;
+        }
+        return view('pengguna.pages.sim.kehilangan.create', [
+            'title' => 'Buat Laporan Kehilangan SIM',
+            'sim' => $sim
+        ]);
     }
 
     /**
@@ -74,10 +100,14 @@ class kehilanganSIM extends Controller
         $laporankehilangan->tgl_akhir = $request->tgl_akhir;
         $laporankehilangan->jenis_pelayanan = $request->jenis_pelayanan;
         $laporankehilangan->file = $request->file;
-        $laporankehilangan->user_id = auth()->user()->id;
+        if (auth()->user()->level === 'admin sim') {
+            $laporankehilangan->user_id = NULL;
+        } else {
+            $laporankehilangan->user_id = auth()->user()->id;
+        }
         $laporankehilangan->save();
 
-        return redirect()->route('kehilanganSIM.index')->with('success', 'Laporan Kehilangan SIM Berhasil Dibuat');
+        return redirect()->route('kehilangan-sim.index')->with('success', 'Laporan Kehilangan SIM Berhasil Dibuat');
     }
 
     /**
@@ -122,6 +152,8 @@ class kehilanganSIM extends Controller
      */
     public function destroy($id)
     {
-        //
+        laporan_kehilangan_sim::destroy($id);
+
+        return redirect()->back()->with('success', 'Laporan berhasil dihapus.');
     }
 }

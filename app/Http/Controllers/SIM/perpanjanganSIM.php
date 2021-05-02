@@ -15,7 +15,7 @@ class perpanjanganSIM extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'adminsim']);
     }
 
     /**
@@ -25,8 +25,10 @@ class perpanjanganSIM extends Controller
      */
     public function index()
     {
-        return view('pengguna.pages.sim.perpanjanganSIM', [
-            'title' => 'Perpanjangan SIM'
+        $data = perpanjangan_sim::latest()->get();
+        return view('pengguna.pages.sim.perpanjang.index', [
+            'title' => 'Perpanjangan SIM',
+            'data' => $data
         ]);
     }
 
@@ -35,7 +37,7 @@ class perpanjanganSIM extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
 
         $request->validate([
@@ -58,7 +60,7 @@ class perpanjanganSIM extends Controller
             'no_hp' => ['required'],
             'pendidikan' => ['required'],
             'pekerjaan' => ['required'],
-            'hubungan' => ['required'], 
+            'hubungan' => ['required'],
             'nama_KD' => ['required'],
             'alamat_KD' => ['required'],
             'telepon_KD' => ['required'],
@@ -83,7 +85,7 @@ class perpanjanganSIM extends Controller
         $perpanjanganSIM->kd_pos = $request->kd_pos;
         $perpanjanganSIM->kota = $request->kota;
         $perpanjanganSIM->alamat = $request->alamat;
-        $perpanjanganSIM->no_hp = $request->no_hp; 
+        $perpanjanganSIM->no_hp = $request->no_hp;
         $perpanjanganSIM->pendidikan = $request->pendidikan;
         $perpanjanganSIM->pekerjaan = $request->pekerjaan;
         $perpanjanganSIM->hubungan = $request->hubungan;
@@ -104,17 +106,17 @@ class perpanjanganSIM extends Controller
      * @return \Illuminate\Http\Response
      */
 
-public function create()
-{
-    //
-}
+    public function create()
+    {
+        //
+    }
 
-/**
- * Store a newly created resource in storage.
- *
- * @param  \Illuminate\Http\Request  $request
- * @return \Illuminate\Http\Response
- * 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     * 
      public function show($id)
     {
         //
