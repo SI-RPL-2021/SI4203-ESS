@@ -54,7 +54,7 @@
     <div class="col-lg">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Pembuatan SIM</h4>
+                <h4 class="card-title">Permohonan Pembuatan SIM</h4>
             </div>
             <div class="card-body">
                 <form id="regForm" action="{{ route('pembuatan-sim.store') }}" method="post">
@@ -72,6 +72,19 @@
                     <div class="tab">
                         <h5>Data Permohonan</h5>
                         <hr>
+                        @if (auth()->user()->level === 'admin sim')
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="select" class=" form-control-label">Status</label></div>
+                            <div class="col-12 col-md-9">
+                                <select name="status" id="status" class="form-control">
+                                    <option value="0">Ditolak</option>
+                                    <option value="2" selected>Proses</option>
+                                    <option value="3">Berhasil</option>
+                                </select>
+                            </div>
+                        </div>
+                        @endif
+
                         <div class="form-group">
                             <label for="no_regis">No Registrasi</label>
                             <input type="text" name="no_regis" class="form-control" id="no_regis" value=<?php

@@ -15,6 +15,7 @@
             <span>Home</span></a>
     </li>
 
+    @if (auth()->user()->level === 'admin sim' || auth()->user()->level === 'user')
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -26,13 +27,15 @@
         </a>
         <div id="collapseSIM" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('buat.index') }}">Pembuatan</a>
-                <a class="collapse-item" href="{{ route('kehilanganSIM.index') }}">Laporan Kehilangan SIM</a>
+                <a class="collapse-item" href="{{ route('pembuatan-sim.index') }}">Pembuatan</a>
+                <a class="collapse-item" href="{{ route('kehilangan-sim.index') }}">Kehilangan SIM</a>
                 <a class="collapse-item" href="{{ route('perpanjanganSIM.index') }}">Perpanjangan SIM</a>
             </div>
         </div>
     </li>
+    @endif
 
+    @if (auth()->user()->level === 'admin stnk')
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
@@ -51,6 +54,8 @@
             </div>
         </div>
     </li>
+    @endif
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

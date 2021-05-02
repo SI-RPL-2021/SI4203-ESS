@@ -15,6 +15,7 @@ class LaporanKehilanganSim extends Migration
     {
         Schema::create('laporan_kehilangan_sim', function (Blueprint $table) {
             $table->id();
+            $table->string('status');
             $table->string('nama');
             $table->string('ttl');
             $table->string('pekerjaan');
