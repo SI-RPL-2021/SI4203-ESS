@@ -14,23 +14,27 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $adminsim = User::create([
             'name' => 'Admin SIM',
+            'username' => 'adminsim',
             'email' => 'Adminsim@gmail.com',
-            'password' => bcrypt('password'),
-            'level' => 'admin sim'
+            'password' => bcrypt('password')
         ]);
-        User::create([
+        $adminstnk = User::create([
             'name' => 'Admin STNK',
+            'username' => 'adminstnk',
             'email' => 'Adminstnk@gmail.com',
-            'password' => bcrypt('password'),
-            'level' => 'admin stnk'
+            'password' => bcrypt('password')
         ]);
-        User::create([
+        $user = User::create([
             'name' => 'User',
+            'username' => 'user',
             'email' => 'user@gmail.com',
-            'password' => bcrypt('password'),
-            'level' => 'user'
+            'password' => bcrypt('password')
         ]);
+
+        $adminsim->assignRole('admin sim');
+        $adminstnk->assignRole('admin stnk');
+        $user->assignRole('user');
     }
 }

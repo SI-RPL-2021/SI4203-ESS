@@ -5,6 +5,7 @@ namespace App\Http\Controllers\STNK;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\laporan_kehilangan_stnk;
+use App\Models\pembuatan_stnk;
 
 class kehilanganSTNK extends Controller
 {
@@ -15,7 +16,7 @@ class kehilanganSTNK extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'adminstnk']);
+        $this->middleware(['auth']);
     }
 
     /**
@@ -25,8 +26,10 @@ class kehilanganSTNK extends Controller
      */
     public function index()
     {
-        return view('pengguna.pages.stnk.laporan_kehilangan_stnk', [
-            'title' => 'Laporan Kehilangan STNK'
+        $data = laporan_kehilangan_stnk::with('stnk')->latest()->get();
+        return view('pengguna.pages.stnk.kehilangan.index', [
+            'title' => 'Laporan Kehilangan STNK',
+            'data' => $data
         ]);
     }
 
@@ -37,7 +40,11 @@ class kehilanganSTNK extends Controller
      */
     public function create()
     {
-        //
+        $data = pembuatan_stnk::where('status', 3)->latest()->get();
+        return view('pengguna.pages.stnk.kehilangan.create', [
+            'title' => 'Laporan Kehilangan STNK',
+            'data' => $data
+        ]);
     }
 
     /**
@@ -50,77 +57,21 @@ class kehilanganSTNK extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'no_regis' => ['required', 'unique:laporan_kehilangan_stnk,no_regis'],
-            'merk' => ['required'],
-            'type' => ['required'],
-            'jenis' => ['required'],
-            'model' => ['required'],
-            'thn_pembuatan' => ['required'],
-            'silinder' => ['required'],
-            'nmr_rangka' => ['required'],
-            'nmr_mesin' => ['required'],
-            'warna_kendaraan' => ['required'],
-            'bahan_bakar' => ['required'],
-            'warna_tnkb' => ['required'],
-            'thn_registrasi' => ['required'],
-            'nmr_urut' => ['required'],
-            'tgl' => ['required'],
-            'apm' => ['required'],
-            'nmr_pib' => ['required'],
-            'nmr_sut' => ['required'],
-            'nmr_tanda_pendaftaran' => ['required'],
-            'kepemilikan' => ['required'], // radiobutton
-            'alamat_pemilik' => ['required'],
-            'kode_pos' => ['required'],
-            'nmr_tlpn' => ['required'],
-            'nmr_ktp' => ['required'],
-            'kitas' => ['required'],
-            'baru' => ['nullable'], // checkbox
-            'perubahan' => ['nullable'],
-            'persyaratan_khusus' => ['nullable'],
-            'perpanjangan ' => ['nullable'],
-            'file' => ['required'],
-            'jenis_pelayanan' => ['required'],
+        $data = request()->all();
+        $user = pembuatan_stnk::with('user')->where('status', 3)->where('id', $request->stnk_id)->first();
+        $data['status'] = 1;
+        $data['user_id'] = $user->id;
+        laporan_kehilangan_stnk::create($data);
+        return redirect()->route('kehilangan-stnk.index')->with('success', 'Laporan Kehilangan STNK Berhasil Dibuat');
+    }
 
-        ]);
+    public function status(Request $request, $id)
+    {
+        $kehilangan_stnk = laporan_kehilangan_stnk::findOrFail($id);
+        $kehilangan_stnk->status = $request->status;
+        $kehilangan_stnk->save();
 
-        $laporankehilangan = new laporan_kehilangan_stnk;
-        $laporankehilangan->no_regis = $request->no_regis;
-        $laporankehilangan->merk = $request->merk;
-        $laporankehilangan->type = $request->type;
-        $laporankehilangan->jenis = $request->jenis;
-        $laporankehilangan->model = $request->model;
-        $laporankehilangan->thn_pembuatan = $request->thn_pembuatan;
-        $laporankehilangan->silinder = $request->silinder;
-        $laporankehilangan->nmr_rangka = $request->nmr_rangka;
-        $laporankehilangan->nmr_mesin = $request->nmr_mesin;
-        $laporankehilangan->warna_kendaraan = $request->warna_kendaraan;
-        $laporankehilangan->bahan_bakar = $request->bahan_bakar;
-        $laporankehilangan->warna_tnkb = $request->warna_tnkb;
-        $laporankehilangan->thn_registrasi = $request->thn_registrasi;
-        $laporankehilangan->nmr_urut = $request->nmr_urut;
-        $laporankehilangan->tgl = $request->tgl;
-        $laporankehilangan->apm = $request->apm;
-        $laporankehilangan->kepemilikan = $request->kepemilikan; //kacau
-        $laporankehilangan->nmr_pib = $request->nmr_pib;
-        $laporankehilangan->nmr_sut = $request->nmr_sut;
-        $laporankehilangan->nmr_tanda_pendaftaran = $request->nmr_tanda_pendaftaran;
-        $laporankehilangan->alamat_pemilik = $request->alamat_pemilik;
-        $laporankehilangan->kode_pos = $request->kode_pos;
-        $laporankehilangan->nmr_tlpn = $request->nmr_tlpn;
-        $laporankehilangan->nmr_ktp = $request->nmr_ktp;
-        $laporankehilangan->kitas = $request->kitas;
-        $laporankehilangan->baru = implode(",", $request->baru);
-        $laporankehilangan->perubahan = implode(" ,", $request->perubahan); //kacau
-        $laporankehilangan->persyaratan_khusus = implode(", ", $request->persyaratan_khusus);
-        $laporankehilangan->perpanjangan = implode(" ,", $request->perpanjangan);
-        $laporankehilangan->jenis_pelayanan = $request->jenis_pelayanan;
-        $laporankehilangan->file = $request->file;
-        $laporankehilangan->user_id = auth()->user()->id;
-        $laporankehilangan->save();
-
-        return redirect()->route('kehilanganSTNK.index')->with('success', 'Laporan Kehilangan STNK Berhasil Dibuat');
+        return redirect()->back()->with('success', 'Status berhasil diupdate.');
     }
 
     /**

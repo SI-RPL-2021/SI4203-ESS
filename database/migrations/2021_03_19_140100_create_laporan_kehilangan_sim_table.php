@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class LaporanKehilanganSim extends Migration
+class CreateLaporanKehilanganSimTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,20 +15,13 @@ class LaporanKehilanganSim extends Migration
     {
         Schema::create('laporan_kehilangan_sim', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
-            $table->string('nama');
-            $table->string('ttl');
-            $table->string('pekerjaan');
-            $table->string('alamat_tinggal');
-            $table->string('no_sim');
-            $table->string('no_regis');
-            $table->date('tgl_awal');
-            $table->date('tgl_akhir');
+            $table->foreignId('sim_id')->constrained('pembuatan_sim')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->date('tanggal_hilang');
+            $table->string('keterangan')->nullable();
             $table->string('file');
-            $table->string('jenis_pelayanan');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->integer('status');
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -39,6 +32,6 @@ class LaporanKehilanganSim extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('laporan_kehilangan_sim');
     }
 }

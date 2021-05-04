@@ -10,10 +10,10 @@ class pembuatan_sim extends Model
     use HasFactory;
     protected $table = "pembuatan_sim";
     protected $guarded = [];
-
+    public $dates = ['masa_berlaku'];
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function status()

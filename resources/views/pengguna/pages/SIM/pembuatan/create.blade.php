@@ -54,7 +54,7 @@
     <div class="col-lg">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Permohonan Pembuatan SIM</h4>
+                <h4 class="card-title">Pembuatan SIM</h4>
             </div>
             <div class="card-body">
                 <form id="regForm" action="{{ route('pembuatan-sim.store') }}" method="post">
@@ -63,8 +63,6 @@
                         <span class="step"></span>
                         <span class="step"></span>
                         <span class="step"></span>
-                        {{-- <span class="step"></span> --}}
-
                     </div>
 
                     <!-- form 1 -->
@@ -72,30 +70,26 @@
                     <div class="tab">
                         <h5>Data Permohonan</h5>
                         <hr>
-                        @if (auth()->user()->level === 'admin sim')
                         <div class="row form-group">
-                            <div class="col col-md-3"><label for="select" class=" form-control-label">Status</label></div>
+                            <div class="col col-md-3"><label for="select" class=" form-control-label">Pilih User</label></div>
                             <div class="col-12 col-md-9">
-                                <select name="status" id="status" class="form-control">
-                                    <option value="0">Ditolak</option>
-                                    <option value="2" selected>Proses</option>
-                                    <option value="3">Berhasil</option>
+                                <select name="user_id" id="user_id" class="form-control">
+                                    <option value="" selected>--Pilih User--</option>
+                                    @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" @if($user->roles->pluck('name')->first() === 'admin sim' || $user->roles->pluck('name')->first() === 'admin stnk') hidden @endif>{{ $user->username }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                        </div>
-                        @endif
-
-                        <div class="form-group">
-                            <label for="no_regis">No Registrasi</label>
-                            <input type="text" name="no_regis" class="form-control" id="no_regis" value=<?php
-                                                                                                        echo rand();
-                                                                                                        ?> readonly>
                         </div>
                         <div class="form-group">
                             <label for="jenis_pelayanan">Pelayanan</label>
                             <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Pembuatan SIM" readonly>
                         </div>
-                        <div class="row form-group">
+                        <div class="form-group">
+                            <label for="no_regis"> No Registrasi </label>
+                            <input type="text" name="no_regis" class="form-control" id="no_regis" value="{{ $no_regis }}" readonly>
+                        </div>
+                        <div class=" row form-group">
                             <div class="col col-md-3"><label class=" form-control-label">Golongan SIM</label></div>
                             <div class="col col-md-9">
                                 <div class="form-check">
@@ -141,14 +135,11 @@
                                 </select>
                             </div>
                         </div>
-
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Alamat SATPAS
                                     Kedatangan</label></div>
                             <div class="col-12 col-md-9"><input type="text" id="alamat_satpas" name="alamat_satpas" class="form-control"></div>
                         </div>
-
                     </div>
 
                     <!-- form 2 -->
@@ -173,30 +164,22 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">NIK/Nomor
                                     KTP</label></div>
                             <div class="col-12 col-md-9"><input type="text" id="nik" name="nik" class="form-control"></div>
                         </div>
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama
                                     Lengkap</label>
                             </div>
                             <div class="col-12 col-md-9"><input type="text" id="nm_lngkp" name="nm_lngkp" class="form-control"></div>
                         </div>
-
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tinggi</label>
                             </div>
                             <div class="col-12 col-md-9"><input type="text" id="tinggi" name="tinggi" class="form-control"></div>
                         </div>
-
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="select" class=" form-control-label">Golongan
                                     Darah</label>
@@ -211,16 +194,12 @@
                                 </select>
                             </div>
                         </div>
-
-
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kode
                                     POS</label></div>
                             <div class="col col-sm-4"><input type="text" id="kd_pos" name="kd_pos" class="form-control">
                             </div>
                         </div>
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kota</label>
                             </div>
@@ -238,7 +217,6 @@
                             <div class="col-12 col-md-9"><input type="text" id="no_hp" name="no_hp" class="form-control">
                             </div>
                         </div>
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="select" class=" form-control-label">Pendidikan</label>
                             </div>
@@ -251,7 +229,6 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="select" class=" form-control-label">Pekerjaan</label>
                             </div>
@@ -265,7 +242,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <!-- form 3 -->
 
@@ -288,27 +264,21 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama</label>
                             </div>
                             <div class="col-12 col-md-9"><input type="text" id="nama_KD" name="nama_KD" class="form-control"></div>
                         </div>
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Alamat</label>
                             </div>
                             <div class="col-12 col-md-9"><input type="text" id="alamat_KD" name="alamat_KD" class="form-control"></div>
                         </div>
-
-
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Telepon</label>
                             </div>
                             <div class="col-12 col-md-9"><input type="text" id="telepon_KD" name="telepon_KD" class="form-control"></div>
                         </div>
-
-
                         <div class="card-header">
                             <strong>Data Validasi</strong>
                         </div>
@@ -321,7 +291,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-header">
                             <strong>Data Sertifikasi</strong>
                         </div>
@@ -341,53 +310,14 @@
                         </div>
                     </div>
 
-                    {{-- <div class="tab">
-                            <table class="table">
-                                <tbody>
-                                  <tr>
-                                    <td>NIK/Nomor KTP</td>
-                                    <td>{{ old('nik') }}</td>
-                    </tr>
-                    <tr>
-                        <td>Nama Lengkap</td>
-                        <td>{{ old('nm_lngkp') }}</td>
-                    </tr>
-                    <tr>
-                        <td>Jenis Permohonan</td>
-                        <td>Pembuatan SIM</td>
-                    </tr>
-                    <tr>
-                        <td>Golongan SIM</td>
-                        <td>{{ old('gol_sim') }}</td>
-                    </tr>
-                    <tr>
-                        <td>POLDA Kedatangan</td>
-                        <td>{{ old('polda_kedatangan') }}</td>
-                    </tr>
-                    <tr>
-                        <td>SATPAS Kedatangan</td>
-                        <td>{{ old('satpas_kedatangan') }}</td>
-                    </tr>
-                    <tr>
-                        <td>Biaya</td>
-                        <td>Rp.120.000</td>
-                    </tr>
-                    </tbody>
-                    </table>
-            </div> --}}
-
-
-
-            <div style="float:right;margin-top:50px;">
-                <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>
-                <button type="button" class="tombol" id="nextBtn" onclick="nextPrev(1)"> Selanjutnya </button>
+                    <div style="float:right;margin-top:50px;">
+                        <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>
+                        <button type="button" class="tombol" id="nextBtn" onclick="nextPrev(1)"> Selanjutnya </button>
+                    </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
-</div>
-</div>
-</div>
 </div>
 
 <script>

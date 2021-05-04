@@ -4,8 +4,10 @@ namespace App\Http\Controllers\SIM;
 
 use App\Http\Controllers\Controller;
 use App\Models\pembuatan_sim;
-use Illuminate\Http\Request;
 use App\Models\Sim;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class pembuatanSIM extends Controller
 {
@@ -16,7 +18,7 @@ class pembuatanSIM extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'adminsim'])->only('destroy');
+        $this->middleware('auth');
     }
 
     /**
@@ -26,21 +28,56 @@ class pembuatanSIM extends Controller
      */
     public function index()
     {
-        if (auth()->user()->level === 'user') {
-            $data = pembuatan_sim::where('user_id', auth()->id())->get();
-            if ($data->count() < 1) {
-                return redirect()->route('pembuatan-sim.create');
-            }
-        } elseif (auth()->user()->level === 'admin sim') {
-            $data = pembuatan_sim::latest()->get();
-        } else {
-            return redirect()->route('home');
-        }
+        $data = pembuatan_sim::with('user')->latest()->get();
         return view('pengguna.pages.sim.pembuatan.index', [
             'title' => 'Pembuatan SIM',
             'data' => $data
         ]);
     }
+
+
+    public function create()
+    {
+        $latest = pembuatan_sim::orderBy('no_regis', 'desc')->first();
+        if ($latest) {
+            $no_regis = $latest->no_regis + 1;
+        } else {
+            $no_regis = 123456789;
+        }
+        $users = User::orderBy('username', 'asc')->get();
+        $users = User::orderBy('name', 'asc')->get();
+        return view('pengguna.pages.sim.pembuatan.create', [
+            'title' => 'Permohonan Pembuatan SIM',
+            'no_regis' => $no_regis,
+            'users' => $users
+        ]);
+    }
+
+
+
+    public function status($id)
+    {
+        $pemsim = pembuatan_sim::findOrFail($id);
+        $terakhir = pembuatan_sim::whereNotNull('no_sim')->orderBy('no_sim', 'desc')->first();
+
+        $pemsim->status = request('status');
+        if (request('status') == 3) {
+            if ($terakhir) {
+                $pemsim->no_sim = $terakhir->no_sim + 1;
+            } else {
+                $pemsim->no_sim = 123456789;
+            }
+            $pemsim->masa_berlaku = Carbon::now()->addYears(5);
+        } else {
+            $pemsim->no_sim = NULL;
+            $pemsim->masa_berlaku = $pemsim->created_at;
+        }
+
+        $pemsim->save();
+
+        return redirect()->back()->with('success', 'Status berhasil diupdate.');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -77,11 +114,8 @@ class pembuatanSIM extends Controller
         ]);
 
         $pembuatanSIM = new pembuatan_sim;
-        if (auth()->user()->level === 'admin sim') {
-            $pembuatanSIM->status = $request->status;
-        } else {
-            $pembuatanSIM->status = 1;
-        }
+        $pembuatanSIM->status = 1;
+        $pembuatanSIM->masa_berlaku = Carbon::now();
         $pembuatanSIM->no_regis = $request->no_regis;
         $pembuatanSIM->gol_sim = $request->gol_sim;
         $pembuatanSIM->polda_kedatangan = $request->polda_kedatangan;
@@ -105,11 +139,7 @@ class pembuatanSIM extends Controller
         $pembuatanSIM->nama_ibu_KD = $request->nama_ibu_KD;
         $pembuatanSIM->sertif = $request->sertif;
         $pembuatanSIM->jenis_pelayanan = $request->jenis_pelayanan;
-        if (auth()->user()->level === 'admin sim') {
-            $pembuatanSIM->user_id = NULL;
-        } else {
-            $pembuatanSIM->user_id = auth()->user()->id;
-        }
+        $pembuatanSIM->user_id = $request->user_id;
         $pembuatanSIM->save();
 
         return redirect()->route('pembuatan-sim.index')->with('success', 'Pembutan SIM akan segera di proses');
@@ -122,32 +152,6 @@ class pembuatanSIM extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function create()
-    {
-        if (auth()->user()->level === 'user') {
-            $data = pembuatan_sim::where('user_id', auth()->id())->count();
-            if ($data > 0) {
-                return redirect()->route('pembuatan-sim.index');
-            } else {
-                return view('pengguna.pages.sim.pembuatan.create', [
-                    'title' => 'Permohonan Pembuatan SIM'
-                ]);
-            }
-        } elseif (auth()->user()->level === 'admin sim') {
-            return view('pengguna.pages.sim.pembuatan.create', [
-                'title' => 'Permohonan Pembuatan SIM'
-            ]);
-        }
-    }
-
-    public function status($id)
-    {
-        $pembuatan_sim = pembuatan_sim::findOrFail($id);
-        $pembuatan_sim->status = request('status');
-        $pembuatan_sim->save();
-
-        return redirect()->back()->with('success', 'Status berhasil diupdate.');
-    }
 
     /**
      * Display the specified resource.

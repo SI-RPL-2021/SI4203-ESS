@@ -22,9 +22,7 @@
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Pembuatan SIM</h6>
-                    @if (auth()->user()->level === 'admin sim')
                     <a href="{{ route('pembuatan-sim.create') }}" class="btn btn-sm btn-primary">Buat Permohonan</a>
-                    @endif
                 </div>
             </div>
             <div class="card-body">
@@ -34,14 +32,15 @@
                             <tr>
                                 <th>#</th>
                                 <th>Tanggal Permohonan</th>
+                                <th>No. SIM</th>
                                 <th>No. Regis</th>
                                 <th>Golongan SIM</th>
+                                <th>Masa Berlaku</th>
                                 <th>Nama Lengkap</th>
                                 <th>NIK</th>
+                                <th>Username</th>
                                 <th>Status</th>
-                                @if (auth()->user()->level === 'admin sim')
                                 <th>Aksi</th>
-                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -49,10 +48,13 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->created_at->translatedFormat('l, d F Y') }}</td>
+                                <td>{{ $item->no_sim ?? 'Tidak Ada' }}</td>
                                 <td>{{ $item->no_regis }}</td>
                                 <td>{{ $item->gol_sim }}</td>
+                                <td>{{ $item->masa_berlaku->translatedFormat('l, d F Y') }}</td>
                                 <td>{{ $item->nm_lngkp }}</td>
                                 <td>{{ $item->nik }}</td>
+                                <td>{{ $item->user->username }}</td>
                                 <td>
                                     @if ($item->status === 0)
                                     <span class="badge badge-danger">Ditolak</span>
@@ -64,9 +66,8 @@
                                     <span class="badge badge-success">Berhasil</span>
                                     @endif
                                 </td>
-                                @if (auth()->user()->level === 'admin sim')
                                 <td>
-                                    <div class="btn-group">
+                                    <div class="btn-group mr-1">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <i class="fas fa-cog"></i>
                                         </button>
@@ -83,7 +84,6 @@
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
-                                @endif
                             </tr>
                             @endforeach
                         </tbody>

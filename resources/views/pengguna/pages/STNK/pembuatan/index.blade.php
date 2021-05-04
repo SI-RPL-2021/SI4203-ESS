@@ -8,13 +8,21 @@
     </button>
 </div>
 @endif
+@if (session('gagal'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Gagal!</strong> {{ session('gagal') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 <div class="row">
     <div class="col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Laporan Kehilangan SIM</h6>
-                    <a href="{{ route('kehilangan-sim.create') }}" class="btn btn-sm btn-primary">Buat laporan</a>
+                    <h6 class="m-0 font-weight-bold text-primary">Pembuatan STNK</h6>
+                    <a href="{{ route('pembuatan-stnk.create') }}" class="btn btn-sm btn-primary">Buat Permohonan</a>
                 </div>
             </div>
             <div class="card-body">
@@ -23,16 +31,17 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama</th>
-                                <th>No. SIM</th>
+                                <th>Tanggal Permohonan</th>
                                 <th>No. Regis</th>
-                                <th>TTL</th>
-                                <th>Golongan</th>
-                                <th>Alamat</th>
-                                <th>Pekerjaan</th>
-                                <th>Tanggal Hilang</th>
-                                <th>Keterangan</th>
-                                <th>File</th>
+                                <th>Golongan SIM</th>
+                                <th>Nama Lengkap</th>
+                                <th>NIK</th>
+                                <th>Merk</th>
+                                <th>Jenis</th>
+                                <th>Warna Kendaraan</th>
+                                <th>Kepemilikan</th>
+                                <th>Nama Pemilik</th>
+                                <th>Nomor KTP</th>
                                 <th>Username</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
@@ -42,39 +51,42 @@
                             @foreach ($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->sim->nm_lngkp }}</td>
-                                <td>{{ $item->sim->no_sim }}</td>
-                                <td>{{ $item->sim->gol_sim }}</td>
-                                <td>{{ $item->sim->alamat }}</td>
-                                <td>{{ $item->sim->pekerjaan }}</td>
-                                <td>{{ $item->tanggal_hilang->translatedFormat('l, d F Y') }}</td>
-                                <td>{{ $item->keterangan }}</td>
-                                <td><a href="{{ route('getFile', $item->id) }}">Download</a></td>
+                                <td>{{ $item->created_at->translatedFormat('l, d F Y') }}</td>
+                                <td>{{ $item->no_regis }}</td>
+                                <td>{{ $item->gol_sim }}</td>
+                                <td>{{ $item->nm_lngkp }}</td>
+                                <td>{{ $item->nik }}</td>
+                                <td>{{ $item->merk }}</td>
+                                <td>{{ $item->jenis }}</td>
+                                <td>{{ $item->warna_kendaraan }}</td>
+                                <td>{{ $item->kepemilikan }}</td>
+                                <td>{{ $item->nama_pemilik }}</td>
+                                <td>{{ $item->nmr_ktp }}</td>
                                 <td>{{ $item->user->username }}</td>
                                 <td>
                                     @if ($item->status === 0)
                                     <span class="badge badge-danger">Ditolak</span>
                                     @elseif ($item->status === 1)
-                                    <span class="badge badge-warning">Menunggu Diproses</span>
+                                    <span class="badge badge-info">Menunggu Diproses</span>
                                     @elseif ($item->status === 2)
-                                    <span class="badge badge-info">Diproses</span>
+                                    <span class="badge badge-warning">Diproses</span>
                                     @elseif ($item->status === 3)
                                     <span class="badge badge-success">Berhasil</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="btn-group mr-1">
+                                    <div class="btn-group">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <i class="fas fa-cog"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('kehilangan-sim.status',$item->id) }}?status=0">Set Ditolak</a>
-                                            <a class="dropdown-item" href="{{ route('kehilangan-sim.status',$item->id) }}?status=1">Set Menunggu Proses</a>
-                                            <a class="dropdown-item" href="{{ route('kehilangan-sim.status',$item->id) }}?status=2">Set Proses</a>
-                                            <a class="dropdown-item" href="{{ route('kehilangan-sim.status',$item->id) }}?status=3">Set Berhasil</a>
+                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=0">Set Ditolak</a>
+                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=1">Set Menunggu Proses</a>
+                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=2">Set Proses</a>
+                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=3">Set Berhasil</a>
                                         </div>
                                     </div>
-                                    <form action="{{ route('kehilangan-sim.destroy',$item->id) }}" method="post" class="d-inline">
+                                    <form action="{{ route('pembuatan-stnk.destroy',$item->id) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>

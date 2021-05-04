@@ -53,10 +53,10 @@
     <div class="col-lg">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title text-primary ">Laporan Kehilangan SIM</h4>
+                <h4 class="card-title text-primary ">Laporan Kehilangan STNk</h4>
             </div>
             <div class="card-body">
-                <form id="regForm" action="{{ route('kehilangan-sim.store') }}" method="post" enctype="multipart/form-data">
+                <form id="regForm" action="{{ route('kehilangan-stnk.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div style="text-align:center;margin-top:20px;margin-bottom:20px;">
                         <span class="step"></span>
@@ -65,26 +65,6 @@
 
                     <!-- form 1 -->
 
-                    <!-- <div class="tab">
-                        <h5>Formulir Pemohonan SIM</h5>
-                        <hr>
-                        <div class="form-group">
-                            <label for="no_regis">No Registrasi</label>
-                            <input type="text" name="no_regis" class="form-control" id="no_regis" value=<?php
-                                                                                                        echo rand();
-                                                                                                        ?> readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="jenis_pelayanan">Pelayanan</label>
-                            <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Laporan Kehilangan SIM" readonly>
-                        </div>
-                        <div class="row">
-                            <label class="col-form-label col-sm-2 pt-0" for="no_regis">Silahkan Download File Berikut </label>
-                        </div>
-                        <div class="row col-sm-2 pt-0">
-                            <a class="btn btn-primary " href="/download">Download</a>
-                        </div>
-                    </div> -->
 
                     <div class="tab">
                         <h5>Identitas Diri</h5>
@@ -97,46 +77,43 @@
                                 <a class="btn btn-primary " href="/download">Download</a>
                             </div>
                         </div>
+
                         <div class="row form-group">
-                            <div class="col col-md-3"><label for="sim_id" class=" form-control-label">Pilih Nama SIM</label></div>
+                            <div class="col col-md-3"><label for="stnk_id" class=" form-control-label">Pilih Nama STNK</label></div>
                             <div class="col-12 col-md-9">
-                                <select name="sim_id" id="sim_id" class="form-control">
-                                    <option value="" selected>--Pilih SIM--</option>
-                                    @foreach ($data as $sim)
-                                    <option value="{{ $sim->id }}">{{ $sim->nm_lngkp . ' - ' . $sim->no_sim . ' - ' . $sim->gol_sim }}</option>
+                                <select name="stnk_id" id="stnk_id" class="form-control">
+                                    <option value="" selected>--Pilih STNK--</option>
+                                    @foreach ($data as $stnk)
+                                    <option value="{{ $stnk->id }}">{{ $stnk->nama_pemilik . ' - ' . $stnk->no_regis }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <!-- </div>
-                        <div class="form-group">
-                            <label for="no_sim">No SIM</label>
-                            <input type="text" name="no_sim" class="form-control" value="{{ $sim->no_sim }}" id="no_sim" readonly>
-                        </div> -->
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="tanggal_hilang" class=" form-control-label">Tanggal Hilang</label></div>
-                                <div class="col-12 col-md-9">
-                                    <input type="date" class="form-control" name="tanggal_hilang">
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="keterangan" class=" form-control-label">Keterangan</label></div>
-                                <div class="col-12 col-md-9">
-                                    <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <fieldset class="form-group">
-                                <div class="row">
-                                    <legend class="col-form-label col-sm-2 pt-0">Silahkan upload file persyaratan</legend>
-                                </div>
-                                <div class="row col-sm-2 pt-0">
-                                    <input type="file" name="file" class="custom-file-inpuit" id="file">
-                                </div>
-                            </fieldset>
                         </div>
-                        <div style="float:right;margin-top:50px;">
-                            <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>
-                            <button type="button" class="tombol" id="nextBtn" onclick="nextPrev(1)"> Selanjutnya </button>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="tanggal_hilang" class=" form-control-label">Tanggal Hilang</label></div>
+                            <div class="col-12 col-md-9">
+                                <input type="date" class="form-control" name="tanggal_hilang">
+                            </div>
                         </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="keterangan" class=" form-control-label">Keterangan</label></div>
+                            <div class="col-12 col-md-9">
+                                <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-2 pt-0">Silahkan upload file persyaratan</legend>
+                            </div>
+                            <div class="row col-sm-2 pt-0">
+                                <input type="file" name="file" class="custom-file-inpuit" id="file">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div style="float:right;margin-top:50px;">
+                        <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>
+                        <button type="button" class="tombol" id="nextBtn" onclick="nextPrev(1)"> Selanjutnya </button>
+                    </div>
                 </form>
             </div>
         </div>
