@@ -1,7 +1,7 @@
 @extends('pengguna.templates.default')
 @section('content')
 <style>
-<<<<<<< HEAD
+
         input.invalid {
             background-color: #ffdddd;
         }
@@ -67,7 +67,7 @@
                             <span class="step"></span>
                             {{-- <span class="step"></span> --}}
                             
-=======
+
     input.invalid {
         background-color: #ffdddd;
     }
