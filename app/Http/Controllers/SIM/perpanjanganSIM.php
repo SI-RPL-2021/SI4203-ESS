@@ -41,7 +41,7 @@ class perpanjanganSIM extends Controller
             'title' => 'Tambah Data Perpanjangan SIM',
             'data' => $data
         ]);
-<<<<<<< HEAD
+
 
         $perpanjanganSIM = new perpanjangan_sim;
         $perpanjanganSIM->gol_sim = $request->gol_sim;
@@ -72,8 +72,7 @@ class perpanjanganSIM extends Controller
         $perpanjanganSIM->save();
 
         return redirect()->route('perpanjanganSIM.index')->with('success', 'Perpanjangan SIM akan segera di proses');
-=======
->>>>>>> 8b71f03d3b1efbdbc5235b93527cd718b8a0feca
+
     }
 
     /**
