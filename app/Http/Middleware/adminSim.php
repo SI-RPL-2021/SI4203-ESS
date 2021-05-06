@@ -19,6 +19,6 @@ class adminSim
         if (auth()->user()->level === 'admin sim') {
             return $next($request);
         }
-        return redirect()->route('home');
+        return redirect()->route('homeadmin');
     }
 }
