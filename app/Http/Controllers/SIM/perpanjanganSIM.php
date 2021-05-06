@@ -94,7 +94,7 @@ class perpanjanganSIM extends Controller
         $perpanjanganSIM->sekolah_mengemudi = $request->sekolah_mengemudi;
         $perpanjanganSIM->save();
 
-        return redirect()->route('buat.index')->with('success', 'Perpanjangan SIM akan segera di proses');
+        return redirect()->route('perpanjanganSIM.index')->with('success', 'Perpanjangan SIM akan segera di proses');
     }
 
     /**

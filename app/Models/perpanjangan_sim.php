@@ -10,4 +10,9 @@ class perpanjangan_sim extends Model
     use HasFactory;
     protected $table = "perpanjangan_sim";
     protected $guarded = [];
+    
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

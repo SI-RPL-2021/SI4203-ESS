@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\adminSIMController;
 use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\STNK\satuTahun;
 use App\Http\Controllers\STNK\limaTahun;
@@ -55,5 +56,8 @@ Route::group(['middleware' => ['auth']], function () {
         } else {
             exit('File tidak bisa di download');
         }
+    });
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('homeadmin', [App\Http\Controllers\adminSIMController::class, 'index'])->name('homeadmin');
     });
 });
