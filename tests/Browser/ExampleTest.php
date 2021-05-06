@@ -1,5 +1,6 @@
 <?php
 
+// latihan testing
 namespace Tests\Browser;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -13,6 +14,7 @@ class ExampleTest extends DuskTestCase
      *
      * @return void
      */
+    
     public function testBasicExample()
     {
         $this->browse(function (Browser $browser) {
