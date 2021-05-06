@@ -78,14 +78,14 @@
                         </div>
                         <div class="form-group">
                             <b><label for="type">Jenis Permohonan</label>
-                            <input type="text" name="jenis_permohonan" class="form-control" id="jenis_permohonan">
+                                <input type="text" name="jenis_permohonan" class="form-control" id="jenis_permohonan">
                         </div>
                         <div class="form-group">
                             <label>II. Identitas Pemilik</label></br></b>
                             <label for="status">Status Pemilik Kendaraan bermotor</label>
                             <input type="text" name="status" class="form-control" id="status">
                         </div>
-                    </br>
+                        </br>
                         <h5>Diisi Bila Kendaraan Bermotor Milik Pribadi</h5>
                         <hr>
                         <div class="form-group">
@@ -96,7 +96,7 @@
                             <label for="kebangsaan">Kebangsaan Pemilik</label>
                             <input type="text" name="kebangsaan" class="form-control" id="kebangsaan">
                         </div>
-                    </br>
+                        </br>
                         <h5>Khusus Untuk Barang Asing</h5>
                         <hr>
                         <div class="form-group">
@@ -148,7 +148,7 @@
                             <input type="text" name="npwp" class="form-control " id="npwp">
                         </div>
                         <div class="form-group">
-                            <label for="ke"> Pemilik ke -  </label>
+                            <label for="ke"> Pemilik ke - </label>
                             <input type="text" name="ke" class="form-control " id="ke">
                         </div>
                         <div class="form-group">
@@ -157,11 +157,11 @@
                             <input type="text" name="ke" class="form-control " id="ke">
                         </div>
                         <div class="form-group">
-                            <label for="fungsi"> Fungsi  </label>
+                            <label for="fungsi"> Fungsi </label>
                             <input type="text" name="fungsi" class="form-control " id="fungsi">
                         </div>
                         <div class="form-group">
-                            <label for="bahan_bakar"> Bahan Bakar  </label>
+                            <label for="bahan_bakar"> Bahan Bakar </label>
                             <input type="text" name="bahan_bakar" class="form-control " id="bahan_bakar">
                         </div>
                         <div class="form-group">
@@ -215,7 +215,7 @@
                             <input type="text" name="roda" class="form-control " id="roda">
                         </div>
                         <div class="form-group">
-                            <label for="TNKB"> Warna Dasar TNKB  </label>
+                            <label for="TNKB"> Warna Dasar TNKB </label>
                             <input type="text" name="TNKB" class="form-control " id="TNKB">
                         </div>
                         <div class="form-group">
@@ -246,15 +246,15 @@
                         <hr>
                         <div class="form-group">
                             <label for="no_regis"> No Registrasi </label>
-                            <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value=<?php echo rand();?>>
+                            <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value=<?php echo rand(); ?> readonly>
                         </div>
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="no_regis"> Nama </label>
-                            <input type="text" name="no_regis" class="form-control @error('nama') is-invalid @enderror" id="nama" value=                                                                           
-                        </div> --}}
+                            <input type="text" name="no_regis" class="form-control @error('nama') is-invalid @enderror" id="nama">
+                        </div>
                         <div class="form-group">
                             <label for="jenis_pelayanan">Pelayanan</label>
-                            <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Perpanjangan Pajak 1 Tahun">
+                            <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Perpanjangan Pajak 1 Tahun" readonly>
                         </div>
 
                         <div class="row form-group">
@@ -263,14 +263,12 @@
                                 <div class="form-check">
                                     <div class="radio">
                                         <label for="radio1" class="form-check-label ">
-                                            <input type="radio" id="pengambilan" name="pengambilan" value="Diambil di kantor Satpas"
-                                                class="form-check-input">Diambil di kantor Satpas
+                                            <input type="radio" id="pengambilan" name="pengambilan" value="Diambil di kantor Satpas" class="form-check-input">Diambil di kantor Satpas
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label for="radio2" class="form-check-label ">
-                                            <input type="radio" id="gol_sim" name="pengambilan" value="pengiriman via kurir"
-                                                class="form-check-input">Pengiriman via kurir
+                                            <input type="radio" id="gol_sim" name="pengambilan" value="pengiriman via kurir" class="form-check-input">Pengiriman via kurir
                                         </label>
                                     </div>
                                 </div>
@@ -283,25 +281,23 @@
                                 <div class="form-check">
                                     <div class="radio">
                                         <label for="radio1" class="form-check-label ">
-                                            <input type="radio" id="metode_pembayaran" name="metode_pembayaran" value="Transfer Bank"
-                                                class="form-check-input">Transfer Bank
+                                            <input type="radio" id="metode_pembayaran" name="metode_pembayaran" value="Transfer Bank" class="form-check-input">Transfer Bank
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label for="radio2" class="form-check-label ">
-                                            <input type="radio" id="metode_pembayaran" name="metode_pembayaran" value="Kantor POS"
-                                                class="form-check-input">Kantor POS
+                                            <input type="radio" id="metode_pembayaran" name="metode_pembayaran" value="Kantor POS" class="form-check-input">Kantor POS
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label for="radio3" class="form-check-label ">
-                                            <input type="radio" id="metode_pembayaran" name="metode_pembayaran" value="Toko retail (Indomaret/Alfamart)"
-                                                class="form-check-input">Toko retail (Indomaret/Alfamart)
+                                            <input type="radio" id="metode_pembayaran" name="metode_pembayaran" value="Toko retail (Indomaret/Alfamart)" class="form-check-input">Toko retail (Indomaret/Alfamart)
                                         </label>
                                     </div>
                                 </div>
                             </div>
-                        </div></div>
+                        </div>
+                    </div>
 
                     <!-- form 6 -->
                     <div style="float:right;margin-top:50px;">

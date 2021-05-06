@@ -12,6 +12,7 @@ use App\Http\Controllers\SIM\pembuatanSIM;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\VerifDataUserController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
+use App\Http\Controllers\SIM\SimController;
 use App\Http\Controllers\STNK\pembuatanSTNK;
 
 /*
@@ -37,13 +38,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('verif', VerifDataUserController::class);
 
     //sim -----------------------
-    Route::resource('kehilanganSIM', kehilanganSIM::class);
-    Route::resource('buat', pembuatanSIM::class);
-    Route::resource('perpanjanganSIM', perpanjanganSIM::class);
+    Route::resource('pembuatan-sim', pembuatanSIM::class);
+    Route::get('/pembuatan-sim/{id}/set', [pembuatanSIM::class, 'status'])->name('pembuatan-sim.status');
+    Route::resource('kehilangan-sim', kehilanganSIM::class);
+    Route::get('/kehilangan-sim/{id}/set', [kehilanganSIM::class, 'status'])->name('kehilangan-sim.status');
+    Route::get('kehilangan-sim/{namafile}/download', [kehilanganSIM::class, 'download'])->name('getFile');
+    Route::resource('perpanjangan-sim', perpanjanganSIM::class);
+    Route::get('perpanjangan-sim/{id}/set', [perpanjanganSIM::class, 'status'])->name('perpanjangan-sim.status');
 
     // stnk -----------------------
-    Route::resource('pembuatanSTNK', pembuatanSTNK::class);
-    Route::resource('kehilanganSTNK', kehilanganSTNK::class);
+    Route::resource('pembuatan-stnk', pembuatanSTNK::class);
+    Route::get('/pembuatan-stnk/{id}/set', [pembuatanSTNK::class, 'status'])->name('pembuatan-stnk.status');
+    Route::resource('kehilangan-stnk', kehilanganSTNK::class);
+    Route::get('/kehilangan-stnk/{id}/set', [kehilanganSTNK::class, 'status'])->name('kehilangan-stnk.status');
     Route::resource('satutahun', satuTahun::class);
     Route::resource('limatahun', limaTahun::class);
 

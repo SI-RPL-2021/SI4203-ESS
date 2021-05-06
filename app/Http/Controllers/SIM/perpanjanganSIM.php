@@ -4,7 +4,9 @@ namespace App\Http\Controllers\SIM;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\pembuatan_sim;
 use App\Models\perpanjangan_sim;
+use Carbon\Carbon;
 
 class perpanjanganSIM extends Controller
 {
@@ -15,7 +17,7 @@ class perpanjanganSIM extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth']);
     }
 
     /**
@@ -25,46 +27,21 @@ class perpanjanganSIM extends Controller
      */
     public function index()
     {
-        return view('pengguna.pages.sim.perpanjanganSIM', [
-            'title' => 'Perpanjangan SIM'
+        $data = perpanjangan_sim::with('sim')->latest()->get();
+        return view('pengguna.pages.sim.perpanjangan.index', [
+            'title' => 'Perpanjangan SIM',
+            'data' => $data
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request) 
+    public function create()
     {
-
-        $request->validate([
-            'gol_sim' => ['required'],
-            'no_sim' => ['required'],
-            'masa_berlaku_sim' => ['required'],
-            'satpas_penerbit' => ['required'],
-            'alamat_email' => ['required'],
-            'polda_kedatangan' => ['required'],
-            'satpas_kedatangan' => ['required'],
-            'alamat_satpas_kedatangan' => ['required'],
-            'kwn' => ['required'],
-            'nik' => ['required'],
-            'nama_lengkap' => ['required'],
-            'tinggi' => ['required'],
-            'gol_darah' => ['required'],
-            'kd_pos' => ['required'],
-            'kota' => ['required'],
-            'alamat' => ['required'],
-            'no_hp' => ['required'],
-            'pendidikan' => ['required'],
-            'pekerjaan' => ['required'],
-            'hubungan' => ['required'], 
-            'nama_KD' => ['required'],
-            'alamat_KD' => ['required'],
-            'telepon_KD' => ['required'],
-            'nama_ibu_KD' => ['required'],
-            'sertif' => ['required'],
+        $data = pembuatan_sim::where('status', 3)->latest()->get();
+        return view('pengguna.pages.sim.perpanjangan.create', [
+            'title' => 'Tambah Data Perpanjangan SIM',
+            'data' => $data
         ]);
+<<<<<<< HEAD
 
         $perpanjanganSIM = new perpanjangan_sim;
         $perpanjanganSIM->gol_sim = $request->gol_sim;
@@ -95,62 +72,55 @@ class perpanjanganSIM extends Controller
         $perpanjanganSIM->save();
 
         return redirect()->route('perpanjanganSIM.index')->with('success', 'Perpanjangan SIM akan segera di proses');
+=======
+>>>>>>> 8b71f03d3b1efbdbc5235b93527cd718b8a0feca
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for creating a new resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-public function create()
-{
-    //
-}
-
-/**
- * Store a newly created resource in storage.
- *
- * @param  \Illuminate\Http\Request  $request
- * @return \Illuminate\Http\Response
- * 
-     public function show($id)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'sim_id' => ['required '],
+            'biaya' => ['required']
+        ]);
+
+        $sim = pembuatan_sim::where('id', $request->sim_id)->first();
+        perpanjangan_sim::create([
+            'sim_id' => $request->sim_id,
+            'masa_berlaku' => $sim->masa_berlaku->addYears(5),
+            'biaya' => $request->biaya,
+            'status' => 1
+        ]);
+
+        return redirect()->route('perpanjangan-sim.index')->with('success', 'Perpanjangan SIM akan segera di proses');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function status(Request $request, $id)
     {
-        //
+        $perpanjangansim = perpanjangan_sim::findOrFail($id);
+        $perpanjangansim->status = request('status');
+        $perpanjangansim->save();
+        $sim = pembuatan_sim::findOrFail($perpanjangansim->sim_id);
+        if (request('status') == 3) {
+            $sim->update([
+                'masa_berlaku' => $perpanjangansim->masa_berlaku
+            ]);
+        } else {
+            $sim->update([
+                'masa_berlaku' => $sim->masa_berlaku->subYears(5)
+            ]);
+        }
+        return redirect()->back()->with('success', 'Status berhasil diupdate.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        perpanjangan_sim::destroy($id);
+
+        return redirect()->back()->with('success', 'Permohonan Perpanjangan SIM berhasil dihapus.');
     }
 }

@@ -10,4 +10,9 @@ class pembuatan_stnk extends Model
     use HasFactory;
     protected $table = "pembuatan_stnk";
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

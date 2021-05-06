@@ -13,6 +13,10 @@ class laporan_kehilangan_stnk extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
+    }
+    public function stnk()
+    {
+        return $this->belongsTo('App\Models\pembuatan_stnk', 'stnk_id', 'id');
     }
 }

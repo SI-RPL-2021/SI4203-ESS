@@ -5,6 +5,11 @@ namespace App\Http\Controllers\SIM;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\laporan_kehilangan_sim;
+use App\Models\pembuatan_sim;
+use Illuminate\Support\Facades\Storage;
+use File;
+use Illuminate\Http\Response as HttpResponse;
+use Response;
 
 class kehilanganSIM extends Controller
 {
@@ -13,10 +18,10 @@ class kehilanganSIM extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth','adminsim']);
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +29,10 @@ class kehilanganSIM extends Controller
      */
     public function index()
     {
-        return view('pengguna.pages.sim.laporan_kehilangan_sim', [
-            'title' => 'Laporan Kehilangan SIM'
+        $data = laporan_kehilangan_sim::with('sim')->latest()->get();
+        return view('pengguna.pages.sim.kehilangan.index', [
+            'title' => 'Laporan Kehilangan SIM',
+            'data' => $data
         ]);
     }
 
@@ -36,7 +43,11 @@ class kehilanganSIM extends Controller
      */
     public function create()
     {
-        //
+        $data = pembuatan_sim::where('status', 3)->latest()->get();
+        return view('pengguna.pages.sim.kehilangan.create', [
+            'title' => 'Buat Laporan Kehilangan SIM',
+            'data' => $data
+        ]);
     }
 
     /**
@@ -48,80 +59,48 @@ class kehilanganSIM extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => ['required'],
-            'ttl' => ['required'],
-            'pekerjaan' => ['required'],
-            'alamat_tinggal' => ['required'],
-            'no_sim' => ['required'],
-            'no_regis' => ['required', 'unique:laporan_kehilangan_sim,no_regis'],
-            'tgl_awal' => ['required'],
-            'tgl_akhir' => ['required'],
-            'file' => ['required'],
-            'jenis_pelayanan' => ['required'],
+            'sim_id' => ['required'],
+            'tanggal_hilang' => ['required'],
+            'keterangan' => ['required'],
+            'file' => ['required']
+        ]);
+        $user = pembuatan_sim::with('user')->where('status', '3')->where('id', $request->sim_id)->first();
+        $file = request()->file('file')->store('persyaratan', 'public');
+        laporan_kehilangan_sim::create([
+            'sim_id' => $request->sim_id,
+            'tanggal_hilang' => $request->tanggal_hilang,
+            'keterangan' => $request->keterangan,
+            'file' => $file,
+            'status' => 1,
+            'user_id' => $user->user->id
         ]);
 
-
-
-        $laporankehilangan = new laporan_kehilangan_sim;
-        $laporankehilangan->no_regis = $request->no_regis;
-        $laporankehilangan->nama = $request->nama;
-        $laporankehilangan->ttl = $request->ttl;
-        $laporankehilangan->pekerjaan = $request->pekerjaan;
-        $laporankehilangan->alamat_tinggal = $request->alamat_tinggal;
-        $laporankehilangan->no_sim = $request->no_sim;
-        $laporankehilangan->no_regis = $request->no_regis;
-        $laporankehilangan->tgl_awal = $request->tgl_awal;
-        $laporankehilangan->tgl_akhir = $request->tgl_akhir;
-        $laporankehilangan->jenis_pelayanan = $request->jenis_pelayanan;
-        $laporankehilangan->file = $request->file;
-        $laporankehilangan->user_id = auth()->user()->id;
-        $laporankehilangan->save();
-
-        return redirect()->route('kehilanganSIM.index')->with('success', 'Laporan Kehilangan SIM Berhasil Dibuat');
+        return redirect()->route('kehilangan-sim.index')->with('success', 'Laporan Kehilangan SIM Berhasil Dibuat');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    function download($id)
     {
-        //
+        $keh = laporan_kehilangan_sim::findOrFail($id);
+        $path = storage_path($keh->file);
+        // return Response::download($keh->file, "Surat Keterangan Hilang.pdf", ['Content-Type: application/pdf']);
+        return response()->download($path, $keh, ['Content-Type: application/pdf']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function status(Request $request, $id)
     {
-        //
+        $kehilangan_sim = laporan_kehilangan_sim::findOrFail($id);
+
+        $kehilangan_sim->status = $request->status;
+        $kehilangan_sim->save();
+
+        return redirect()->back()->with('success', 'Status berhasil diupdate.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        laporan_kehilangan_sim::destroy($id);
+
+        return redirect()->back()->with('success', 'Laporan berhasil dihapus.');
     }
 }
