@@ -4,15 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\STNK\kehilanganSTNK;
-use App\Http\Controllers\STNK\satuTahun;
-use App\Http\Controllers\STNK\limaTahun;
 use App\Http\Controllers\SIM\kehilanganSIM;
-use App\Http\Controllers\SIM\pembuatanSIM;
 use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\VerifDataUserController;
+use App\Http\Controllers\SIM\pembuatanSIM;
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\STNK\pembuatanSTNK;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,9 +28,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'landing_page'])->n
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', [App\Http\Controllers\RolesController::class, 'index'])->name('home');
 
-    //internal -----------------------'
-    Route::resource('verif', VerifDataUserController::class);
-
     //sim -----------------------
     Route::resource('kehilanganSIM', kehilanganSIM::class);
     Route::resource('buat', pembuatanSIM::class);
@@ -43,8 +36,6 @@ Route::group(['middleware' => ['auth']], function () {
     // stnk -----------------------
     Route::resource('pembuatanSTNK', pembuatanSTNK::class);
     Route::resource('kehilanganSTNK', kehilanganSTNK::class);
-    Route::resource('satutahun', satuTahun::class);
-    Route::resource('limatahun', limaTahun::class);
 
     Route::resource('HistoryController', HistoryController::class);
     //download file

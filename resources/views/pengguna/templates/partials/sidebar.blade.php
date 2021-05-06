@@ -46,8 +46,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('kehilanganSTNK.index') }}">Laporan Kehilangan STNK</a>
                 <a class="collapse-item" href="{{ route('pembuatanSTNK.index') }}">Pembuatan STNK</a>
-                <a class="collapse-item" href="{{ route('satutahun.index') }}">Pajak 1 Tahun</a>
-                <a class="collapse-item" href="{{ route('limatahun.index') }}">Pajak 5 Tahun</a>
             </div>
         </div>
     </li>

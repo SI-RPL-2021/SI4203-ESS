@@ -36,19 +36,15 @@
                         <td><button class="btn btn-primary">Cetak</button></td>
                     </tr>
                     @endforeach
-                    @foreach ($items3 as $item)
-                    <tr>
-                        <td>{{ $item->jenis_pelayanan }}</td>
-                        <td>{{ $item->jenis_pelayanan }}</td>
-                        <td>{{ $item->created_at->formatLocalized('%d %B %Y') }}</td>
-                        <td>{{ $item->no_regis }}</td>
-                        <td><button class="btn btn-primary">Cetak</button></td>
-                    </tr>
-                    @endforeach
                 <tbody>
             </table>
         </div>
     </div>
 </div>
 
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
 @endsection

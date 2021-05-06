@@ -95,7 +95,7 @@ class perpanjanganSIM extends Controller
         $perpanjanganSIM->save();
 
         return redirect()->route('buat.index')->with('success', 'Perpanjangan SIM akan segera di proses');
-    }
+    } 
 
     /**
      * Display the specified resource.

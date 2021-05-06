@@ -49,6 +49,7 @@
     }
 </style>
 
+
 <div class="row">
     <div class="col-lg">
         <div class="card">
@@ -138,6 +139,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     var currentTab = 0; // Current tab is set to be the first tab (0)

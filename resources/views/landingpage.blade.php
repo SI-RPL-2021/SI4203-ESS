@@ -20,9 +20,8 @@
         <nav class="navbar navbar-expand navbar-dark shadow p-3 mb-5" style="background-color: #2A4D69;">
             <div class="nav-item">
                 <span class="navbar-brand ">E-SS</span>
-                
             </div>
-           <div class=" navbar-nav ml-auto">
+            <!-- <div class=" navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link " href="#home">Awal </a>
                 </li>
@@ -32,73 +31,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Hubungi </a>
                 </li>
-            </div>
+            </div> -->
             <div class="navbar-nav ml-auto">
                 <div class="dropdown">
                     <a class="btn rounded-pill align-middle shadow-sm" href="{{ route('login') }}" aria-haspopup="true" aria-expanded="false" style="background-color: #63ACE5;">
                         <span class="txt-button" style="color: white;">Login</span>
                     </a>
                 </div>
-
-
-                
             </div>
         </nav>
     </header>
     <!-- penutup navbar -->
 
-      {{-- <!-- ======= Home Section ======= -->
-      <section id="home" class="d-flex align-items-center">
-        <div class="container">
-            <h1>Selamat Datang di Website E-SS</h1>
-            <h2>Website <b>E-SS</b> (Electronics SIM STNK) adalah sebuah sistem aplikasi <br>berbasis web yang
-                menyediakan layanan pembuatan, perpanjangan <br>dan pelaporan kehilangan SIM dan STNK, juga layanan
-                untuk pembayaran pajak.</h2>
-        </div>
-    </section><!-- End Home -->
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-        <div class="container-fluid">
-
-            <div class="row">
-                <div class="col-xl-5 col-lg-6 ">
-                    Kasih logo ESS
-                </div>
-
-                <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-                    <h3>Tentang</h3>
-                    <p align=justify>Website <b>E-SS</b> (Electronics SIM STNK) adalah sebuah sistem aplikasi
-                        <br>berbasis web yang menyediakan layanan pembuatan, perpanjangan <br>dan pelaporan
-                        kehilangan SIM dan STNK, juga layanan untuk pembayaran pajak.</p>
-
-                </div>
-            </div>
-
-        </div>
-    </section><!-- End About Section -->
-
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-        <div class="container"> --}}
-
-            {{-- <div class="section-title">
-                <h2>Contact</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                    sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                    ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-            </div>
-        </div>
-    </section><!-- End Contact Section -->
-
-</main><!-- End #main --> --}}
-
-
-
     <!-- konten -->
     <div class="container">
-        <p align=justify>Website <b>E-SS</b> (Electronics SIM STNK) adalah sebuah sistem aplikasi <br>berbasis web yang menyediakan layanan pembuatan, perpanjangan <br>dan pelaporan kehilangan SIM dan STNK, juga layanan untuk pembayaran pajak.</p>
+        ASDSAD
     </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

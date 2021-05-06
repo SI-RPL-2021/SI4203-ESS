@@ -64,7 +64,6 @@
                             <span class="step"></span>
                             <span class="step"></span>
                             <span class="step"></span>
-                            {{-- <span class="step"></span> --}}
                             
                         </div>
 
@@ -73,16 +72,6 @@
                         <div class="tab">
                             <h5>Data Permohonan</h5>
                             <hr>
-                            <div class="form-group">
-                                <label for="no_regis">No Registrasi</label>
-                                <input type="text" name="no_regis" class="form-control" id="no_regis" value=<?php
-                                                                                                            echo rand();
-                                                                                                            ?> readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="jenis_pelayanan">Pelayanan</label>
-                                <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Pembuatan SIM" readonly>
-                            </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label class=" form-control-label">Golongan SIM</label></div>
                                 <div class="col col-md-9">
@@ -114,9 +103,9 @@
                                 <div class="col-12 col-md-9">
                                     <select name="polda_kedatangan" id="polda_kedatangan" class="form-control">
                                         <option value="0">Please select</option>
-                                        <option value="Jawa Barat">Jawa Barat</option>
-                                        <option value="Jawa Tengah">Jawa Tengah</option>
-                                        <option value="Jawa Timur">Jawa Timur</option>
+                                        <option value="1">Option #1</option>
+                                        <option value="2">Option #2</option>
+                                        <option value="3">Option #3</option>
                                     </select>
                                 </div>
                             </div>
@@ -248,8 +237,8 @@
                                     <select name="pendidikan" id="pendidikan" class="form-control">
                                         <option value="0">Please select</option>
                                         <option value="SLTA/Sederajat">SLTA/Sederajat</option>
-                                        <option value="2">S1</option>
-                                        <option value="3">S2</option>
+                                        <option value="2">Option #2</option>
+                                        <option value="3">Option #3</option>
                                     </select>
                                 </div>
                             </div>
@@ -351,42 +340,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="tab">
-                            <table class="table">
-                                <tbody>
-                                  <tr>
-                                    <td>NIK/Nomor KTP</td>
-                                    <td>{{ old('nik') }}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Nama Lengkap</td>
-                                    <td>{{ old('nm_lngkp') }}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Jenis Permohonan</td>
-                                    <td>Pembuatan SIM</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Golongan SIM</td>
-                                    <td>{{ old('gol_sim') }}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>POLDA Kedatangan</td>
-                                    <td>{{ old('polda_kedatangan') }}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>SATPAS Kedatangan</td>
-                                    <td>{{ old('satpas_kedatangan') }}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Biaya</td>
-                                    <td>Rp.120.000</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                        </div> --}}
-                        
-                        
+
                         
                         <div style="float:right;margin-top:50px;">
                             <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>

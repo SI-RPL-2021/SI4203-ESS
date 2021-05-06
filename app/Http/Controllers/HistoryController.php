@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\laporan_kehilangan_sim;
 use App\Models\laporan_kehilangan_stnk;
-use App\Models\pembuatan_sim;
 use App\Models\History;
 use App\Models\User;
 
@@ -20,12 +19,10 @@ class HistoryController extends Controller
     {
         $items1 = laporan_kehilangan_sim::orderBy('created_at', 'desc')->where('user_id', auth()->id())->get();
         $items2 = laporan_kehilangan_stnk::orderBy('created_at', 'desc')->where('user_id', auth()->id())->get();
-        $items3 = pembuatan_sim::orderBy('created_at', 'desc')->where('user_id', auth()->id())->get();
         return view('pengguna.pages.history', [
             'title' => 'History',
             'items1' => $items1,
             'items2' => $items2,
-            'items3' => $items3,
         ]);
     }
 
