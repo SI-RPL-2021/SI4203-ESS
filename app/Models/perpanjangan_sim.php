@@ -15,7 +15,7 @@ class perpanjangan_sim extends Model
     public function user()
     {
         return $this->hasOne(User::class);
-
+    }
     public $dates = ['masa_berlaku'];
     public function sim()
     {
