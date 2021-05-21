@@ -42,6 +42,38 @@ class perpanjanganSIM extends Controller
             'title' => 'Tambah Data Perpanjangan SIM',
             'data' => $data
         ]);
+
+
+        $perpanjanganSIM = new perpanjangan_sim;
+        $perpanjanganSIM->gol_sim = $request->gol_sim;
+        $perpanjanganSIM->no_sim = $request->no_sim;
+        $perpanjanganSIM->masa_berlaku_sim = $request->masa_berlaku_sim;
+        $perpanjanganSIM->satpas_penerbit = $request->satpas_penerbit;
+        $perpanjanganSIM->alamat_email = $request->alamat_email;
+        $perpanjanganSIM->polda_kedatangan = $request->polda_kedatangan;
+        $perpanjanganSIM->satpas_kedatangan = $request->satpas_kedatangan;
+        $perpanjanganSIM->alamat_satpas_kedatangan = $request->alamat_satpas_kedatangan;
+        $perpanjanganSIM->kwn = $request->kwn;
+        $perpanjanganSIM->nik = $request->nik;
+        $perpanjanganSIM->nama_lengkap = $request->nama_lengkap;
+        $perpanjanganSIM->tinggi = $request->tinggi;
+        $perpanjanganSIM->gol_darah = $request->gol_darah;
+        $perpanjanganSIM->kd_pos = $request->kd_pos;
+        $perpanjanganSIM->kota = $request->kota;
+        $perpanjanganSIM->alamat = $request->alamat;
+        $perpanjanganSIM->no_hp = $request->no_hp; 
+        $perpanjanganSIM->pendidikan = $request->pendidikan;
+        $perpanjanganSIM->pekerjaan = $request->pekerjaan;
+        $perpanjanganSIM->hubungan = $request->hubungan;
+        $perpanjanganSIM->nama_KD = $request->nama_KD;
+        $perpanjanganSIM->alamat_KD = $request->alamat_KD;
+        $perpanjanganSIM->telepon_KD = $request->telepon_KD;
+        $perpanjanganSIM->nama_ibu_KD = $request->nama_ibu_KD;
+        $perpanjanganSIM->sekolah_mengemudi = $request->sekolah_mengemudi;
+        $perpanjanganSIM->save();
+
+        return redirect()->route('perpanjanganSIM.index')->with('success', 'Perpanjangan SIM akan segera di proses');
+
     }
 
     /**

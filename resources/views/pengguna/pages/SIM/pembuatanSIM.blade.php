@@ -1,6 +1,73 @@
 @extends('pengguna.templates.default')
 @section('content')
 <style>
+
+        input.invalid {
+            background-color: #ffdddd;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .tombol {
+            background-color: #4e73df;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            ;
+            cursor: pointer;
+            border-radius: 7px;
+        }
+
+        .tombol:hover {
+            opacity: 0.8;
+        }
+
+        #prevBtn {
+            background-color: #bbbbbb;
+        }
+
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #4e73df;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        .step.finish {
+            background-color: #4e73df;
+        }
+
+    </style>
+
+<body>
+    <div class="row">
+        <div class="col-lg">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Pembuatan SIM</h4>
+                </div>
+                <div class="card-body">
+                    <form id="regForm" action="{{ route('buat.store') }}" method="post">
+                        @csrf
+                        <div style="text-align:center;margin-top:20px;margin-bottom:20px;">
+                            <span class="step"></span>
+                            <span class="step"></span>
+                            <span class="step"></span>
+                            {{-- <span class="step"></span> --}}
+                            
+
     input.invalid {
         background-color: #ffdddd;
     }
@@ -77,6 +144,7 @@
                             <input type="text" name="no_regis" class="form-control" id="no_regis" value=<?php
                                                                                                         echo rand();
                                                                                                         ?> readonly>
+>>>>>>> 8b71f03d3b1efbdbc5235b93527cd718b8a0feca
                         </div>
                         <div class="form-group">
                             <label for="jenis_pelayanan">Pelayanan</label>
