@@ -139,9 +139,11 @@
                         </div>
                         <div class="form-group">
                             <label for="nmr_urut">Nomor Urut Pendaftaran</label>
-                            <input type="text" name=" nmr_urut" class="form-control " id="nmr_urut">
+                            <input type="text" name=" nmr_urut" class="form-control " id="nmr_urut" value="{{ $nmr_urut }}" readonly>
                         </div>
+
                     </div>
+
 
                     <!-- form 3 -->
 
@@ -169,6 +171,7 @@
                             <input type="text" name="nmr_tanda_pendaftaran" class="form-control " id="nmr_tanda_pendaftaran">
                         </div>
                     </div>
+
 
                     <!-- form 4 -->
 
@@ -405,19 +408,20 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perpanjangan" type="checkbox" id="23" value="tahunan">
+                                        <input class="form-check-input" name="pajak_berlaku" type="checkbox" id="23" value="1">
                                         <label class="form-check-label" for="23">Pengesahan STNK Tahunan</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perpanjangan" type="checkbox" id="24" value="5 tahunan">
+                                        <input class="form-check-input" name="pajak_berlaku" type="checkbox" id="24" value="5">
                                         <label class="form-check-label" for="24">Perpanjangan STNK 5 Tahunan</label>
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
                     </div>
+
 
                     <!-- form 6 -->
 

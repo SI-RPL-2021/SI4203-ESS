@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class History extends Migration
+class CreateHistoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,11 @@ class History extends Migration
     {
         Schema::create('history', function (Blueprint $table) {
             $table->id();
-            $table->rememberToken();
+            $table->string('username');
+            $table->string('jenis_pelayanan');
+            $table->bigInteger('no_regis')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->string('admin')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class History extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('history');
     }
 }

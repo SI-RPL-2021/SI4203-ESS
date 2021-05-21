@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SIM;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\History;
 use App\Models\pembuatan_sim;
 use App\Models\perpanjangan_sim;
 use Carbon\Carbon;
@@ -56,16 +57,36 @@ class perpanjanganSIM extends Controller
         ]);
 
         $sim = pembuatan_sim::where('id', $request->sim_id)->first();
-        perpanjangan_sim::create([
+        $per = perpanjangan_sim::create([
             'sim_id' => $request->sim_id,
             'masa_berlaku' => $sim->masa_berlaku->addYears(5),
             'biaya' => $request->biaya,
             'status' => 1
         ]);
 
+        if (auth()->user()->roles->pluck('name') !== 'user') {
+            $deskripsi = auth()->user()->name . ' membuat laporan perpanjangan SIM atas nama ' . $per->sim->nm_lngkp . ' Golongan ' . $per->sim->gol_sim . ' dari tanggal ' . $per->sim->masa_berlaku->translatedFormat('d F Y') . ' sampai tanggal ' . $per->masa_berlaku->translatedFormat('d F Y');
+            History::create([
+                'username' => $sim->user->username,
+                'jenis_pelayanan' => 'Perpanjangan SIM',
+                'no_regis' => $sim->no_regis,
+                'deskripsi' => $deskripsi,
+                'admin' => auth()->user()->username
+            ]);
+        }
+
+
         return redirect()->route('perpanjangan-sim.index')->with('success', 'Perpanjangan SIM akan segera di proses');
     }
 
+    public function show($id)
+    {
+        $data = perpanjangan_sim::with('sim')->findOrFail($id);
+        return view('pengguna.pages.sim.perpanjangan.show', [
+            'title' => 'Detail',
+            'data' => $data
+        ]);
+    }
     public function status(Request $request, $id)
     {
         $perpanjangansim = perpanjangan_sim::findOrFail($id);

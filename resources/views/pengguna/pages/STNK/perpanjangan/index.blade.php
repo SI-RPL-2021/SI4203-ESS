@@ -8,21 +8,13 @@
     </button>
 </div>
 @endif
-@if (session('gagal'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Gagal!</strong> {{ session('gagal') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endif
 <div class="row">
     <div class="col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Pembuatan STNk</h6>
-                    <a href="{{ route('pembuatan-stnk.create') }}" class="btn btn-sm btn-primary">Buat Permohonan</a>
+                    <h6 class="m-0 font-weight-bold text-primary">Perpanjangan STNK</h6>
+                    <a href="{{ route('perpanjangan-stnk.create') }}" class="btn btn-sm btn-primary">Tambah Data</a>
                 </div>
             </div>
             <div class="card-body">
@@ -31,13 +23,16 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Tanggal Permohonan</th>
-                                <th>No. STNk</th>
+                                <th>No. STNK</th>
                                 <th>No. Regis</th>
-                                <th>Pajak Berlaku</th>
+                                <th>Nama Pemilik</th>
                                 <th>Merk</th>
                                 <th>Jenis</th>
-                                <th>Warna Kendaraan</th>
+                                <th>Model</th>
+                                <th>Pajak Berlaku</th>
+                                <th>Perpanjangan Sampai</th>
+                                <th>Biaya</th>
+                                <th>Keterangan</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -46,13 +41,16 @@
                             @foreach ($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->created_at->translatedFormat('l, d F Y') }}</td>
-                                <td>{{ $item->no_stnk ?? 'Tidak Ada' }}</td>
-                                <td>{{ $item->no_regis }}</td>
-                                <td>{{ $item->pajak_berlaku->translatedFormat('l, d F Y') }}</td>
-                                <td>{{ $item->merk }}</td>
-                                <td>{{ $item->jenis }}</td>
-                                <td>{{ $item->warna_kendaraan }}</td>
+                                <td>{{ $item->stnk->no_stnk }}</td>
+                                <td>{{ $item->stnk->no_regis }}</td>
+                                <td>{{ $item->stnk->nama_pemilik }}</td>
+                                <td>{{ $item->stnk->merk }}</td>
+                                <td>{{ $item->stnk->jenis }}</td>
+                                <td>{{ $item->stnk->model }}</td>
+                                <td>{{ $item->stnk->pajak_berlaku->translatedFormat('d F Y') }}</td>
+                                <td>{{ $item->pajak_berlaku->translatedFormat('d F Y') }}</td>
+                                <td>Rp. {{ number_format($item->biaya) }}</td>
+                                <td>{{ $item->keterangan }}</td>
                                 <td>
                                     @if ($item->status === 0)
                                     <span class="badge badge-danger">Ditolak</span>
@@ -65,19 +63,19 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('pembuatan-stnk.show', $item->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('perpanjangan-stnk.show', $item->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <i class="fas fa-cog"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=0">Set Ditolak</a>
-                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=1">Set Menunggu Proses</a>
-                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=2">Set Proses</a>
-                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=3">Set Berhasil</a>
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=0">Set Ditolak</a>
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=1">Set Menunggu Proses</a>
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=2">Set Proses</a>
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=3">Set Berhasil</a>
                                         </div>
                                     </div>
-                                    <form action="{{ route('pembuatan-stnk.destroy',$item->id) }}" method="post" class="d-inline">
+                                    <form action="{{ route('perpanjangan-stnk.destroy',$item->id) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SIM;
 
 use App\Http\Controllers\Controller;
+use App\Models\History;
 use App\Models\pembuatan_sim;
 use App\Models\Sim;
 use App\Models\User;
@@ -33,49 +34,6 @@ class pembuatanSIM extends Controller
             'title' => 'Pembuatan SIM',
             'data' => $data
         ]);
-    }
-
-
-    public function create()
-    {
-        $latest = pembuatan_sim::orderBy('no_regis', 'desc')->first();
-        if ($latest) {
-            $no_regis = $latest->no_regis + 1;
-        } else {
-            $no_regis = 123456789;
-        }
-        $users = User::orderBy('username', 'asc')->get();
-        $users = User::orderBy('name', 'asc')->get();
-        return view('pengguna.pages.sim.pembuatan.create', [
-            'title' => 'Permohonan Pembuatan SIM',
-            'no_regis' => $no_regis,
-            'users' => $users
-        ]);
-    }
-
-
-
-    public function status($id)
-    {
-        $pemsim = pembuatan_sim::findOrFail($id);
-        $terakhir = pembuatan_sim::whereNotNull('no_sim')->orderBy('no_sim', 'desc')->first();
-
-        $pemsim->status = request('status');
-        if (request('status') == 3) {
-            if ($terakhir) {
-                $pemsim->no_sim = $terakhir->no_sim + 1;
-            } else {
-                $pemsim->no_sim = 123456789;
-            }
-            $pemsim->masa_berlaku = Carbon::now()->addYears(5);
-        } else {
-            $pemsim->no_sim = NULL;
-            $pemsim->masa_berlaku = $pemsim->created_at;
-        }
-
-        $pemsim->save();
-
-        return redirect()->back()->with('success', 'Status berhasil diupdate.');
     }
 
 
@@ -112,6 +70,18 @@ class pembuatanSIM extends Controller
             'sertif' => ['required'],
             'jenis_pelayanan' => ['required'],
         ]);
+
+        if (auth()->user()->roles->pluck('name') !== 'user') {
+            $user = User::where('id', request('user_id'))->first();
+            $deskripsi = auth()->user()->name . ' membuat SIM atas nama ' . request('nm_lngkp');
+            History::create([
+                'username' => $user->username,
+                'jenis_pelayanan' => 'Pembuatan SIM',
+                'no_regis' => request('no_regis'),
+                'deskripsi' => $deskripsi,
+                'admin' => auth()->user()->username
+            ]);
+        }
 
         $pembuatanSIM = new pembuatan_sim;
         $pembuatanSIM->status = 1;
@@ -152,15 +122,57 @@ class pembuatanSIM extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function create()
+    {
+        $users = User::orderBy('name', 'asc')->get();
+        $sim = pembuatan_sim::orderBy('no_regis', 'desc')->first();
+        if ($sim) {
+            $no_regis = $sim->no_regis + 1;
+        } else {
+            $no_regis = 1000;
+        }
+        return view('pengguna.pages.sim.pembuatan.create', [
+            'title' => 'Permohonan Pembuatan SIM',
+            'users' => $users,
+            'no_regis' => $no_regis
+        ]);
+    }
+
+    public function status($id)
+    {
+        $pemsim = pembuatan_sim::findOrFail($id);
+        $terakhir = pembuatan_sim::whereNotNull('no_sim')->orderBy('no_sim', 'desc')->first();
+
+        $pemsim->status = request('status');
+        if (request('status') == 3) {
+            if ($terakhir) {
+                $pemsim->no_sim = $terakhir->no_sim + 1;
+            } else {
+                $pemsim->no_sim = 100000;
+            }
+            $pemsim->masa_berlaku = Carbon::now()->addYears(5);
+        } else {
+            $pemsim->no_sim = NULL;
+            $pemsim->masa_berlaku = $pemsim->created_at;
+        }
+
+        $pemsim->save();
+
+        return redirect()->back()->with('success', 'Status berhasil diupdate.');
+    }
 
     /**
      * Display the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        //
+        $data = pembuatan_sim::findOrFail($id);
+        return view('pengguna.pages.sim.pembuatan.show', [
+            'title' => 'Detail ',
+            'data' => $data
+        ]);
     }
     /**
      * Show the form for editing the specified resource.

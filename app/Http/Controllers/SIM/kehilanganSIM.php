@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SIM;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\History;
 use App\Models\laporan_kehilangan_sim;
 use App\Models\pembuatan_sim;
 use Illuminate\Support\Facades\Storage;
@@ -66,7 +67,7 @@ class kehilanganSIM extends Controller
         ]);
         $user = pembuatan_sim::with('user')->where('status', '3')->where('id', $request->sim_id)->first();
         $file = request()->file('file')->store('persyaratan', 'public');
-        laporan_kehilangan_sim::create([
+        $sim = laporan_kehilangan_sim::create([
             'sim_id' => $request->sim_id,
             'tanggal_hilang' => $request->tanggal_hilang,
             'keterangan' => $request->keterangan,
@@ -75,7 +76,27 @@ class kehilanganSIM extends Controller
             'user_id' => $user->user->id
         ]);
 
+        if (auth()->user()->roles->pluck('name') !== 'user') {
+            $deskripsi = auth()->user()->name . ' membuat laporan kehilangan SIM atas nama ' . request('nm_lngkp') . ' Golongan SIM ' . $sim->sim->gol_sim;
+            History::create([
+                'username' => $user->user->username,
+                'jenis_pelayanan' => 'Kehilangan SIM',
+                'no_regis' => $sim->sim->no_regis,
+                'deskripsi' => $deskripsi,
+                'admin' => auth()->user()->username
+            ]);
+        }
+
         return redirect()->route('kehilangan-sim.index')->with('success', 'Laporan Kehilangan SIM Berhasil Dibuat');
+    }
+
+    public function show($id)
+    {
+        $data = laporan_kehilangan_sim::with('sim')->findOrFail($id);
+        return view('pengguna.pages.sim.kehilangan.show', [
+            'title' => 'Detail',
+            'data' => $data
+        ]);
     }
 
     function download($id)

@@ -16,6 +16,7 @@ class CreatePembuatanStnkTable extends Migration
         Schema::create('pembuatan_stnk', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('no_regis');
+            $table->bigInteger('no_stnk')->nullable();
             $table->string('merk');
             $table->string('type');
             $table->string('jenis');
@@ -44,7 +45,7 @@ class CreatePembuatanStnkTable extends Migration
             $table->string('baru')->nullable();
             $table->string('perubahan')->nullable();
             $table->string('persyaratan_khusus')->nullable();
-            $table->string('perpanjangan')->nullable();
+            $table->date('pajak_berlaku');
             $table->string('file');
             $table->integer('status');
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();

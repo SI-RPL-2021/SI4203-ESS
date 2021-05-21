@@ -25,8 +25,6 @@
                                 <th>#</th>
                                 <th>Nama</th>
                                 <th>No. SIM</th>
-                                <th>No. Regis</th>
-                                <th>TTL</th>
                                 <th>Golongan</th>
                                 <th>Alamat</th>
                                 <th>Pekerjaan</th>
@@ -63,7 +61,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="btn-group mr-1">
+                                    <a href="{{ route('kehilangan-sim.show', $item->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
+                                    <div class="btn-group">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <i class="fas fa-cog"></i>
                                         </button>

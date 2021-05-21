@@ -4,6 +4,7 @@ namespace App\Http\Controllers\STNK;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\History;
 use App\Models\laporan_kehilangan_stnk;
 use App\Models\pembuatan_stnk;
 
@@ -56,18 +57,28 @@ class kehilanganSTNK extends Controller
 
     public function store(Request $request)
     {
-
         $data = request()->all();
         $user = pembuatan_stnk::with('user')->where('status', 3)->where('id', $request->stnk_id)->first();
         $data['status'] = 1;
         $data['user_id'] = $user->id;
-        laporan_kehilangan_stnk::create($data);
+        $stnk = laporan_kehilangan_stnk::create($data);
+        if (auth()->user()->roles->pluck('name') !== 'user') {
+            $deskripsi = auth()->user()->name . ' membuat laporan kehilangan STNK atas nama ' . $stnk->stnk->nama_pemilik;
+            History::create([
+                'username' => $user->user->username,
+                'jenis_pelayanan' => 'Kehilangan STNK',
+                'no_regis' => $stnk->stnk->no_regis,
+                'deskripsi' => $deskripsi,
+                'admin' => auth()->user()->username
+            ]);
+        }
         return redirect()->route('kehilangan-stnk.index')->with('success', 'Laporan Kehilangan STNK Berhasil Dibuat');
     }
 
     public function status(Request $request, $id)
     {
         $kehilangan_stnk = laporan_kehilangan_stnk::findOrFail($id);
+
         $kehilangan_stnk->status = $request->status;
         $kehilangan_stnk->save();
 
