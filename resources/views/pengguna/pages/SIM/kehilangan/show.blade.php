@@ -82,13 +82,13 @@
                         <tr>
                             <th>Status</th>
                             <td>
-                                @if ($data->sim->status === 0)
+                                @if ($data->status === 0)
                                 <span class="badge badge-danger">Ditolak</span>
-                                @elseif ($data->sim->status === 1)
+                                @elseif ($data->status === 1)
                                 <span class="badge badge-warning">Menunggu Diproses</span>
-                                @elseif ($data->sim->status === 2)
+                                @elseif ($data->status === 2)
                                 <span class="badge badge-info">Diproses</span>
-                                @elseif ($data->sim->status === 3)
+                                @elseif ($data->status === 3)
                                 <span class="badge badge-success">Berhasil</span>
                                 @endif
                             </td>

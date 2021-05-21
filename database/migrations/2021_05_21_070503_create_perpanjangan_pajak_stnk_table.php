@@ -20,6 +20,7 @@ class CreatePerpanjanganPajakStnkTable extends Migration
             $table->bigInteger('biaya');
             $table->string('keterangan');
             $table->integer('status');
+            $table->string('user_id');
             $table->timestamps();
         });
     }

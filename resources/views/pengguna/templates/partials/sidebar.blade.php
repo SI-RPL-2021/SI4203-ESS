@@ -15,7 +15,7 @@
             <span>Dashboard</span></a>
     </li>
 
-    @role('admin sim')
+    @role('admin sim|user')
     <!-- Divider -->
     <hr class="sidebar-divider">
 

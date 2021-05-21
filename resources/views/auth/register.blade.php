@@ -49,6 +49,14 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
+                                            <input type="nik" class="form-control form-control-user @error('nik') is-invalid @enderror" placeholder="NIK KTP" name="nik" value="{{ old('nik') }}">
+                                            @error('nik')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
                                             <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email" name="email" value="{{ old('email') }}">
                                             @error('email')
                                             <div class="invalid-feedback">

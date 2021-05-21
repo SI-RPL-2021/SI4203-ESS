@@ -25,6 +25,7 @@
                                 <th>#</th>
                                 <th>Nama</th>
                                 <th>No. SIM</th>
+                                <th>Golongan</th>
                                 <th>No. Regis</th>
                                 <th>Alamat</th>
                                 <th>Pekerjaan</th>
@@ -44,6 +45,7 @@
                                 <td>{{ $item->sim->no_regis }}</td>
                                 <td>{{ $item->sim->alamat }}</td>
                                 <td>{{ $item->sim->pekerjaan }}</td>
+                                <td>{{ $item->sim->gol_sim }}</td>
                                 <td>{{ $item->sim->user->username }}</td>
                                 <td>{{ $item->masa_berlaku->translatedFormat('l, d F Y') }}</td>
                                 <td>Rp. {{ number_format($item->biaya) }}</td>
@@ -63,6 +65,7 @@
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <i class="fas fa-cog"></i>
                                         </button>
+                                        @role('admin sim')
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="{{ route('perpanjangan-sim.status',$item->id) }}?status=0">Set Ditolak</a>
                                             <a class="dropdown-item" href="{{ route('perpanjangan-sim.status',$item->id) }}?status=1">Set Menunggu Proses</a>
@@ -75,6 +78,7 @@
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
+                                    @endrole
                                 </td>
                             </tr>
                             @endforeach

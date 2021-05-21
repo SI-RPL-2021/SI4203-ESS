@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     //sim -----------------------
-    Route::group(['middleware' => ['role:admin sim']], function () {
+    Route::group(['middleware' => ['role:admin sim|user']], function () {
         Route::resource('pembuatan-sim', pembuatanSIM::class);
         Route::get('/pembuatan-sim/{id}/set', [pembuatanSIM::class, 'status'])->name('pembuatan-sim.status');
         Route::resource('kehilangan-sim', kehilanganSIM::class);

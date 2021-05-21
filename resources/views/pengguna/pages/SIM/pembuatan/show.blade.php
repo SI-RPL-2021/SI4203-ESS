@@ -104,10 +104,6 @@
                             <td>{{ $data->sertif }}</td>
                         </tr>
                         <tr>
-                            <th>File</th>
-                            <td><a href="">Download</a></td>
-                        </tr>
-                        <tr>
                             <th>Status</th>
                             <td>
                                 @if ($data->status === 0)

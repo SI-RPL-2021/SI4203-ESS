@@ -30,7 +30,11 @@ class kehilanganSIM extends Controller
      */
     public function index()
     {
-        $data = laporan_kehilangan_sim::with('sim')->latest()->get();
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
+            $data = laporan_kehilangan_sim::with('sim')->latest()->get();
+        } else {
+            $data = laporan_kehilangan_sim::where('user_id', auth()->id())->with('sim')->latest()->get();
+        }
         return view('pengguna.pages.sim.kehilangan.index', [
             'title' => 'Laporan Kehilangan SIM',
             'data' => $data
@@ -44,7 +48,11 @@ class kehilanganSIM extends Controller
      */
     public function create()
     {
-        $data = pembuatan_sim::where('status', 3)->latest()->get();
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
+            $data = pembuatan_sim::where('status', 3)->latest()->get();
+        } else {
+            $data = pembuatan_sim::where('user_id', auth()->id())->where('status', 3)->latest()->get();
+        }
         return view('pengguna.pages.sim.kehilangan.create', [
             'title' => 'Buat Laporan Kehilangan SIM',
             'data' => $data
