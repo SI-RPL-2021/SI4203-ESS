@@ -14,7 +14,11 @@ class PerpanjanganStnk extends Controller
 {
     public function index()
     {
-        $data = ModelsPerpanjanganStnk::with('stnk')->latest()->get();
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
+            $data = ModelsPerpanjanganStnk::with('stnk')->latest()->get();
+        } else {
+            $data = ModelsPerpanjanganStnk::with('stnk')->where('user_id', auth()->id())->latest()->get();
+        }
         return view('pengguna.pages.STNK.perpanjangan.index', [
             'title' => 'Perpanjangan STNK',
             'data' => $data
@@ -23,7 +27,11 @@ class PerpanjanganStnk extends Controller
 
     public function create()
     {
-        $data = pembuatan_stnk::where('status', 3)->orderBy('no_stnk')->get();
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
+            $data = pembuatan_stnk::where('status', 3)->orderBy('no_stnk')->get();
+        } else {
+            $data = pembuatan_stnk::where('status', 3)->orderBy('no_stnk')->where('user_id', auth()->id())->get();
+        }
         return view('pengguna.pages.STNK.perpanjangan.create', [
             'title' => 'Buat Perpanjangan STNK',
             'data' => $data
@@ -42,6 +50,17 @@ class PerpanjanganStnk extends Controller
             $data['keterangan'] = '5 Tahun';
         }
         $data['status'] = 1;
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
+            $data['user_id'] = $data2->user_id;
+            $data['biaya'] = request('biaya');
+        } else {
+            $data['user_id'] = auth()->id();
+            if (request('pajak_berlaku') == 1) {
+                $data['biaya'] = 1000000;
+            } else {
+                $data['biaya'] = 2500000;
+            }
+        }
         $per = ModelsPerpanjanganStnk::create($data);
         if (auth()->user()->roles->pluck('name') !== 'user') {
             $deskripsi = auth()->user()->name . ' membuat laporan perpanjangan STNK atas nama ' . $per->stnk->nama_pemilik . ' dari tanggal ' . $per->stnk->pajak_berlaku->translatedFormat('d F Y') . ' sampai tanggal ' . $per->pajak_berlaku->translatedFormat('d F Y');

@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('perpanjangan-sim/{id}/set', [perpanjanganSIM::class, 'status'])->name('perpanjangan-sim.status');
     });
 
-    Route::group(['middleware' => ['role:admin stnk']], function () {
+    Route::group(['middleware' => ['role:admin stnk|user']], function () {
         // stnk -----------------------
         Route::resource('pembuatan-stnk', pembuatanSTNK::class);
         Route::get('/pembuatan-stnk/{id}/set', [pembuatanSTNK::class, 'status'])->name('pembuatan-stnk.status');

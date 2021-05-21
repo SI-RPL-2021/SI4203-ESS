@@ -101,7 +101,7 @@
                         </tr>
                         <tr>
                             <th>Kode POS</th>
-                            <td>{{ $data->stnk->kd_pos }}</td>
+                            <td>{{ $data->stnk->kode_pos }}</td>
                         </tr>
                         <tr>
                             <th>No. Telepon</th>
@@ -134,13 +134,13 @@
                         <tr>
                             <th>Status</th>
                             <td>
-                                @if ($data->stnk->status === 0)
+                                @if ($data->status === 0)
                                 <span class="badge badge-danger">Ditolak</span>
-                                @elseif ($data->stnk->status === 1)
+                                @elseif ($data->status === 1)
                                 <span class="badge badge-warning">Menunggu Diproses</span>
-                                @elseif ($data->stnk->status === 2)
+                                @elseif ($data->status === 2)
                                 <span class="badge badge-info">Diproses</span>
-                                @elseif ($data->stnk->status === 3)
+                                @elseif ($data->status === 3)
                                 <span class="badge badge-success">Berhasil</span>
                                 @endif
                             </td>

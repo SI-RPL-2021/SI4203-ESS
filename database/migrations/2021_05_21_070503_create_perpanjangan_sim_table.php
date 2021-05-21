@@ -19,6 +19,7 @@ class CreatePerpanjanganSimTable extends Migration
             $table->date('masa_berlaku');
             $table->bigInteger('biaya');
             $table->integer('status');
+            $table->string('user_id');
             $table->timestamps();
         });
     }

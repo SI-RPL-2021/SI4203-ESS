@@ -105,7 +105,7 @@
                         </tr>
                         <tr>
                             <th>Kode POS</th>
-                            <td>{{ $data->kd_pos }}</td>
+                            <td>{{ $data->kode_pos }}</td>
                         </tr>
                         <tr>
                             <th>No. Telepon</th>
@@ -113,7 +113,7 @@
                         </tr>
                         <tr>
                             <th>No. KTP</th>
-                            <td>{{ $data->no_ktp }}</td>
+                            <td>{{ $data->user->nik }}</td>
                         </tr>
                         <tr>
                             <th>KITAS</th>

@@ -34,7 +34,9 @@
                                 <th>File</th>
                                 <th>Username</th>
                                 <th>Status</th>
+                                @role('admin stnk')
                                 <th>Aksi</th>
+                                @endrole
                             </tr>
                         </thead>
                         <tbody>
@@ -62,6 +64,7 @@
                                     <span class="badge badge-success">Berhasil</span>
                                     @endif
                                 </td>
+                                @role('admin stnk')
                                 <td>
                                     <div class="btn-group mr-1">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -80,6 +83,7 @@
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
+                                @endrole
                             </tr>
                             @endforeach
                         </tbody>

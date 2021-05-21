@@ -80,12 +80,14 @@
                                 </select>
                             </div>
                         </div>
+                        @role('admin stnk')
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="biaya" class=" form-control-label">Biaya</label></div>
                             <div class="col-12 col-md-9">
                                 <input type="text" class="form-control" name="biaya">
                             </div>
                         </div>
+                        @endrole
                         <div class="form-group row">
                             <div class="col-lg-3">
                                 <label for="">Pajak Berlaku</label>

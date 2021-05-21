@@ -16,10 +16,6 @@ class pembuatanSTNK extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware(['auth']);
-    }
 
     /**
      * Show the application dashboard.
@@ -28,7 +24,11 @@ class pembuatanSTNK extends Controller
      */
     public function index()
     {
-        $data = pembuatan_stnk::latest()->get();
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
+            $data = pembuatan_stnk::latest()->get();
+        } else {
+            $data = pembuatan_stnk::where('user_id', auth()->id())->get();
+        }
         return view('pengguna.pages.stnk.pembuatan.index', [
             'title' => 'Pembuatan STNK',
             'data' => $data
@@ -103,13 +103,20 @@ class pembuatanSTNK extends Controller
         //     'file' => ['required'],
 
         // ]);
+        $user = User::where('id', request('user_id'))->first();
         $data = request()->all();
         $data['thn_registrasi'] = Carbon::now()->translatedFormat('Y');
         $data['status'] = 1;
-        $data['user_id'] = request('user_id');
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
+            $data['user_id'] = request('user_id');
+            $data['nmr_ktp'] = $user->nik;
+        } else {
+            $data['user_id'] = auth()->id();
+            $data['nmr_ktp'] = auth()->user()->nik;
+        }
         $data['pajak_berlaku'] = Carbon::now()->addYears(request('pajak_berlaku'));
         $stnk = pembuatan_stnk::create($data);
-        if (auth()->user()->roles->pluck('name') !== 'user') {
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
             $user = User::where('id', request('user_id'))->first();
             $deskripsi = auth()->user()->name . ' membuat SIM atas nama ' . $stnk->nama_pemilik;
             History::create([

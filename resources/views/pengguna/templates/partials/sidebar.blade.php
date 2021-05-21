@@ -36,7 +36,7 @@
     @endrole
 
 
-    @role('admin stnk')
+    @role('admin stnk|user')
     <hr class="sidebar-divider d-none d-md-block">
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">

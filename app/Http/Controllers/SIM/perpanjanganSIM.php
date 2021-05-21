@@ -29,6 +29,7 @@ class perpanjanganSIM extends Controller
         } else {
             $data = perpanjangan_sim::where('user_id', auth()->id())->with('sim')->latest()->get();
         }
+
         return view('pengguna.pages.sim.perpanjangan.index', [
             'title' => 'Perpanjangan SIM',
             'data' => $data
@@ -59,7 +60,6 @@ class perpanjanganSIM extends Controller
         $request->validate([
             'sim_id' => ['required ']
         ]);
-
         $sim = pembuatan_sim::where('id', $request->sim_id)->first();
         if ($sim->gol_sim === 'A') {
             $biaya = 2000000;
@@ -99,6 +99,7 @@ class perpanjanganSIM extends Controller
             'data' => $data
         ]);
     }
+
     public function status(Request $request, $id)
     {
         $perpanjangansim = perpanjangan_sim::findOrFail($id);
@@ -120,7 +121,6 @@ class perpanjanganSIM extends Controller
     public function destroy($id)
     {
         perpanjangan_sim::destroy($id);
-
         return redirect()->back()->with('success', 'Permohonan Perpanjangan SIM berhasil dihapus.');
     }
 }

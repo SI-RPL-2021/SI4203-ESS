@@ -73,6 +73,7 @@
                     <div class="tab">
                         <h5>Formulir Pemohonan STNK</h5>
                         <hr>
+                        @role('admin stnk')
                         <div class="form-group">
                             <label for="">User</label>
                             <select name="user_id" id="user_id" class="form-control">
@@ -82,6 +83,7 @@
                                 @endforeach
                             </select>
                         </div>
+                        @endrole
                         <div class="form-group">
                             <label for="no_regis"> No Registrasi </label>
                             <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value="{{ $no_regis }}" readonly>
@@ -212,10 +214,6 @@
                         <div class="form-group">
                             <label for="nmr_tlpn"> Nomor Telepon </label>
                             <input type="text" name="nmr_telepon" class="form-control " id="nmr_tlpn">
-                        </div>
-                        <div class="form-group">
-                            <label for="nmr_ktp"> Nomor KTP </label>
-                            <input type="text" name="nmr_ktp" class="form-control " id="nmr_ktp">
                         </div>
                         <div class="form-group">
                             <label for="kitas"> KITAS / KITAP </label>
