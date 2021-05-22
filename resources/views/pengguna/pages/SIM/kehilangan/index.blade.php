@@ -25,10 +25,7 @@
                                 <th>#</th>
                                 <th>Nama</th>
                                 <th>No. SIM</th>
-<<<<<<< HEAD
                                 <th>No. Regis</th>
-=======
->>>>>>> b6681c886a828ad4010f6231835e36516d261e96
                                 <th>Golongan</th>
                                 <th>Alamat</th>
                                 <th>Pekerjaan</th>
