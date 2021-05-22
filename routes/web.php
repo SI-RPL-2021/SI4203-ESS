@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
 //     Route::get('/dashboard', function () {
 //         return view('dashboard');
 //   });
-  Route::get('/dashboard', [ddashboard::class,'index']);
+  Route::get('/ddashboard', [ddashboard::class,'index']);
   Route::get('chart', [ChartController::class, 'index']);
     Route::group(['middleware' => ['role:admin sim|user']], function () {
         Route::resource('pembuatan-sim', pembuatanSIM::class);
