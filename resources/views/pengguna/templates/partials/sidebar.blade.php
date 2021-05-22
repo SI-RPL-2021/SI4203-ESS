@@ -28,7 +28,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('home') }}">
+            <a class="nav-link" href="{{ url('dashboard') }}">
                 <i class="fas fa-fw fa-home"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -38,7 +38,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+        <a class="nav-link" href="{{ route('ddashboard') }}">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>
