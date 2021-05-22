@@ -12,11 +12,8 @@ use App\Http\Controllers\SIM\pembuatanSIM;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\STNK\pembuatanSTNK;
-<<<<<<< HEAD
 use App\Http\Controllers\ChartController;
-=======
 use App\Http\Controllers\STNK\PerpanjanganStnk;
->>>>>>> b6681c886a828ad4010f6231835e36516d261e96
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +35,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     //sim -----------------------
-<<<<<<< HEAD
     Route::resource('pembuatan-sim', pembuatanSIM::class);
     Route::get('/pembuatan-sim/{id}/set', [pembuatanSIM::class, 'status'])->name('pembuatan-sim.status');
     Route::resource('kehilangan-sim', kehilanganSIM::class);
@@ -51,7 +47,6 @@ Route::group(['middleware' => ['auth']], function () {
 //   });
   Route::get('/dashboard', [ddashboard::class,'index']);
   Route::get('chart', [ChartController::class, 'index']);
-=======
     Route::group(['middleware' => ['role:admin sim|user']], function () {
         Route::resource('pembuatan-sim', pembuatanSIM::class);
         Route::get('/pembuatan-sim/{id}/set', [pembuatanSIM::class, 'status'])->name('pembuatan-sim.status');
@@ -71,7 +66,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('perpanjangan-stnk', PerpanjanganStnk::class);
         Route::get('perpanjangan-stnk/{id}/set', [perpanjanganStnk::class, 'status'])->name('perpanjangan-stnk.status');
     });
->>>>>>> b6681c886a828ad4010f6231835e36516d261e96
+
 
 
     Route::resource('history', HistoryController::class);
