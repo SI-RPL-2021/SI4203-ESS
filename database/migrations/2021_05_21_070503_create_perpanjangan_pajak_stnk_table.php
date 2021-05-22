@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePerpanjanganSimTable extends Migration
+class CreatePerpanjanganPajakStnkTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreatePerpanjanganSimTable extends Migration
      */
     public function up()
     {
-        Schema::create('perpanjangan_sim', function (Blueprint $table) {
+        Schema::create('perpanjangan_pajak_stnk', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sim_id')->constrained('pembuatan_sim')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->date('masa_berlaku');
+            $table->foreignId('stnk_id')->constrained('pembuatan_stnk')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->date('pajak_berlaku');
             $table->bigInteger('biaya');
+            $table->string('keterangan');
             $table->integer('status');
-            $table->string('user_id');
+            $table->foreignId('user_id')->constrained('users')->cascadeOndUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreatePerpanjanganSimTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perpanjangan_sim');
+        Schema::dropIfExists('perpanjangan_pajak_stnk');
     }
 }

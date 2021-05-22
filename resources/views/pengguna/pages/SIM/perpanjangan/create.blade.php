@@ -81,12 +81,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label for="biaya" class=" form-control-label">Biaya</label></div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" class="form-control" name="biaya" value="50000" readonly>
-                            </div>
-                        </div>
                     </div>
                     <div style="float:right;margin-top:50px;">
                         <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>

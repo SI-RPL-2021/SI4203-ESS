@@ -49,6 +49,16 @@
     }
 </style>
 
+@if (session('gagal'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Gagal!</strong> {{ session('gagal') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
+
 
 <div class="row">
     <div class="col-lg">
@@ -70,6 +80,7 @@
                     <div class="tab">
                         <h5>Data Permohonan</h5>
                         <hr>
+                        @role('admin sim')
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="select" class=" form-control-label">Pilih User</label></div>
                             <div class="col-12 col-md-9">
@@ -81,6 +92,9 @@
                                 </select>
                             </div>
                         </div>
+                        @elserole('user')
+                        <input type="hidden" name="user_id" value="{{ $users->id }}">
+                        @endrole
                         <div class="form-group">
                             <label for="jenis_pelayanan">Pelayanan</label>
                             <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Pembuatan SIM" readonly>
@@ -95,17 +109,16 @@
                                 <div class="form-check">
                                     <div class="radio">
                                         <label for="radio1" class="form-check-label ">
-                                            <input type="radio" id="gol_sim" name="gol_sim" value="a" class="form-check-input">A
-                                        </label>
+                                            <input type="radio" id="gol_sim" name="gol_sim" value="A" class="form-check-input" checked>A</label>
                                     </div>
                                     <div class="radio">
                                         <label for="radio2" class="form-check-label ">
-                                            <input type="radio" id="gol_sim" name="gol_sim" value="b" class="form-check-input">B
+                                            <input type="radio" id="gol_sim" name="gol_sim" value="B" class="form-check-input">B
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label for="radio3" class="form-check-label ">
-                                            <input type="radio" id="b" name="gol_sim" value="c" class="form-check-input">C
+                                            <input type="radio" id="b" name="gol_sim" value="C" class="form-check-input">C
                                         </label>
                                     </div>
                                 </div>
@@ -153,7 +166,7 @@
                                 <div class="form-check">
                                     <div class="radio">
                                         <label for="radio1" class="form-check-label ">
-                                            <input type="radio" id="radio1" name="kwn" value="WNI" class="form-check-input">WNI
+                                            <input type="radio" id="radio1" name="kwn" value="WNI" class="form-check-input checked">WNI
                                         </label>
                                     </div>
                                     <div class="radio">
@@ -163,11 +176,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">NIK/Nomor
-                                    KTP</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="nik" name="nik" class="form-control"></div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama

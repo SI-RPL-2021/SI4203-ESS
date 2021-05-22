@@ -10,6 +10,7 @@ class pembuatan_stnk extends Model
     use HasFactory;
     protected $table = "pembuatan_stnk";
     protected $guarded = [];
+    public $dates = ['pajak_berlaku'];
 
     public function user()
     {

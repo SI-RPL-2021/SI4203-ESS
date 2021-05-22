@@ -67,6 +67,8 @@
                                     @endif
                                 </td>
                                 <td>
+                                    <a href="{{ route('pembuatan-sim.show', $item->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
+                                    @role('admin sim')
                                     <div class="btn-group mr-1">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <i class="fas fa-cog"></i>
@@ -83,6 +85,7 @@
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
+                                    @endrole
                                 </td>
                             </tr>
                             @endforeach

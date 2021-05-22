@@ -73,6 +73,7 @@
                     <div class="tab">
                         <h5>Formulir Pemohonan STNK</h5>
                         <hr>
+                        @role('admin stnk')
                         <div class="form-group">
                             <label for="">User</label>
                             <select name="user_id" id="user_id" class="form-control">
@@ -82,6 +83,7 @@
                                 @endforeach
                             </select>
                         </div>
+                        @endrole
                         <div class="form-group">
                             <label for="no_regis"> No Registrasi </label>
                             <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value="{{ $no_regis }}" readonly>
@@ -139,9 +141,11 @@
                         </div>
                         <div class="form-group">
                             <label for="nmr_urut">Nomor Urut Pendaftaran</label>
-                            <input type="text" name=" nmr_urut" class="form-control " id="nmr_urut">
+                            <input type="text" name=" nmr_urut" class="form-control " id="nmr_urut" value="{{ $nmr_urut }}" readonly>
                         </div>
+
                     </div>
+
 
                     <!-- form 3 -->
 
@@ -169,6 +173,7 @@
                             <input type="text" name="nmr_tanda_pendaftaran" class="form-control " id="nmr_tanda_pendaftaran">
                         </div>
                     </div>
+
 
                     <!-- form 4 -->
 
@@ -209,10 +214,6 @@
                         <div class="form-group">
                             <label for="nmr_tlpn"> Nomor Telepon </label>
                             <input type="text" name="nmr_telepon" class="form-control " id="nmr_tlpn">
-                        </div>
-                        <div class="form-group">
-                            <label for="nmr_ktp"> Nomor KTP </label>
-                            <input type="text" name="nmr_ktp" class="form-control " id="nmr_ktp">
                         </div>
                         <div class="form-group">
                             <label for="kitas"> KITAS / KITAP </label>
@@ -405,19 +406,20 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perpanjangan" type="checkbox" id="23" value="tahunan">
+                                        <input class="form-check-input" name="pajak_berlaku" type="checkbox" id="23" value="1">
                                         <label class="form-check-label" for="23">Pengesahan STNK Tahunan</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="perpanjangan" type="checkbox" id="24" value="5 tahunan">
+                                        <input class="form-check-input" name="pajak_berlaku" type="checkbox" id="24" value="5">
                                         <label class="form-check-label" for="24">Perpanjangan STNK 5 Tahunan</label>
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
                     </div>
+
 
                     <!-- form 6 -->
 

@@ -25,7 +25,10 @@
                                 <th>#</th>
                                 <th>Nama</th>
                                 <th>No. SIM</th>
+<<<<<<< HEAD
                                 <th>No. Regis</th>
+=======
+>>>>>>> b6681c886a828ad4010f6231835e36516d261e96
                                 <th>Golongan</th>
                                 <th>Alamat</th>
                                 <th>Pekerjaan</th>
@@ -63,7 +66,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="btn-group mr-1">
+                                    <a href="{{ route('kehilangan-sim.show', $item->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
+                                    @role('admin sim')
+                                    <div class="btn-group">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <i class="fas fa-cog"></i>
                                         </button>
@@ -79,6 +84,7 @@
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
+                                    @endrole
                                 </td>
                             </tr>
                             @endforeach

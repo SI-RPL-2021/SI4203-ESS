@@ -21,7 +21,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Pembuatan STNK</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Pembuatan STNk</h6>
                     <a href="{{ route('pembuatan-stnk.create') }}" class="btn btn-sm btn-primary">Buat Permohonan</a>
                 </div>
             </div>
@@ -32,17 +32,12 @@
                             <tr>
                                 <th>#</th>
                                 <th>Tanggal Permohonan</th>
+                                <th>No. STNk</th>
                                 <th>No. Regis</th>
-                                <th>Golongan SIM</th>
-                                <th>Nama Lengkap</th>
-                                <th>NIK</th>
+                                <th>Pajak Berlaku</th>
                                 <th>Merk</th>
                                 <th>Jenis</th>
                                 <th>Warna Kendaraan</th>
-                                <th>Kepemilikan</th>
-                                <th>Nama Pemilik</th>
-                                <th>Nomor KTP</th>
-                                <th>Username</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -52,29 +47,26 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->created_at->translatedFormat('l, d F Y') }}</td>
+                                <td>{{ $item->no_stnk ?? 'Tidak Ada' }}</td>
                                 <td>{{ $item->no_regis }}</td>
-                                <td>{{ $item->gol_sim }}</td>
-                                <td>{{ $item->nm_lngkp }}</td>
-                                <td>{{ $item->nik }}</td>
+                                <td>{{ $item->pajak_berlaku->translatedFormat('l, d F Y') }}</td>
                                 <td>{{ $item->merk }}</td>
                                 <td>{{ $item->jenis }}</td>
                                 <td>{{ $item->warna_kendaraan }}</td>
-                                <td>{{ $item->kepemilikan }}</td>
-                                <td>{{ $item->nama_pemilik }}</td>
-                                <td>{{ $item->nmr_ktp }}</td>
-                                <td>{{ $item->user->username }}</td>
                                 <td>
                                     @if ($item->status === 0)
                                     <span class="badge badge-danger">Ditolak</span>
                                     @elseif ($item->status === 1)
-                                    <span class="badge badge-info">Menunggu Diproses</span>
+                                    <span class="badge badge-warning">Menunggu Diproses</span>
                                     @elseif ($item->status === 2)
-                                    <span class="badge badge-warning">Diproses</span>
+                                    <span class="badge badge-info">Diproses</span>
                                     @elseif ($item->status === 3)
                                     <span class="badge badge-success">Berhasil</span>
                                     @endif
                                 </td>
                                 <td>
+                                    <a href="{{ route('pembuatan-stnk.show', $item->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
+                                    @role('admin stnk')
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <i class="fas fa-cog"></i>
@@ -91,6 +83,7 @@
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
+                                    @endrole
                                 </td>
                             </tr>
                             @endforeach

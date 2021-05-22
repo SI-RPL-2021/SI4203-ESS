@@ -8,6 +8,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
+<<<<<<< HEAD
     <?php if (Auth::user()->hasRole('user')) { ?>
         <!-- Divider -->
         <!-- Nav Item - Dashboard -->
@@ -35,8 +36,16 @@
 
     <?php } ?>
 
+=======
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('dashboard') }}">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Dashboard</span></a>
+    </li>
+>>>>>>> b6681c886a828ad4010f6231835e36516d261e96
 
-    @role('admin sim')
+    @role('admin sim|user')
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -48,7 +57,7 @@
         </a>
         <div id="collapseSIM" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('pembuatan-sim.index') }}">Pembuatan SIM</a>
+                <a class="collapse-item" href="{{ route('pembuatan-sim.index') }}">Pembuatan</a>
                 <a class="collapse-item" href="{{ route('kehilangan-sim.index') }}">Kehilangan SIM</a>
                 <a class="collapse-item" href="{{ route('perpanjangan-sim.index') }}">Perpanjangan SIM</a>
             </div>
@@ -57,7 +66,7 @@
     @endrole
 
 
-    @role('admin stnk')
+    @role('admin stnk|user')
     <hr class="sidebar-divider d-none d-md-block">
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
@@ -69,14 +78,20 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('pembuatan-stnk.index') }}">Pembuatan STNK</a>
                 <a class="collapse-item" href="{{ route('kehilangan-stnk.index') }}">Kehilangan STNK</a>
-                <a class="collapse-item" href="{{ route('satutahun.index') }}">Pajak 1 Tahun</a>
-                <a class="collapse-item" href="{{ route('limatahun.index') }}">Pajak 5 Tahun</a>
+                <a class="collapse-item" href="{{ route('perpanjangan-stnk.index') }}">Perpanjang Pajak</a>
             </div>
         </div>
     </li>
     @endrole
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
 
-
+    <!-- Nav Item - History -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('history.index') }}">
+            <i class="fas fa-fw fa-history"></i>
+            <span>History</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class=" sidebar-divider d-none d-md-block">
