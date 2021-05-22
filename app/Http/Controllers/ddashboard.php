@@ -40,7 +40,7 @@ class ddashboard extends Controller
         ->where('user_id', auth()->id())->get();
         $items3 = perpanjangan_sim::orderBy('created_at', 'desc')
         ->where('id', auth()->id())->get();
-        return view('dashboard', [
+        return view('ddashboard', [
             'items1' => $items1,
             'items2' => $items2,
             'items3' => $items3,

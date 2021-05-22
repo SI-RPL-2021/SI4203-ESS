@@ -20,7 +20,7 @@
         <hr class="sidebar-divider d-none d-md-block">
         <!-- Nav Item - History -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('HistoryController.index') }}">
+            <a class="nav-link" href="{{ route('history.index') }}">
                 <i class="fas fa-fw fa-history"></i>
                 <span>History</span></a>
         </li>
@@ -28,7 +28,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('dashboard') }}">
+            <a class="nav-link" href="{{ url('/dashboard') }}">
                 <i class="fas fa-fw fa-home"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -36,12 +36,12 @@
     <?php } ?>
 
 
-    <!-- Nav Item - Dashboard -->
+    {{-- <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('ddashboard') }}">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
-    </li>
+    </li> --}}
 
 
     @role('admin sim|user')

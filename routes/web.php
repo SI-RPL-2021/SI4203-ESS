@@ -3,7 +3,6 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ddashboard;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\adminSIMController;
 use App\Http\Controllers\STNK\kehilanganSTNK;
@@ -12,9 +11,8 @@ use App\Http\Controllers\SIM\pembuatanSIM;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\STNK\pembuatanSTNK;
-use App\Http\Controllers\ChartController;
 use App\Http\Controllers\STNK\PerpanjanganStnk;
-
+use App\Http\Controllers\ddashboard;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,20 +31,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'landing_page'])->n
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('home', [HomeController::class, 'landing_page'])->name('home');
 
     //sim -----------------------
-    Route::resource('pembuatan-sim', pembuatanSIM::class);
-    Route::get('/pembuatan-sim/{id}/set', [pembuatanSIM::class, 'status'])->name('pembuatan-sim.status');
-    Route::resource('kehilangan-sim', kehilanganSIM::class);
-    Route::get('/kehilangan-sim/{id}/set', [kehilanganSIM::class, 'status'])->name('kehilangan-sim.status');
-    Route::get('kehilangan-sim/{namafile}/download', [kehilanganSIM::class, 'download'])->name('getFile');
-    Route::resource('perpanjangan-sim', perpanjanganSIM::class);
-    Route::get('perpanjangan-sim/{id}/set', [perpanjanganSIM::class, 'status'])->name('perpanjangan-sim.status');
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//   });
-  Route::get('/ddashboard', [ddashboard::class,'index']);
-  Route::get('chart', [ChartController::class, 'index']);
     Route::group(['middleware' => ['role:admin sim|user']], function () {
         Route::resource('pembuatan-sim', pembuatanSIM::class);
         Route::get('/pembuatan-sim/{id}/set', [pembuatanSIM::class, 'status'])->name('pembuatan-sim.status');
@@ -67,8 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('perpanjangan-stnk/{id}/set', [perpanjanganStnk::class, 'status'])->name('perpanjangan-stnk.status');
     });
 
-
-
+    Route::get('/ddashboard', [ddashboard::class,'index']);
     Route::resource('history', HistoryController::class);
     //download file
     Route::get('/download', function () {
