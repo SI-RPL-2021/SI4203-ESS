@@ -35,7 +35,7 @@
 
     <?php } ?>
 
-=======
+
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
