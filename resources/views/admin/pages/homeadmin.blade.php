@@ -1,5 +1,5 @@
 @extends('admin.templates.default')
 
 @section('content')
-<a>asdsad</a>
+<a>Admin SIM</a>
 @endsection

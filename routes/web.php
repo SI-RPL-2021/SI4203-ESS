@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ddashboard;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\adminSIMController;
 use App\Http\Controllers\STNK\kehilanganSTNK;
@@ -14,6 +15,7 @@ use App\Http\Controllers\VerifDataUserController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\SIM\SimController;
 use App\Http\Controllers\STNK\pembuatanSTNK;
+use App\Http\Controllers\ChartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('kehilangan-sim/{namafile}/download', [kehilanganSIM::class, 'download'])->name('getFile');
     Route::resource('perpanjangan-sim', perpanjanganSIM::class);
     Route::get('perpanjangan-sim/{id}/set', [perpanjanganSIM::class, 'status'])->name('perpanjangan-sim.status');
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//   });
+  Route::get('/dashboard', [ddashboard::class,'index']);
+  Route::get('chart', [ChartController::class, 'index']);
 
     // stnk -----------------------
     Route::resource('pembuatan-stnk', pembuatanSTNK::class);

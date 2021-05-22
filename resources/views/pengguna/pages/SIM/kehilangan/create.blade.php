@@ -83,11 +83,11 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <!-- </div>
-                        <div class="form-group">
+                          </div>
+                        {{-- <div class="form-group">
                             <label for="no_sim">No SIM</label>
                             <input type="text" name="no_sim" class="form-control" value="{{ $sim->no_sim }}" id="no_sim" readonly>
-                        </div> -->
+                        </div> --> --}}
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="tanggal_hilang" class=" form-control-label">Tanggal Hilang</label></div>
                                 <div class="col-12 col-md-9">
