@@ -1,5 +1,10 @@
 @extends('pengguna.templates.default')
 
 @section('content')
-<a>asdsad</a>
+<a>KOSONG</a>
+              
 @endsection
+
+
+
+

@@ -15,6 +15,7 @@ class PembuatanSim extends Migration
     {
         Schema::create('pembuatan_sim', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('no_sim')->nullable();
             $table->integer('no_regis');
             $table->string('gol_sim');
             $table->string('polda_kedatangan');
@@ -38,13 +39,14 @@ class PembuatanSim extends Migration
             $table->string('nama_ibu_KD');
             $table->string('sertif');
             $table->string('jenis_pelayanan');
-            $table->rememberToken();
+            $table->date('masa_berlaku');
+            $table->integer('status');
             $table->timestamps();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
-/**
+    /**
      * Reverse the migrations.
      *
      * @return void

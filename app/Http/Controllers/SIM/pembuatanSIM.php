@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\SIM;
 
 use App\Http\Controllers\Controller;
+use App\Models\History;
 use App\Models\pembuatan_sim;
+use App\Models\Sim;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class pembuatanSIM extends Controller
@@ -25,10 +29,37 @@ class pembuatanSIM extends Controller
      */
     public function index()
     {
-        return view('pengguna.pages.sim.pembuatanSIM', [
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
+            $data = pembuatan_sim::with('user')->latest()->get();
+        } else {
+            $data = pembuatan_sim::with('user')->where('user_id', auth()->id())->latest()->get();
+        }
+        return view('pengguna.pages.sim.pembuatan.index', [
             'title' => 'Pembuatan SIM',
+            'data' => $data
         ]);
     }
+
+    public function create()
+    {
+        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
+            $users = User::orderBy('name', 'asc')->get();
+        } else {
+            $users = User::where('id', auth()->id())->first();
+        }
+        $sim = pembuatan_sim::orderBy('no_regis', 'desc')->first();
+        if ($sim) {
+            $no_regis = $sim->no_regis + 1;
+        } else {
+            $no_regis = 1000;
+        }
+        return view('pengguna.pages.sim.pembuatan.create', [
+            'title' => 'Permohonan Pembuatan SIM',
+            'users' => $users,
+            'no_regis' => $no_regis
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -45,7 +76,6 @@ class pembuatanSIM extends Controller
             'satpas_kedatangan' => ['required'],
             'alamat_satpas' => ['required'],
             'kwn' => ['required'],
-            'nik' => ['required'],
             'nm_lngkp' => ['required'],
             'tinggi' => ['required'],
             'gol_darah' => ['required'],
@@ -64,14 +94,37 @@ class pembuatanSIM extends Controller
             'jenis_pelayanan' => ['required'],
         ]);
 
+        $sim = pembuatan_sim::where('user_id', request('user_id'))->count();
+        $golsim = pembuatan_sim::where('user_id', request('user_id'))->where('gol_sim', request('gol_sim'))->first();
+        if ($sim >= 3) {
+            return redirect()->route('pembuatan-sim.index')->with('gagal', 'Anda gagal membuat permohonan, maksimal setiap user membuat 3 kali permohonan.');
+        } elseif ($golsim) {
+            return redirect()->route('pembuatan-sim.index')->with('gagal', 'Anda gagal membuat permohonan, permohonan untuk golongan sim yang sama sudah pernah dibuat.');
+        }
+
+        $user = User::where('id', request('user_id'))->first();
+
+        if (auth()->user()->roles->pluck('name') !== 'user') {
+            $deskripsi = auth()->user()->name . ' membuat SIM atas nama ' . request('nm_lngkp');
+            History::create([
+                'username' => $user->username,
+                'jenis_pelayanan' => 'Pembuatan SIM',
+                'no_regis' => request('no_regis'),
+                'deskripsi' => $deskripsi,
+                'admin' => auth()->user()->username
+            ]);
+        }
+
         $pembuatanSIM = new pembuatan_sim;
+        $pembuatanSIM->status = 1;
+        $pembuatanSIM->masa_berlaku = Carbon::now();
         $pembuatanSIM->no_regis = $request->no_regis;
         $pembuatanSIM->gol_sim = $request->gol_sim;
         $pembuatanSIM->polda_kedatangan = $request->polda_kedatangan;
         $pembuatanSIM->satpas_kedatangan = $request->satpas_kedatangan;
         $pembuatanSIM->alamat_satpas = $request->alamat_satpas;
         $pembuatanSIM->kwn = $request->kwn;
-        $pembuatanSIM->nik = $request->nik;
+        $pembuatanSIM->nik = $user->nik;
         $pembuatanSIM->nm_lngkp = $request->nm_lngkp;
         $pembuatanSIM->tinggi = $request->tinggi;
         $pembuatanSIM->gol_darah = $request->gol_darah;
@@ -88,10 +141,10 @@ class pembuatanSIM extends Controller
         $pembuatanSIM->nama_ibu_KD = $request->nama_ibu_KD;
         $pembuatanSIM->sertif = $request->sertif;
         $pembuatanSIM->jenis_pelayanan = $request->jenis_pelayanan;
-        $pembuatanSIM->user_id = auth()->user()->id;
+        $pembuatanSIM->user_id = $request->user_id;
         $pembuatanSIM->save();
 
-        return redirect()->route('buat.index')->with('success', 'Pembutan SIM akan segera di proses');
+        return redirect()->route('pembuatan-sim.index')->with('success', 'Pembutan SIM akan segera di proses');
     }
 
     /**
@@ -101,9 +154,26 @@ class pembuatanSIM extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function create()
+    public function status($id)
     {
-        //
+        $pemsim = pembuatan_sim::findOrFail($id);
+        $terakhir = pembuatan_sim::whereNotNull('no_sim')->orderBy('no_sim', 'desc')->first();
+        $pemsim->status = request('status');
+        if (request('status') == 3) {
+            if ($terakhir) {
+                $pemsim->no_sim = $terakhir->no_sim + 1;
+            } else {
+                $pemsim->no_sim = 100000;
+            }
+            $pemsim->masa_berlaku = Carbon::now()->addYears(5);
+        } else {
+            $pemsim->no_sim = NULL;
+            $pemsim->masa_berlaku = $pemsim->created_at;
+        }
+
+        $pemsim->save();
+
+        return redirect()->back()->with('success', 'Status berhasil diupdate.');
     }
 
     /**
@@ -111,9 +181,13 @@ class pembuatanSIM extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        //
+        $data = pembuatan_sim::findOrFail($id);
+        return view('pengguna.pages.sim.pembuatan.show', [
+            'title' => 'Detail ',
+            'data' => $data
+        ]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -145,6 +219,8 @@ class pembuatanSIM extends Controller
      */
     public function destroy()
     {
-        //
+        pembuatan_sim::destroy($id);
+
+        return redirect()->back()->with('success', 'Permohonan berhasil dihapus.');
     }
 }

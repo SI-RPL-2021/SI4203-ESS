@@ -8,13 +8,43 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('home') }}">
-            <i class="fas fa-fw fa-home"></i>
-            <span>Home</span></a>
-    </li>
+    <?php if (Auth::user()->hasRole('user')) { ?>
+        <!-- Divider -->
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('home') }}">
+                <i class="fas fa-fw fa-home"></i>
+                <span>Home</span></a>
+        </li>
 
+        <hr class="sidebar-divider d-none d-md-block">
+        <!-- Nav Item - History -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('history.index') }}">
+                <i class="fas fa-fw fa-history"></i>
+                <span>History</span></a>
+        </li>
+    <?php } else { ?>
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/dashboard') }}">
+                <i class="fas fa-fw fa-home"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+    <?php } ?>
+
+
+    {{-- <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('ddashboard') }}">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Dashboard</span></a>
+    </li> --}}
+
+
+    @role('admin sim|user')
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -26,15 +56,17 @@
         </a>
         <div id="collapseSIM" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('buat.index') }}">Pembuatan</a>
-                <a class="collapse-item" href="{{ route('kehilanganSIM.index') }}">Laporan Kehilangan SIM</a>
+                <a class="collapse-item" href="{{ route('pembuatan-sim.index') }}">Pembuatan</a>
+                <a class="collapse-item" href="{{ route('kehilangan-sim.index') }}">Kehilangan SIM</a>
+                <a class="collapse-item" href="{{ route('perpanjangan-sim.index') }}">Perpanjangan SIM</a>
             </div>
         </div>
     </li>
+    @endrole
 
-    <!-- Divider -->
+
+    @role('admin stnk|user')
     <hr class="sidebar-divider d-none d-md-block">
-
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSTNK" aria-expanded="true" aria-controls="collapseSTNK">
@@ -43,18 +75,25 @@
         </a>
         <div id="collapseSTNK" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+<<<<<<< HEAD
                 <a class="collapse-item" href="{{ route('satutahun.index') }}">Perpanjangan 1 Tahun</a>
                 <a class="collapse-item" href="{{ route('limatahun.index') }}">Perpanjangan 5 Tahun</a>
                 <a class="collapse-item" href="{{ route('kehilanganSTNK.index') }}">Laporan Kehilangan STNK</a>
+=======
+                <a class="collapse-item" href="{{ route('pembuatan-stnk.index') }}">Pembuatan STNK</a>
+                <a class="collapse-item" href="{{ route('kehilangan-stnk.index') }}">Kehilangan STNK</a>
+                <a class="collapse-item" href="{{ route('perpanjangan-stnk.index') }}">Perpanjang Pajak</a>
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
             </div>
         </div>
     </li>
+    @endrole
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Nav Item - History -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('HistoryController.index') }}">
+        <a class="nav-link" href="{{ route('history.index') }}">
             <i class="fas fa-fw fa-history"></i>
             <span>History</span></a>
     </li>

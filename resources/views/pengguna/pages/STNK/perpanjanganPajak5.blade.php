@@ -1,6 +1,7 @@
 @extends('pengguna.templates.default')
 @section('content')
 <style>
+<<<<<<< HEAD
         input.invalid {
             background-color: #ffdddd;
         }
@@ -69,6 +70,75 @@
                         </div>
 
                         <!-- form 1 -->
+=======
+    input.invalid {
+        background-color: #ffdddd;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .tombol {
+        background-color: #4e73df;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        ;
+        cursor: pointer;
+        border-radius: 7px;
+    }
+
+    .tombol:hover {
+        opacity: 0.8;
+    }
+
+    #prevBtn {
+        background-color: #bbbbbb;
+    }
+
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #4e73df;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+    .step.active {
+        opacity: 1;
+    }
+
+    .step.finish {
+        background-color: #4e73df;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-lg">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title text-primary ">Formulir Pemohonan Perpanjangan Pajak</h4>
+            </div>
+            <div class="card-body">
+                <form id="regForm" action="{{ route('limatahun.store') }}" method="post">
+                    @csrf
+                    <div style="text-align:center;margin-top:20px;margin-bottom:20px;">
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                    </div>
+
+                    <!-- form 1 -->
+
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
                     <div class="tab">
                         <h5>Diisi oleh pemohon</h5>
                         <hr>
@@ -78,11 +148,19 @@
                             <input type="text" name="jenis_surat" class="form-control" id="jenis_surat">
                         </div>
                         <div class="form-group">
+<<<<<<< HEAD
                             <label for="type">Jenis Permohonan</label>
                             <input type="text" name="jenis_permohonan" class="form-control" id="jenis_permohonan">
                         </div>
                         <div class="form-group">
                             <b><label>II. Identitas Pemilik</label></br></b>
+=======
+                            <b><label for="type">Jenis Permohonan</label>
+                            <input type="text" name="jenis_permohonan" class="form-control" id="jenis_permohonan">
+                        </div>
+                        <div class="form-group">
+                            <label>II. Identitas Pemilik</label></br></b>
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
                             <label for="status">Status Pemilik Kendaraan bermotor</label>
                             <input type="text" name="status" class="form-control" id="status">
                         </div>
@@ -120,6 +198,10 @@
 
 
                     <!-- form 2 -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
                     <div class="tab">
                         <div class="form-group">
                             <h5>Diisi Bila Kendaraan Bermotor Bukan Milik Pribadi</h5>
@@ -154,7 +236,11 @@
                         <div class="form-group">
                             <b><label for="ke"> IV. Identifikasi Kendaraan</label></b></br>
                             <label for="ke">Jenis / Model</label>
+<<<<<<< HEAD
                             <input type="text" name="jenis" class="form-control " id="jenis">
+=======
+                            <input type="text" name="ke" class="form-control " id="ke">
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
                         </div>
                         <div class="form-group">
                             <label for="fungsi"> Fungsi  </label>
@@ -180,6 +266,10 @@
 
 
                     <!-- form 3 -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
                     <div class="tab">
                         <div class="form-group">
                             <label for="hukum">Isi Silinder / CC / HP</label>
@@ -187,7 +277,11 @@
                         </div>
                         <div class="form-group">
                             <label for="no_rangka">Nomor Rangka / NIK</label>
+<<<<<<< HEAD
                             <input type="text" class="form-control " name="no_rangka" id="no_rangka">
+=======
+                            <input type="text" class="form-control " name="no_rangka">
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
                         </div>
                         <div class="form-group">
                             <label for="no_mesin">Nomor Mesin</label>
@@ -210,8 +304,13 @@
                             <input type="text" name="Sumbu" class="form-control " id="Sumbu">
                         </div>
                         <div class="form-group">
+<<<<<<< HEAD
                             <label for="roda">Jumlah Ban / Roda</label>
                             <input type="text" name="roda" class="form-control " id="roda">
+=======
+                            <label for="ke">Jumlah Ban / Roda</label>
+                            <input type="text" name="ke" class="form-control " id="ke">
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
                         </div>
                         <div class="form-group">
                             <label for="TNKB"> Warna Dasar TNKB  </label>
@@ -226,12 +325,21 @@
                             <input type="text" name="penumpang" class="form-control " id="penumpang">
                         </div>
                         <div class="form-group">
+<<<<<<< HEAD
                             <label for="bpkb">Nomor BPKB</label>
                             <input type="text" name="bpkb" class="form-control " id="bpkb">
                         </div>
                         <div class="form-group">
                             <label for="regist_bpkb">Nomor Register BPKB</label>
                             <input type="text" name="regist_bpkb" class="form-control " id="regist_bpkb">
+=======
+                            <label for="merk">Nomor BPKB</label>
+                            <input type="text" name="merk" class="form-control " id="merk">
+                        </div>
+                        <div class="form-group">
+                            <label for="bpkb">Nomor Register BPKB</label>
+                            <input type="text" name="bpkb" class="form-control " id="bpkb">
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
                         </div>
                         <div class="form-group">
                             <label for="import">Cara Import</label>
@@ -244,13 +352,24 @@
                     <div class="tab">
                         <hr>
                         <div class="form-group">
+<<<<<<< HEAD
                             <label for="no_regis">No Registrasi</label>
                             <input type="text" name="no_regis" class="form-control" id="no_regis" value=<?php echo rand(); ?> readonly>
                         </div>
+=======
+                            <label for="no_regis"> No Registrasi </label>
+                            <input type="text" name="no_regis" class="form-control @error('no_regis') is-invalid @enderror" id="no_regis" value=<?php echo rand();?>>                                                                                                              ?> readonly>
+                        </div>
+                        {{-- <div class="form-group">
+                            <label for="no_regis"> Nama </label>
+                            <input type="text" name="no_regis" class="form-control @error('nama') is-invalid @enderror" id="nama" value=<?php echo nama?>>                                                                                                           ?> readonly>
+                        </div> --}}
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
                         <div class="form-group">
                             <label for="jenis_pelayanan">Pelayanan</label>
                             <input type="text" name="jenis_pelayanan" class="form-control" id="jenis_pelayanan" value="Perpanjangan Pajak 1 Tahun" readonly>
                         </div>
+<<<<<<< HEAD
                         <div class="row form-group">
                             <div class="col col-md-3"><label class=" form-control-label">Pengambilan</label></div>
                             <div class="col col-md-9">
@@ -305,10 +424,64 @@
                         </div>
                     </form>
                 </div>
+=======
+                        <div class="col-lg-3">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">Pengambilan</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="baru[]" type="checkbox" id="2" value="Satpas">
+                                <label class="form-check-label" for="2">Diambil di kantor Satpas</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="baru[]" type="checkbox" id="3" value="kurir">
+                                <label class="form-check-label" for="3">Pengiriman via kurir</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-lg-3">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">Metode Pembayaran</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="baru[]" type="checkbox" id="2" value="bank">
+                                <label class="form-check-label" for="2">Transfer Bank</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="baru[]" type="checkbox" id="3" value="pos">
+                                <label class="form-check-label" for="3">Kantor POS</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="baru[]" type="checkbox" id="3" value="retail">
+                                <label class="form-check-label" for="3">Toko retail (Indomaret/Alfamart)</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- form 6 -->
+                    <div style="float:right;margin-top:50px;">
+                        <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>
+                        <button type="button" class="tombol" id="nextBtn" onclick="nextPrev(1)"> Selanjutnya </button>
+                    </div>
+                </form>
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
             </div>
         </div>
     </div>
 </div>
+<<<<<<< HEAD
     </div>
 
     <script>
@@ -387,3 +560,83 @@
     </script>
     
     @endsection
+=======
+
+
+<script>
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
+    function showTab(n) {
+        // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Selesai";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Selanjutnya";
+        }
+        //... and run a function that will display the correct step indicator:
+        fixStepIndicator(n)
+    }
+
+    function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + n;
+        // if you have reached the end of the form...
+        if (currentTab >= x.length) {
+            // ... the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+    function validateForm() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
+            }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
+    }
+
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class on the current step:
+        x[n].className += " active";
+    }
+</script>
+
+@endsection
+>>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
