@@ -8,7 +8,6 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
-<<<<<<< HEAD
     <?php if (Auth::user()->hasRole('user')) { ?>
         <!-- Divider -->
         <!-- Nav Item - Dashboard -->
@@ -43,7 +42,7 @@
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>
->>>>>>> b6681c886a828ad4010f6231835e36516d261e96
+
 
     @role('admin sim|user')
     <!-- Divider -->
