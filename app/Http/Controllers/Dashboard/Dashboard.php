@@ -75,6 +75,6 @@ class Dashboard extends Controller
                 'title' => 'Dashboard'
             ]);
         }
-        // -----------------------------------
+        // ------------------------------------
     }
 }
