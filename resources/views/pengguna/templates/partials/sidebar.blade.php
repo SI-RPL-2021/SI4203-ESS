@@ -75,15 +75,9 @@
         </a>
         <div id="collapseSTNK" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-<<<<<<< HEAD
-                <a class="collapse-item" href="{{ route('satutahun.index') }}">Perpanjangan 1 Tahun</a>
-                <a class="collapse-item" href="{{ route('limatahun.index') }}">Perpanjangan 5 Tahun</a>
-                <a class="collapse-item" href="{{ route('kehilanganSTNK.index') }}">Laporan Kehilangan STNK</a>
-=======
                 <a class="collapse-item" href="{{ route('pembuatan-stnk.index') }}">Pembuatan STNK</a>
                 <a class="collapse-item" href="{{ route('kehilangan-stnk.index') }}">Kehilangan STNK</a>
                 <a class="collapse-item" href="{{ route('perpanjangan-stnk.index') }}">Perpanjang Pajak</a>
->>>>>>> ecae1db3cc81d3bc63ca8ecff43ba62a7676a003
             </div>
         </div>
     </li>

@@ -257,7 +257,7 @@
         <!-- Illustrations -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Pembuatan</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Permohonan SIM</h6>
             </div>
             <div class="card-body" id="pembuatan">
             </div>
@@ -279,6 +279,7 @@
 
     </div>
 </div>
+
 <script type="text/javascript">
     var users =  <?php echo json_encode($datas) ?>;
     Highcharts.chart('container', {
@@ -325,7 +326,7 @@
             }]
         }
 });
-var pembuatan_sim =  <?php echo json_encode($items1) ?>;
+
 Highcharts.chart('o', {
   chart: {
     type: 'column'
@@ -375,7 +376,7 @@ Highcharts.chart('o', {
       data: [
         {
           name: "Pembuatan SIM",
-          y: {{$items1}},
+          y: {!!json_encode($items1)!!},
           drilldown: "pembuatan-sim"
         },
         {
@@ -461,29 +462,24 @@ Highcharts.chart('pembuatan', {
         type: 'column'
     },
     title: {
-        text: 'Permohonan SIM'
+        text: ''
     },
     subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: ''
     },
     xAxis: {
-        categories: [
-            'Pembuatan',
-            'Perpanjangan',
-            'Kehilangan'
-        ],
         crosshair: true
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Rainfall (mm)'
+            text: ''
         }
     },
     tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        headerFormat: '<span style="font-size:10px"></span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -495,20 +491,16 @@ Highcharts.chart('pembuatan', {
         }
     },
     series: [{
-        name: 'Tokyo',
-        data: [49.9, 71.5, 106.4]
+        name: 'Pembuatan',
+        data: {!!json_encode($items1)!!}
 
     }, {
-        name: 'New York',
-        data: [83.6, 78.8, 98.5]
+        name: 'Perpanjangan',
+        data: {!!json_encode($items2)!!}
 
     }, {
-        name: 'London',
-        data: [48.9, 38.8, 39.3]
-
-    }, {
-        name: 'Berlin',
-        data: [42.4, 33.2, 34.5,]
+        name: 'Kehilangan',
+        data: {!!json_encode($items3)!!}
 
     }]
 });

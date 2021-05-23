@@ -31,9 +31,21 @@ class DashboardController extends Controller
         }
        
 
-        $items1 = pembuatan_sim::where('no_regist')->count();
-        $items1 = laporan_kehilangan_sim::where('no_regist')->count();
-        $items1 = perpanjangan_sim::where('no_regist')->count();
+        $items1 = pembuatan_sim::select(DB::raw("COUNT(*) as count"))
+        ->whereYear('created_at', date('Y'))
+        ->groupBy(DB::raw("Month(created_at)"))
+        ->pluck('count');
+
+        $items2 = laporan_kehilangan_sim::select(DB::raw("COUNT(*) as count"))
+        ->whereYear('created_at', date('Y'))
+        ->groupBy(DB::raw("Month(created_at)"))
+        ->pluck('count');
+
+        $items3 = perpanjangan_sim::select(DB::raw("COUNT(*) as count"))
+        ->whereYear('created_at', date('Y'))
+        ->groupBy(DB::raw("Month(created_at)"))
+        ->pluck('count');
+        
         return view('pengguna.pages.dashboard', [
             'items1' => $items1,
             'items2' => $items2,
