@@ -1,5 +1,12 @@
 @extends('pengguna.templates.default')
 @section('content')
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -100,24 +107,13 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+                <h6 class="m-0 font-weight-bold text-primary">Data Permohonan SIM E-SS</h6>
+                
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                <div class="chart-area" id="o">
+                    
                 </div>
             </div>
         </div>
@@ -128,24 +124,12 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+                <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
+                <div class="chart-pie pt-4 pb-2" id="container">
+                  
                 </div>
                 <div class="mt-4 text-center small">
                     <span class="mr-2">
@@ -273,17 +257,9 @@
         <!-- Illustrations -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Pembuatan</h6>
             </div>
-            <div class="card-body">
-                <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
-                </div>
-                <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                    constantly updated collection of beautiful svg images that you can use
-                    completely free and without attribution!</p>
-                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                    unDraw &rarr;</a>
+            <div class="card-body" id="pembuatan">
             </div>
         </div>
 
@@ -303,4 +279,239 @@
 
     </div>
 </div>
+<script type="text/javascript">
+    var users =  <?php echo json_encode($datas) ?>;
+    Highcharts.chart('container', {
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+         xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah Users'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            name: 'New Users',
+            data: users
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+});
+var pembuatan_sim =  <?php echo json_encode($items1) ?>;
+Highcharts.chart('o', {
+  chart: {
+    type: 'column'
+  },
+  title: {
+    text: ''
+  },
+  subtitle: {
+    text: 'Click the columns to view the details'
+  },
+  accessibility: {
+    announceNewData: {
+      enabled: true
+    }
+  },
+  xAxis: {
+    type: 'category'
+  },
+  yAxis: {
+    title: {
+      text: 'Total percent Permohonan'
+    }
+
+  },
+  legend: {
+    enabled: false
+  },
+  plotOptions: {
+    series: {
+      borderWidth: 0,
+      dataLabels: {
+        enabled: true,
+        format: '{point.y:.1f}%'
+      }
+    }
+  },
+
+  tooltip: {
+    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+  },
+
+  series: [
+    {
+      name: "Jumlah Permohonan",
+      colorByPoint: true,
+      data: [
+        {
+          name: "Pembuatan SIM",
+          y: {{$items1}},
+          drilldown: "pembuatan-sim"
+        },
+        {
+          name: "Kehilanagn SIM",
+          y: 10.57,
+          drilldown: "kehilangan-sim"
+        },
+        {
+          name: "Perpanjangan SIM",
+          y: 7.23,
+          drilldown: "perpanjangan-sim"
+        }
+      ]
+    }
+  ],
+  drilldown: {
+    series: [
+      {
+        name: "Pembuatan SIM",
+        id: "pembuatan-sim",
+        data: [
+          [
+            "Januari",
+            1.3
+          ],
+          [
+            "Februari",
+            53.02
+          ],
+          [
+            "Maret",
+            1.4
+          ],
+        ]
+      },
+      {
+        name: "Kehilangan SIM",
+        id: "kehilangan-sim",
+        data: [
+          [
+            "v58.0",
+            1.02
+          ],
+          [
+            "v57.0",
+            7.36
+          ],
+          [
+            "v56.0",
+            0.35
+          ],
+        ]
+      },
+      {
+        name: "Perpanjangan SIM",
+        id: "perpanjangan-sim",
+        data: [
+          [
+            "v11.0",
+            6.2
+          ],
+          [
+            "v10.0",
+            0.29
+          ],
+          [
+            "v9.0",
+            0.27
+          ],
+          [
+            "v8.0",
+            0.47
+          ]
+        ]
+      },
+      
+    ]
+  }
+});
+
+Highcharts.chart('pembuatan', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Permohonan SIM'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: [
+            'Pembuatan',
+            'Perpanjangan',
+            'Kehilangan'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4]
+
+    }, {
+        name: 'New York',
+        data: [83.6, 78.8, 98.5]
+
+    }, {
+        name: 'London',
+        data: [48.9, 38.8, 39.3]
+
+    }, {
+        name: 'Berlin',
+        data: [42.4, 33.2, 34.5,]
+
+    }]
+});
+
+</script>
 @endsection
