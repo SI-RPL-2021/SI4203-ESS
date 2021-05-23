@@ -19,7 +19,7 @@ class PerpanjanganStnk extends Controller
         } else {
             $data = ModelsPerpanjanganStnk::with('stnk')->where('user_id', auth()->id())->latest()->get();
         }
-        return view('pengguna.pages.STNK.perpanjangan.index', [
+        return view('pengguna.pages.stnk.perpanjangan.index', [
             'title' => 'Perpanjangan STNK',
             'data' => $data
         ]);
@@ -32,7 +32,7 @@ class PerpanjanganStnk extends Controller
         } else {
             $data = pembuatan_stnk::where('status', 3)->orderBy('no_stnk')->where('user_id', auth()->id())->get();
         }
-        return view('pengguna.pages.STNK.perpanjangan.create', [
+        return view('pengguna.pages.stnk.perpanjangan.create', [
             'title' => 'Buat Perpanjangan STNK',
             'data' => $data
         ]);
@@ -106,8 +106,8 @@ class PerpanjanganStnk extends Controller
     public function show($id)
     {
         $data = ModelsPerpanjanganStnk::findOrFail($id);
-        return view('pengguna.pages.STNK.perpanjangan.show', [
-            'title' => 'Detail Perpanjangan STNk',
+        return view('pengguna.pages.stnk.perpanjangan.show', [
+            'title' => 'Detail Perpanjangan STNK',
             'data' => $data
         ]);
     }

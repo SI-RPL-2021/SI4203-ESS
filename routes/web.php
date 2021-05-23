@@ -30,6 +30,8 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'landing_page'])->name('landingpage');
 
 Route::group(['middleware' => ['auth']], function () {
+
+    //landing page ------------------
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     //sim -----------------------
@@ -43,8 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('perpanjangan-sim/{id}/set', [perpanjanganSIM::class, 'status'])->name('perpanjangan-sim.status');
     });
 
+    // stnk -----------------------
     Route::group(['middleware' => ['role:admin stnk|user']], function () {
-        // stnk -----------------------
         Route::resource('pembuatan-stnk', pembuatanSTNK::class);
         Route::get('/pembuatan-stnk/{id}/set', [pembuatanSTNK::class, 'status'])->name('pembuatan-stnk.status');
         Route::resource('kehilangan-stnk', kehilanganSTNK::class);

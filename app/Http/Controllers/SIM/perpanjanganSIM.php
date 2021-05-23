@@ -76,16 +76,11 @@ class perpanjanganSIM extends Controller
             'user_id' => $sim->user_id
         ]);
 
-        if (auth()->user()->roles->pluck('name') !== 'user') {
-            $deskripsi = auth()->user()->name . ' membuat laporan perpanjangan SIM atas nama ' . $per->sim->nm_lngkp . ' Golongan ' . $per->sim->gol_sim . ' dari tanggal ' . $per->sim->masa_berlaku->translatedFormat('d F Y') . ' sampai tanggal ' . $per->masa_berlaku->translatedFormat('d F Y');
-            History::create([
-                'username' => $sim->user->username,
-                'jenis_pelayanan' => 'Perpanjangan SIM',
-                'no_regis' => $sim->no_regis,
-                'deskripsi' => $deskripsi,
-                'admin' => auth()->user()->username
-            ]);
-        }
+        History::create([
+            'username' => auth()->user()->username,
+            'jenis_pelayanan' => 'Perpanjangan SIM',
+            'deskripsi' => 'Membuat permohonan perpanjangan SIM ' . $per->sim->gol_sim . ' dengan No. SIM ' . $per->sim->no_sim
+        ]);
 
 
         return redirect()->route('perpanjangan-sim.index')->with('success', 'Perpanjangan SIM akan segera di proses');
