@@ -83,6 +83,24 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                          </div>
+                        {{-- <div class="form-group">
+                            <label for="no_sim">No SIM</label>
+                            <input type="text" name="no_sim" class="form-control" value="{{ $sim->no_sim }}" id="no_sim" readonly>
+                        </div> --> --}}
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="tanggal_hilang" class=" form-control-label">Tanggal Hilang</label></div>
+                                <div class="col-12 col-md-9">
+                                    <input type="date" class="form-control" name="tanggal_hilang">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="keterangan" class=" form-control-label">Keterangan</label></div>
+                                <div class="col-12 col-md-9">
+                                    <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
+                                </div>
+
                         </div>
                         <div class="form-group">
                             <label for="no_sim">No SIM</label>
@@ -92,6 +110,7 @@
                             <div class="col col-md-3"><label for="tanggal_hilang" class=" form-control-label">Tanggal Hilang</label></div>
                             <div class="col-12 col-md-9">
                                 <input type="date" class="form-control" name="tanggal_hilang">
+
                             </div>
                         </div>
                         <div class="row form-group">

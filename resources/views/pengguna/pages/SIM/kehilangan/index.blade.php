@@ -25,6 +25,7 @@
                                 <th>#</th>
                                 <th>Nama</th>
                                 <th>No. SIM</th>
+                                <th>No. Regis</th>
                                 <th>Golongan</th>
                                 <th>Alamat</th>
                                 <th>Pekerjaan</th>
@@ -42,6 +43,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->sim->nm_lngkp }}</td>
                                 <td>{{ $item->sim->no_sim }}</td>
+                                <td>{{ $item->sim->no_regis }}</td>
                                 <td>{{ $item->sim->gol_sim }}</td>
                                 <td>{{ $item->sim->alamat }}</td>
                                 <td>{{ $item->sim->pekerjaan }}</td>
