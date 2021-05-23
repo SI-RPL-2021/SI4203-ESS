@@ -12,7 +12,9 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\STNK\pembuatanSTNK;
 use App\Http\Controllers\STNK\PerpanjanganStnk;
-use App\Http\Controllers\ddashboard;
+use App\Http\Controllers\Dashboard\DashboardUser;
+use App\Http\Controllers\Dashboard\DashboardSIM;
+use App\Http\Controllers\Dashboard\Dashboard;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,9 +33,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'landing_page'])->n
 
 Route::group(['middleware' => ['auth']], function () {
 
-    //landing page ------------------
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('home', [HomeController::class, 'landing_page'])->name('home');
+    Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
 
     //sim -----------------------
     Route::group(['middleware' => ['role:admin sim|user']], function () {
@@ -56,7 +56,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('perpanjangan-stnk/{id}/set', [perpanjanganStnk::class, 'status'])->name('perpanjangan-stnk.status');
     });
 
-    Route::get('/ddashboard', [ddashboard::class,'index']);
     Route::resource('history', HistoryController::class);
     //download file
     Route::get('/download', function () {
