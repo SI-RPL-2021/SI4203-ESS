@@ -12,7 +12,7 @@
                     @method('patch')
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama" value="{{ old('name') }}">
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama" value="{{ $item->name ?? old('name')}}">
                         @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ old('email') }}">
+                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ $item->email ?? old('email') }}">
                         @error('email')
                         <div class="invalid-feedback">
                             {{ $message }}

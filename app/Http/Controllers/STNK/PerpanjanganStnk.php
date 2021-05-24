@@ -95,7 +95,7 @@ class PerpanjanganStnk extends Controller
                 ]);
             } else {
                 $stnk->update([
-                    'pajak_berlaku' => $perpanjanganstnk->pajak_berlaku->pajak_berlaku->subYears(5)
+                    'pajak_berlaku' => $perpanjanganstnk->pajak_berlaku->subYears(5)
                 ]);
             }
         }

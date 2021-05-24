@@ -353,17 +353,17 @@
             data: [{
                     name: "Pembuatan STNK",
                     y: 30,
-                    drilldown: "pembuatan-sim"
+                    drilldown: "pembuatan-stnk"
                 },
                 {
                     name: "Kehilanagn STNK",
                     y: 10.57,
-                    drilldown: "kehilangan-sim"
+                    drilldown: "kehilangan-stnk"
                 },
                 {
                     name: "Perpanjangan STNK",
                     y: 7.23,
-                    drilldown: "perpanjangan-sim"
+                    drilldown: "PerpanjanganStnk"
                 }
             ]
         }],
