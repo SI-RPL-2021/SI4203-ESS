@@ -7,7 +7,7 @@
                 <h6 class="card-title">Tambah User Baru</h6>
             </div>
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
+                <form action="{{ route('data-user.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="nik">NIK</label>
@@ -40,6 +40,15 @@
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" value="{{ old('password') }}">
                         @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Konfirmasi Password</label>
+                        <input type="password" class="form-control form-control-user @error('password_confirmation') is-invalid @enderror" id="exampleInputPassword" placeholder="Konfirmasi Password" name="password_confirmation">
+                        @error('password_confirmation')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

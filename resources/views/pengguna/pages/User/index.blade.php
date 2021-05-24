@@ -38,9 +38,9 @@
                                 <td>{{ $item->email }}</td>
                                 <td>
                                     <a href="{{ route('data-user.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <form method="post" class="d-inline">
-                                        @csrf
+                                    <form action="{{ route('data-user.destroy', $item->id) }}" method="post" class="d-inline">
                                         @method('delete')
+                                        @csrf
                                         <button class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</button>
                                     </form>
                                 </td>

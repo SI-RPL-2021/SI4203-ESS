@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -43,55 +44,73 @@ class UserController extends Controller
         ]);
     }
 
-    public function edit(User $user)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function edit($id)
     {
+        $user = User::findorFail($id);
         return view('pengguna.pages.user.edit', [
             'title' => 'Edit User ' . $user->name,
             'item' => $user
         ]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+
+        $user = User::findorFail($id);
         $request->validate([
-            'name' => ['required'],
-            'username' => ['required', 'alpha_dash', Rule::unique('users', 'username')->ignore($user->id)],
-            'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
-
-
-        $data = $request->all();
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
         } else {
             $data['password'] = $user->password;
         }
+        $data = $request->all();
         $user->update($data);
 
         return redirect()->route('data-user.index')->with('success', 'User berhasil diubah.');
     }
 
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required'],
-            'username' => ['required', 'alpha_dash', 'unique:users,username'],
-            'email' => ['required', 'unique:users,email'],
-            'password' => ['required', 'min:8'],
-            'level' => ['required', 'in:administrator,user'],
+            'name' => ['required', 'string', 'max:255'],
+            'nik' => ['required', 'unique:users,nik'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
         $data = $request->all();
+        $data['username'] = Str::snake($request['name']);
         $data['password'] = bcrypt($request->password);
-        User::create($data);
+        $user = User::create($data);
+        $user->assignRole('user');
 
-        return redirect()->route('user.index')->with('success', 'User baru berhasil ditambahkan.');
+        return redirect()->route('data-user.index')->with('success', 'User baru berhasil ditambahkan.');
     }
 
     // /**
@@ -122,15 +141,17 @@ class UserController extends Controller
     //  */
 
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy(User $user)
-    // {
-    //     $user->delete();
-    //     return redirect()->route('user.index')->with('success', 'User berhasil dihapus.');
-    // }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = User::findorFail($id);
+        $user->delete();
+        echo $user;
+        return redirect()->route('data-user.index')->with('success', 'User berhasil dihapus.');
+    }
 }

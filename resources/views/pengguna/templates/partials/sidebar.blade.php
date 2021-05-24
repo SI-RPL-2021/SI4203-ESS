@@ -15,16 +15,18 @@
             <span>Dashboard</span></a>
     </li>
 
-    @role('admin sim|user')
-
+    @role('admin stnk|admin sim')
     <!-- Divider -->
     <hr class="sidebar-divider">
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('data-user.index') }}">
-            <i class="fas fa-fw fa-home"></i>
+            <i class="fas fa-fw fa-user"></i>
             <span>Data User</span></a>
     </li>
+    @endrole
+
+    @role('admin sim|user')
 
     <!-- Divider -->
     <hr class="sidebar-divider">

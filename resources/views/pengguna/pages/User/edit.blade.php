@@ -11,15 +11,6 @@
                     @csrf
                     @method('patch')
                     <div class="form-group">
-                        <label for="nik">NIK</label>
-                        <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" placeholder="NIK" value="{{ old('nik') }}">
-                        @error('nik')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama" value="{{ old('name') }}">
                         @error('name')
@@ -41,6 +32,15 @@
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" value="{{ old('password') }}">
                         @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Konfirmasi Password</label>
+                        <input type="password" class="form-control form-control-user @error('password_confirmation') is-invalid @enderror" id="exampleInputPassword" placeholder="Konfirmasi Password" name="password_confirmation">
+                        @error('password_confirmation')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
