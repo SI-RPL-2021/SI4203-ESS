@@ -19,7 +19,15 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider">
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('data-user.index') }}">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Data User</span></a>
+    </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSIM" aria-expanded="true" aria-controls="collapse">
