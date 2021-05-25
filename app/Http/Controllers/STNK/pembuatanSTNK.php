@@ -116,17 +116,11 @@ class pembuatanSTNK extends Controller
         }
         $data['pajak_berlaku'] = Carbon::now()->addYears(request('pajak_berlaku'));
         $stnk = pembuatan_stnk::create($data);
-        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
-            $user = User::where('id', request('user_id'))->first();
-            $deskripsi = auth()->user()->name . ' membuat SIM atas nama ' . $stnk->nama_pemilik;
-            History::create([
-                'username' => $user->username,
-                'jenis_pelayanan' => 'Pembuatan STNK',
-                'no_regis' => request('no_regis'),
-                'deskripsi' => $deskripsi,
-                'admin' => auth()->user()->username
-            ]);
-        }
+        History::create([
+            'username' => auth()->user()->username,
+            'jenis_pelayanan' => 'Pembuatan STNK',
+            'deskripsi' => 'Membuat permohonan pembuatan STNK dengan No. Registrasi ' . $stnk->no_regis
+        ]);
 
         return redirect()->route('pembuatan-stnk.index')->with('success', 'Laporan Kehilangan STNK Berhasil Dibuat');
     }

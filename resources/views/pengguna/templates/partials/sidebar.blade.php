@@ -8,46 +8,28 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
-    <?php if (Auth::user()->hasRole('user')) { ?>
-        <!-- Divider -->
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('home') }}">
-                <i class="fas fa-fw fa-home"></i>
-                <span>Home</span></a>
-        </li>
-
-        <hr class="sidebar-divider d-none d-md-block">
-        <!-- Nav Item - History -->
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('history.index') }}">
-                <i class="fas fa-fw fa-history"></i>
-                <span>History</span></a>
-        </li>
-    <?php } else { ?>
-
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('/dashboard') }}">
-                <i class="fas fa-fw fa-home"></i>
-                <span>Dashboard</span></a>
-        </li>
-
-    <?php } ?>
-
-
-    {{-- <!-- Nav Item - Dashboard -->
+    <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('ddashboard') }}">
+        <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
-    </li> --}}
+    </li>
 
-
-    @role('admin sim|user')
+    @role('admin stnk|admin sim')
     <!-- Divider -->
     <hr class="sidebar-divider">
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('data-user.index') }}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Data User</span></a>
+    </li>
+    @endrole
 
+    @role('admin sim|user')
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSIM" aria-expanded="true" aria-controls="collapse">
@@ -82,6 +64,9 @@
         </div>
     </li>
     @endrole
+
+
+    @role('user')
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
@@ -91,6 +76,8 @@
             <i class="fas fa-fw fa-history"></i>
             <span>History</span></a>
     </li>
+    @endrole
+
 
     <!-- Divider -->
     <hr class=" sidebar-divider d-none d-md-block">

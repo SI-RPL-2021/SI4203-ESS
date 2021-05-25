@@ -17,9 +17,7 @@ class CreateHistoryTable extends Migration
             $table->id();
             $table->string('username');
             $table->string('jenis_pelayanan');
-            $table->bigInteger('no_regis')->nullable();
             $table->string('deskripsi')->nullable();
-            $table->string('admin')->nullable();
             $table->timestamps();
         });
     }

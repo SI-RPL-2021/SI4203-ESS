@@ -9,9 +9,7 @@ class HistoryController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
-            $data = History::latest()->where('admin', auth()->user()->username)->get();
-        }
+        $data = History::latest()->where('username', auth()->user()->username)->get();
         return view('pengguna.pages.history.index', [
             'title' => 'History',
             'data' => $data

@@ -13,7 +13,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">SIM</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">History</h6>
                 </div>
             </div>
             <div class="card-body">
@@ -25,9 +25,7 @@
                                 <th>Hari/Tanggal</th>
                                 <th>Username</th>
                                 <th>Jenis Pelayanan</th>
-                                <th>No. Registrasi</th>
                                 <th>Deskripsi</th>
-                                <th>Admin</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,9 +35,7 @@
                                 <td>{{ $item->created_at->translatedFormat('l, d F Y') }}</td>
                                 <td>{{ $item->username }}</td>
                                 <td>{{ $item->jenis_pelayanan }}</td>
-                                <td>{{ $item->no_regis }}</td>
                                 <td>{{ $item->deskripsi }}</td>
-                                <td>{{ $item->admin ?? 'Tidak Ada' }}</td>
                             </tr>
                             @endforeach
                         </tbody>

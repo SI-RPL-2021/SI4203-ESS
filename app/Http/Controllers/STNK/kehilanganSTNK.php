@@ -71,16 +71,11 @@ class kehilanganSTNK extends Controller
             $data['user_id'] = auth()->id();
         }
         $stnk = laporan_kehilangan_stnk::create($data);
-        if (auth()->user()->roles->pluck('name') !== 'user') {
-            $deskripsi = auth()->user()->name . ' membuat laporan kehilangan STNK atas nama ' . $stnk->stnk->nama_pemilik;
-            History::create([
-                'username' => $user->user->username,
-                'jenis_pelayanan' => 'Kehilangan STNK',
-                'no_regis' => $stnk->stnk->no_regis,
-                'deskripsi' => $deskripsi,
-                'admin' => auth()->user()->username
-            ]);
-        }
+        History::create([
+            'username' => auth()->user()->username,
+            'jenis_pelayanan' => 'Kehilangan STNK',
+            'deskripsi' => 'Membuat permohonan kehilangan STNK dengan No. STNK ' . $stnk->stnk->no_stnk
+        ]);
         return redirect()->route('kehilangan-stnk.index')->with('success', 'Laporan Kehilangan STNK Berhasil Dibuat');
     }
 

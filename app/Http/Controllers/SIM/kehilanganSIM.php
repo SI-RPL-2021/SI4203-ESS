@@ -84,16 +84,11 @@ class kehilanganSIM extends Controller
             'user_id' => $user->user->id
         ]);
 
-        if (auth()->user()->roles->pluck('name') !== 'user') {
-            $deskripsi = auth()->user()->name . ' membuat laporan kehilangan SIM atas nama ' . request('nm_lngkp') . ' Golongan SIM ' . $sim->sim->gol_sim;
-            History::create([
-                'username' => $user->user->username,
-                'jenis_pelayanan' => 'Kehilangan SIM',
-                'no_regis' => $sim->sim->no_regis,
-                'deskripsi' => $deskripsi,
-                'admin' => auth()->user()->username
-            ]);
-        }
+        History::create([
+            'username' => auth()->user()->username,
+            'jenis_pelayanan' => 'Kehilangan SIM',
+            'deskripsi' => 'Membuat permohonan kehilangan SIM ' . $sim->sim->gol_sim . ' dengan No. SIM ' . $sim->sim->no_sim
+        ]);
 
         return redirect()->route('kehilangan-sim.index')->with('success', 'Laporan Kehilangan SIM Berhasil Dibuat');
     }

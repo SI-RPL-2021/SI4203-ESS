@@ -104,17 +104,6 @@ class pembuatanSIM extends Controller
 
         $user = User::where('id', request('user_id'))->first();
 
-        if (auth()->user()->roles->pluck('name') !== 'user') {
-            $deskripsi = auth()->user()->name . ' membuat SIM atas nama ' . request('nm_lngkp');
-            History::create([
-                'username' => $user->username,
-                'jenis_pelayanan' => 'Pembuatan SIM',
-                'no_regis' => request('no_regis'),
-                'deskripsi' => $deskripsi,
-                'admin' => auth()->user()->username
-            ]);
-        }
-
         $pembuatanSIM = new pembuatan_sim;
         $pembuatanSIM->status = 1;
         $pembuatanSIM->masa_berlaku = Carbon::now();
@@ -144,7 +133,12 @@ class pembuatanSIM extends Controller
         $pembuatanSIM->user_id = $request->user_id;
         $pembuatanSIM->save();
 
-        return redirect()->route('pembuatan-sim.index')->with('success', 'Pembutan SIM akan segera di proses');
+        History::create([
+            'username' => auth()->user()->username,
+            'jenis_pelayanan' => 'Pembuatan SIM',
+            'deskripsi' => 'Membuat permohonan pembuatan SIM ' . $pembuatanSIM->gol_sim . ' dengan No. Registrasi ' . $pembuatanSIM->no_regis
+        ]);
+        return redirect()->route('pembuatan-sim.index')->with('success', 'Pembutan SIM akan segera di proses.');
     }
 
     /**

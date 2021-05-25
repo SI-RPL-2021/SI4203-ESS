@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RolesController;
-use App\Http\Controllers\adminSIMController;
+
 use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\SIM\pembuatanSIM;
@@ -12,7 +10,8 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\STNK\pembuatanSTNK;
 use App\Http\Controllers\STNK\PerpanjanganStnk;
-use App\Http\Controllers\ddashboard;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Dashboard\Dashboard;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,8 +29,9 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'landing_page'])->name('landingpage');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('home', [HomeController::class, 'landing_page'])->name('home');
+
+    Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
+    Route::resource('data-user', UserController::class);
 
     //sim -----------------------
     Route::group(['middleware' => ['role:admin sim|user']], function () {
@@ -44,8 +44,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('perpanjangan-sim/{id}/set', [perpanjanganSIM::class, 'status'])->name('perpanjangan-sim.status');
     });
 
+    // stnk -----------------------
     Route::group(['middleware' => ['role:admin stnk|user']], function () {
-        // stnk -----------------------
         Route::resource('pembuatan-stnk', pembuatanSTNK::class);
         Route::get('/pembuatan-stnk/{id}/set', [pembuatanSTNK::class, 'status'])->name('pembuatan-stnk.status');
         Route::resource('kehilangan-stnk', kehilanganSTNK::class);
@@ -54,7 +54,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('perpanjangan-stnk/{id}/set', [perpanjanganStnk::class, 'status'])->name('perpanjangan-stnk.status');
     });
 
-    Route::get('/ddashboard', [ddashboard::class,'index']);
     Route::resource('history', HistoryController::class);
     //download file
     Route::get('/download', function () {
