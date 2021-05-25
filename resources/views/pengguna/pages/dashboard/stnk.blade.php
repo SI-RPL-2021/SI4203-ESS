@@ -24,7 +24,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             Permohonan Pembuatan STNK</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$items1}} Permohonan</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$items11}} Permohonan</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -42,7 +42,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                             Laporan Kehilangan STNK</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$items2}} Permohonan</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$items21}} Permohonan</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$items3}} Permohonan</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$items31}} Permohonan</div>
                             </div>
                             <div class="col">
                                 <div class="progress progress-sm mr-2">
@@ -370,7 +370,7 @@
         drilldown: {
             series: [{
                     name: "Pembuatan STNK",
-                    id: "pembuatan-sim",
+                    id: "pembuatan-stnk",
                     data: [
                         [
                             "Januari",
@@ -516,28 +516,28 @@
         series: [{
             name: 'Pembuatan',
             data: {
-                !!json_encode($items1) !!
+                !!json_encode($items11) !!
             }
 
         }, {
             name: 'Perpanjangan',
             data: {
-                !!json_encode($items2) !!
+                !!json_encode($items21) !!
             }
 
         }, {
             name: 'Kehilangan',
             data: {
-                !!json_encode($items3) !!
+                !!json_encode($items31) !!
             }
 
         }]
     });
 
     // Data by month
-    var pembuatan_sim = <?php echo json_encode($data1) ?>;
-    var laporan_kehilangan_sim = <?php echo json_encode($data2) ?>;
-    var perpanjangan_sim = <?php echo json_encode($data3) ?>;
+    var pembuatan_stnk = <?php echo json_encode($data11) ?>;
+    var laporan_kehilangan_stnk = <?php echo json_encode($data21) ?>;
+    var perpanjangan_pajak_stnk = <?php echo json_encode($data31) ?>;
     Highcharts.chart('by_month', {
         title: {
             text: ''
@@ -565,15 +565,15 @@
         },
         series: [{
                 name: 'Pembuatan',
-                data: pembuatan_sim
+                data: pembuatan_stnk
             },
             {
                 name: 'Perpanjangan',
-                data: perpanjangan_sim
+                data: perpanjangan_pajak_stnk
             },
             {
                 name: 'Laporan Kehilangan',
-                data: laporan_kehilangan_sim
+                data: laporan_kehilangan_stnk
             }
         ],
         responsive: {

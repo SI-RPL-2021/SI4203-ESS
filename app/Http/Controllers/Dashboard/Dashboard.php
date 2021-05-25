@@ -109,59 +109,59 @@ class Dashboard extends Controller
         elseif (auth()->user()->roles->pluck('name')->first() === 'admin stnk') {
 
             // bar chart
-            $items1 = pembuatan_stnk::select(DB::raw("COUNT(*) as count"))
+            $items11 = pembuatan_stnk::select(DB::raw("COUNT(*) as count"))
                 ->whereYear('created_at', date('Y'))
                 ->groupBy(DB::raw("Month(created_at)"))
                 ->pluck('count');
 
-            $months1 = pembuatan_stnk::select(DB::raw("Month(created_at)as month1"))
+            $months11 = pembuatan_stnk::select(DB::raw("Month(created_at)as month11"))
                 ->whereYear('created_at', date('Y'))
                 ->groupBy(DB::raw("Month(created_at)"))
-                ->pluck('month1');
+                ->pluck('month11');
 
-            $items2 = laporan_kehilangan_stnk::select(DB::raw("COUNT(*) as count"))
-                ->whereYear('created_at', date('Y'))
-                ->groupBy(DB::raw("Month(created_at)"))
-                ->pluck('count');
-
-            $months2 = laporan_kehilangan_stnk::select(DB::raw("Month(created_at)as month2"))
-                ->whereYear('created_at', date('Y'))
-                ->groupBy(DB::raw("Month(created_at)"))
-                ->pluck('month2');
-
-            $items3 = PerpanjanganStnk::select(DB::raw("COUNT(*) as count"))
+            $items21 = laporan_kehilangan_stnk::select(DB::raw("COUNT(*) as count"))
                 ->whereYear('created_at', date('Y'))
                 ->groupBy(DB::raw("Month(created_at)"))
                 ->pluck('count');
 
-            $months3 = PerpanjanganStnk::select(DB::raw("Month(created_at)as month3"))
+            $months21 = laporan_kehilangan_stnk::select(DB::raw("Month(created_at)as month21"))
                 ->whereYear('created_at', date('Y'))
                 ->groupBy(DB::raw("Month(created_at)"))
-                ->pluck('month3');
+                ->pluck('month21');
 
-            $data1 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            foreach ($months1 as $index => $month1) {
-                $data1[$month1 - 1] = $items1[$index];
+            $items31 = PerpanjanganStnk::select(DB::raw("COUNT(*) as count"))
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("Month(created_at)"))
+                ->pluck('count');
+
+            $months31 = PerpanjanganStnk::select(DB::raw("Month(created_at)as month31"))
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("Month(created_at)"))
+                ->pluck('month31');
+
+            $data11 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            foreach ($months11 as $index => $month11) {
+                $data11[$month11 - 1] = $items11[$index];
             }
 
-            $data2 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            foreach ($months2 as $index => $month2) {
-                $data2[$month2 - 1] = $items2[$index];
+            $data21 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            foreach ($months21 as $index => $month21) {
+                $data21[$month21 - 1] = $items21[$index];
             }
 
-            $data3 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            foreach ($months3 as $index => $month3) {
-                $data3[$month3 - 1] = $items3[$index];
+            $data31 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            foreach ($months31 as $index => $month31) {
+                $data31[$month31 - 1] = $items31[$index];
             }
 
 
 
             return view('pengguna.pages.dashboard.stnk', [
                 'title' => 'Dashboard STNK',
-                'items1' => $items1,
-                'items2' => $items2,
-                'items3' => $items3,
-            ], compact('datas', 'data1', 'data2', 'data3'));
+                'items11' => $items11,
+                'items21' => $items21,
+                'items31' => $items31,
+            ], compact('datas', 'data11', 'data21', 'data31'));
         }
         // -------------------------------------
 
