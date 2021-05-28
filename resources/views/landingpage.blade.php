@@ -201,15 +201,14 @@
         <div class="section-title">
           <span>Contact</span>
           <h2>Contact</h2>
-          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-lg-6">
             <div class="info-box mb-4">
               <i class="bx bx-map"></i>
-              <h3>Our Address</h3>
-              <p>A108 Adam Street, New York, NY 535022</p>
+              <h3>Alamaat</h3>
+              <p>Jl. Telekomunikasi Jl. Terusan Buah Batu, Sukapura, Kec. Dayeuhkolot, Jawa Barat 40257</p>
             </div>
           </div>
 
@@ -217,7 +216,7 @@
             <div class="info-box  mb-4">
               <i class="bx bx-envelope"></i>
               <h3>Email Us</h3>
-              <p>contact@example.com</p>
+              <p>ess@example.com</p>
             </div>
           </div>
 
