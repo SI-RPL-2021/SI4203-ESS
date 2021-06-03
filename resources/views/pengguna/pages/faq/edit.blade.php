@@ -6,7 +6,7 @@
                 <h2>Edit FAQ</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('faq.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('faq.index') }}">Kembali</a>
             </div>
         </div>
     </div>
