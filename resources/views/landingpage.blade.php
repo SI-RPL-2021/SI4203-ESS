@@ -239,7 +239,7 @@
 
           <div class="col-lg-6">
             
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="feedback.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <h2>Feedback</h2>
                 <div class="col-md-6 form-group">
