@@ -98,7 +98,7 @@
 
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+            <img style="height:660px" class="img-fluid" alt="" src="{{ asset('style/assets/img/about.jpg' )}}">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right">
             <h3>Website E-SS</h3>
@@ -111,11 +111,18 @@
               <li><i class="bi bi-check-circle"></i> Perpanjangan SIM dan STNK.</li>
               <li><i class="bi bi-check-circle"></i> Laporan Kehilangan SIM dan STNK.</li>
             </ul>
+              <ul>
+                <li>Lokasi Satpas yang dapat melayani registrasi secara online adalah satpas yang sudah online. Daftar satpas yang sudah online dapat dilihat disini pada bagian Daftar Satpas Online.</li>
+                <li>Ketentuan mengenai Persyaratan Pendaftaran, Perpanjangan SIM, Pengalihan Golongan SIM, Perubahan Data SIM, dan Penggantian SIM Rusak atau Hilang dapat dilihat disini.</li>
+                <li>Petunjuk penggunaan (user manual) dapat dilihat disini dan pilih Panduan Penggunaan Website Registrasi SIM Online.</li>
+                <li>Bagi pemohon yang telah melakukan proses registrasi melalui Web Registrasi SIM Online namun belum mendapatkan email konfirmasi registrasi dapat melakukan proses kirim ulang email konfirmasi disini.</li>
+                <li>Pembayaran registrasi SIM Online dapat dilakukan pada layanan bank BRI (tidak dikenakan biaya administrasi)
+                </li>
+            </ul>
             <p>
               dengan menggunakan layanan website E-SS ini masyarakat dapat melakukan permohonan
               pembuatan, perpanjangan dan pembuatan laporan kehilangan SIM dan STNK dengan mudah
-              dan juga dapat diakses dimana saja dan kapan saja.
-            </p>
+              dan juga dapat diakses dimana saja dan kapan saja. <br></p>
           </div>
         </div>
 
@@ -201,15 +208,14 @@
         <div class="section-title">
           <span>Contact</span>
           <h2>Contact</h2>
-          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-lg-6">
             <div class="info-box mb-4">
               <i class="bx bx-map"></i>
-              <h3>Our Address</h3>
-              <p>A108 Adam Street, New York, NY 535022</p>
+              <h3>Alamaat</h3>
+              <p>Jl. Telekomunikasi Jl. Terusan Buah Batu, Sukapura, Kec. Dayeuhkolot, Jawa Barat 40257</p>
             </div>
           </div>
 
@@ -217,7 +223,7 @@
             <div class="info-box  mb-4">
               <i class="bx bx-envelope"></i>
               <h3>Email Us</h3>
-              <p>contact@example.com</p>
+              <p>ess@example.com</p>
             </div>
           </div>
 

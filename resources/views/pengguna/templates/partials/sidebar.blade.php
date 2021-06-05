@@ -24,6 +24,11 @@
             <i class="fas fa-fw fa-user"></i>
             <span>Data User</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('faq.index') }}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>FAQ</span></a>
+    </li>
     @endrole
 
     @role('admin sim|user')
@@ -76,6 +81,7 @@
             <i class="fas fa-fw fa-history"></i>
             <span>History</span></a>
     </li>
+    
     @endrole
 
 
