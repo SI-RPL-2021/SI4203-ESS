@@ -88,6 +88,36 @@
 
                 </div>
             </div>
+
+
+            <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card  card-tasks">
+                    <div class="card-header ">
+                        <h5 class="card-category"><b>FEEDBACK</b></h5>
+                        <h4 class="card-title"></h4>
+                    </div>
+@foreach ($feedback as $item)
+                    <div class="card-body ">
+                        <div class="table-full-width table-responsive"> 
+                            <table class="table">
+                                Q : {{ $item->pertanyaan }}
+                                <br> A : {{ $item->jawaban }}
+                                <hr>
+                                @endforeach
+                                <tbody>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
