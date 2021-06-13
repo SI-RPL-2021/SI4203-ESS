@@ -13,13 +13,40 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
-                    <a  class="btn btn-sm btn-primary">Tambah User</a>
+                    <h6 class="m-0 font-weight-bold text-primary">Metode Pembayaran</h6>
+                    <a href="{{ route('pembayaran.create') }}" class="btn btn-sm btn-primary">Tambah</a>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                 
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Nomor</th>
+                                <th>Keterangan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($items as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->nama }}</td>
+                                <td>{{ $item->nomor }}</td>
+                                <td>{{ $item->keterangan }}</td>
+                                <td>
+                                    <a href="{{ route('pembayaran.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ route('pembayaran.destroy',$item->id) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Apakah yakin?')"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

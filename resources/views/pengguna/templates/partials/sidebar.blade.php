@@ -69,6 +69,18 @@
         </div>
     </li>
     @endrole
+    
+    @role('admin sim|admin stnk')
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('pembayaran.index') }}">
+            <i class="fas fa-fw fa-receipt"></i>
+            <span>Pembayaran</span></a>
+    </li>
+    @endrole
 
     @role('user')
     <!-- Divider -->
@@ -80,7 +92,7 @@
             <i class="fas fa-fw fa-message"></i>
             <span>Feedback</span></a>
     </li>
-    
+
     @endrole
 
     @role('user')
@@ -93,7 +105,7 @@
             <i class="fas fa-fw fa-history"></i>
             <span>History</span></a>
     </li>
-    
+
     @endrole
 
 

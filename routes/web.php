@@ -6,6 +6,7 @@ use App\Http\Controllers\faqController;
 use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\SIM\pembuatanSIM;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\STNK\pembuatanSTNK;
@@ -55,6 +56,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/kehilangan-stnk/{id}/set', [kehilanganSTNK::class, 'status'])->name('kehilangan-stnk.status');
         Route::resource('perpanjangan-stnk', PerpanjanganStnk::class);
         Route::get('perpanjangan-stnk/{id}/set', [perpanjanganStnk::class, 'status'])->name('perpanjangan-stnk.status');
+    });
+
+    Route::group(['middleware' => ['role:admin stnk|admin sim']], function () {
+        Route::resource('pembayaran', PembayaranController::class)->except('show');
     });
 
     Route::resource('history', HistoryController::class);
