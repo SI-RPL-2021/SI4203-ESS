@@ -17,7 +17,7 @@
      
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Judul Artikel :</strong>
+                        <strong>Judul :</strong>
                         <input type="text" name="judul" id="judul" class="form-control" value="{{ $artikel->judul }}">
                     </div>
                 </div>
