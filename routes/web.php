@@ -12,7 +12,6 @@ use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\STNK\pembuatanSTNK;
 use App\Http\Controllers\STNK\PerpanjanganStnk;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Dashboard\Dashboard;
 use App\Http\Controllers\feedbackController;
 use Illuminate\Support\Facades\Route;
 
