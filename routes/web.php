@@ -1,17 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\artikelController;
+use App\Http\Controllers\Dashboard\Dashboard;
 use App\Http\Controllers\faqController;
-use App\Http\Controllers\STNK\kehilanganSTNK;
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\SIM\pembuatanSIM;
-use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
+use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\STNK\pembuatanSTNK;
 use App\Http\Controllers\STNK\PerpanjanganStnk;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Dashboard\Dashboard;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,7 @@ use App\Http\Controllers\Dashboard\Dashboard;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
+ */
 
 Auth::routes();
 
@@ -34,6 +34,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
     Route::resource('data-user', UserController::class);
     Route::resource('faq', faqController::class);
+    // Route::resource('artikel', artikelController::class);
+    Route::resource('article', artikelController::class);
+    Route::get('buat-artikel', [artikelController::class, 'upload'])->name('upload');
+    Route::post('/artikel/proses', [artikelController::class, 'proses_upload'])->name('proses_upload');
 
     //sim -----------------------
     Route::group(['middleware' => ['role:admin sim|user']], function () {
@@ -69,6 +73,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('homeadmin', [App\Http\Controllers\adminSIMController::class, 'index'])->name('homeadmin');
     });
-
 
 });

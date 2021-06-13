@@ -29,6 +29,11 @@
             <i class="fas fa-fw fa-user"></i>
             <span>FAQ</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('article.index') }}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Artikel</span></a>
+    </li>
     @endrole
 
     @role('admin sim|user')

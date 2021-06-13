@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\faq;
+use App\Models\artikel;
 use App\Models\laporan_kehilangan_sim;
 use App\Models\laporan_kehilangan_stnk;
 use App\Models\pembuatan_sim;
@@ -163,7 +164,8 @@ class Dashboard extends Controller
 
         elseif (auth()->user()->roles->pluck('name')->first() === 'user') {
             $faq = faq::latest()->paginate(5);
-            return view('pengguna.pages.dashboard.user', compact('faq'))->with('i', (request()->input('page', 1) - 1) * 5);
+            $artikel = artikel::get();
+            return view('pengguna.pages.dashboard.user', compact('faq', 'artikel'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
         // ------------------------------------
     }
