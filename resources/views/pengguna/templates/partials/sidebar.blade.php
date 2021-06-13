@@ -29,6 +29,11 @@
             <i class="fas fa-fw fa-message"></i>
             <span>Feedback</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('article.index') }}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Artikel</span></a>
+    </li>
     @endrole
 
     @role('admin sim|user')
@@ -51,6 +56,7 @@
     </li>
     @endrole
 
+ 
 
     @role('admin stnk|user')
     <hr class="sidebar-divider d-none d-md-block">
