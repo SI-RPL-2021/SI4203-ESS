@@ -24,6 +24,11 @@
             <i class="fas fa-fw fa-user"></i>
             <span>Data User</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('feedback.index') }}">
+            <i class="fas fa-fw fa-message"></i>
+            <span>Feedback</span></a>
+    </li>
     @endrole
 
     @role('admin sim|user')
@@ -65,6 +70,18 @@
     </li>
     @endrole
 
+    @role('user')
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Nav Item - History -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('feedback.index') }}">
+            <i class="fas fa-fw fa-message"></i>
+            <span>Feedback</span></a>
+    </li>
+    
+    @endrole
 
     @role('user')
     <!-- Divider -->
@@ -76,6 +93,7 @@
             <i class="fas fa-fw fa-history"></i>
             <span>History</span></a>
     </li>
+    
     @endrole
 
 

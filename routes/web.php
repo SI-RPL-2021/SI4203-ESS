@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\faqController;
 use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\SIM\pembuatanSIM;
@@ -12,6 +12,8 @@ use App\Http\Controllers\STNK\pembuatanSTNK;
 use App\Http\Controllers\STNK\PerpanjanganStnk;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Dashboard\Dashboard;
+use App\Http\Controllers\feedbackController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
     Route::resource('data-user', UserController::class);
+    Route::resource('feedback', feedbackController::class);
 
     //sim -----------------------
     Route::group(['middleware' => ['role:admin sim|user']], function () {
