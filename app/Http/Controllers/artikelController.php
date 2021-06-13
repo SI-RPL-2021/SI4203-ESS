@@ -7,6 +7,7 @@ use App\Models\artikel;
 
 class artikelController extends Controller
 {
+    // artikel
     public function index()
     {
         $artikel = artikel::get();

@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="row form-group">
-                            <div class="col col-md-3"><label for="judul" class=" form-control-label">Judul</label></div>
+                            <div class="col col-md-3"><label for="judul" class=" form-control-label">Judul </label></div>
                             <div class="col-12 col-md-9">
                                 <input type="text" class="form-control" name="judul"></input>
                             </div>

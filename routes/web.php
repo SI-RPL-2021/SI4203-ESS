@@ -34,7 +34,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
     Route::resource('data-user', UserController::class);
     Route::resource('faq', faqController::class);
-    // Route::resource('artikel', artikelController::class);
     Route::resource('article', artikelController::class);
     Route::get('buat-artikel', [artikelController::class, 'upload'])->name('upload');
     Route::post('/artikel/proses', [artikelController::class, 'proses_upload'])->name('proses_upload');

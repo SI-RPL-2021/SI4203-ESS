@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class artikels extends Migration
 {
+    // database artikel
     /**
      * Run the migrations.
      *

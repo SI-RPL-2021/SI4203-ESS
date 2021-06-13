@@ -24,7 +24,7 @@
 <table class="table table-bordered">
     <tr>
         <th>No</th>
-        <th>Judul</th>
+        <th>Judul Artikel</th>
         <th>Deskripsi</th>
         <th>Gambar</th>
         <th width="250px">Action</th>
