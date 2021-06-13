@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
 use App\Models\User;
-=======
 use App\Models\faq;
 use App\Models\artikel;
->>>>>>> AnnisaFitriani
 use App\Models\laporan_kehilangan_sim;
 use App\Models\perpanjangan_sim;
 use App\Models\pembuatan_sim;
@@ -174,15 +171,12 @@ class Dashboard extends Controller
         // ------------------ dashboard user -----------------
 
         elseif (auth()->user()->roles->pluck('name')->first() === 'user') {
-<<<<<<< HEAD
             return view('pengguna.pages.dashboard.user', [
                 'title' => 'Dashboard'
             ]);
-=======
             $faq = faq::latest()->paginate(5);
             $artikel = artikel::get();
             return view('pengguna.pages.dashboard.user', compact('faq', 'artikel'))->with('i', (request()->input('page', 1) - 1) * 5);
->>>>>>> AnnisaFitriani
         }
         // ------------------------------------
     }
