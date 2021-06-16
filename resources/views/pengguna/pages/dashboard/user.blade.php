@@ -102,8 +102,8 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-category">All Persons List</h5>
-                        <h4 class="card-title"> Employees Stats</h4>
+                        <h5 class="card-category"></h5>
+                        <h4 class="card-title"></h4>
 
                     </div>
                 </div>

@@ -58,16 +58,19 @@ class artikelController extends Controller
         ]);
     }
 
-    public function update(Request $request, artikel $artikel, $id)
+    public function update(Request $request, $id)
     {
-        $artikel = artikel::findorFail($id);
-        $request->validate([
-            'judul' => 'required', 
-            'keterangan' => 'required',
-            'file' => 'required', 
-        ]);
-        
-        $artikel->update($request->all());
+        $ubah = artikel::findorFail($id);
+        $awal = $ubah->file;
+
+		$dt = [
+        'judul' => $request ['judul'], 
+        'keterangan' => $request ['keterangan'],
+        'file' => $awal,
+        ];
+
+		$request->file->move(public_path().'/data_file', $awal);
+		$ubah->update($dt);
         return redirect()->route('article.index')->with('success', 'Artikel berhasil diubah.');
     }
 

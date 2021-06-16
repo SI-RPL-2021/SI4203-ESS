@@ -11,7 +11,7 @@
         </div>
     </div>
    
-    <form action="{{ route('article.update',$artikel->id) }}" method="POST">
+    <form action="{{ route('article.update',$artikel->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
      
@@ -35,6 +35,8 @@
                     </div>
                     <div class="row col-sm-2 pt-0">
                         <input type="file" name="file" class="custom-file-inpuit" id="file" value="{{ $artikel->file }}">
+                        <br>
+                        <img width="250px" src="{{ url('/data_file/' . $artikel->file) }}">
                     </div>
                 </fieldset>
              
