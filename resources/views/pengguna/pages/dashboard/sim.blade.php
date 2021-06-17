@@ -513,7 +513,7 @@ Highcharts.chart('o', {
     },
     plotOptions: {
         column: {
-            pointPadding: 0.2,
+            pointPadding: 0.1,
             borderWidth: 0
         }
     },

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\faq;
+use App\Models\artikel;
 use App\Models\laporan_kehilangan_sim;
-use App\Models\perpanjangan_sim;
+use App\Models\laporan_kehilangan_stnk;
 use App\Models\pembuatan_sim;
 use App\Models\pembuatan_stnk;
-use App\Models\laporan_kehilangan_stnk;
 use App\Models\PerpanjanganStnk;
+use App\Models\perpanjangan_sim;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Controller
@@ -37,7 +38,6 @@ class Dashboard extends Controller
         foreach ($months as $index => $month) {
             $datas[$month - 1] = $users[$index];
         }
-
 
         // ------------------ dashboard admin sim -----------------
 
@@ -89,8 +89,6 @@ class Dashboard extends Controller
                 $data3[$month3 - 1] = $items3[$index];
             }
 
-
-
             return view('pengguna.pages.dashboard.sim', [
                 'title' => 'Dashboard SIM',
                 'items1' => $items1,
@@ -102,7 +100,6 @@ class Dashboard extends Controller
             // ]);
         }
         // -------------------------------------
-
 
         // ------------------ dashboard stnk -----------------
 
@@ -154,8 +151,6 @@ class Dashboard extends Controller
                 $data31[$month31 - 1] = $items31[$index];
             }
 
-
-
             return view('pengguna.pages.dashboard.stnk', [
                 'title' => 'Dashboard STNK',
                 'items11' => $items11,
@@ -165,13 +160,12 @@ class Dashboard extends Controller
         }
         // -------------------------------------
 
-
         // ------------------ dashboard user -----------------
 
         elseif (auth()->user()->roles->pluck('name')->first() === 'user') {
-            return view('pengguna.pages.dashboard.user', [
-                'title' => 'Dashboard'
-            ]);
+            $faq = faq::latest()->paginate(5);
+            $artikel = artikel::get();
+            return view('pengguna.pages.dashboard.user', compact('faq', 'artikel'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
         // ------------------------------------
     }
