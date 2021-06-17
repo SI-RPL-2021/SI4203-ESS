@@ -38,13 +38,13 @@
         <a class="nav-link" href="{{ route('faq.index') }}">
             <i class="fas fa-fw fa-user"></i>
             <span>FAQ</span></a>
-    @endrole
+        @endrole
 
-    @role('admin sim|user')
+        @role('admin sim|user')
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-    <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSIM" aria-expanded="true" aria-controls="collapse">
             <i class="fas fa-fw fa-folder"></i>
@@ -60,7 +60,7 @@
     </li>
     @endrole
 
- 
+
 
     @role('admin stnk|user')
     <hr class="sidebar-divider d-none d-md-block">
@@ -79,7 +79,7 @@
         </div>
     </li>
     @endrole
-    
+
     @role('admin sim|admin stnk')
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
@@ -89,6 +89,12 @@
         <a class="nav-link" href="{{ route('pembayaran.index') }}">
             <i class="fas fa-fw fa-receipt"></i>
             <span>Pembayaran</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('pengaturan.index') }}">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Pengaturan</span></a>
     </li>
     @endrole
 
