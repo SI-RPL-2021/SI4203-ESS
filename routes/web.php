@@ -8,13 +8,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SIM\kehilanganSIM;
 use App\Http\Controllers\SIM\pembuatanSIM;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SIM\perpanjanganSIM;
 use App\Http\Controllers\STNK\kehilanganSTNK;
 use App\Http\Controllers\STNK\pembuatanSTNK;
 use App\Http\Controllers\STNK\PerpanjanganStnk;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\feedbackController;
+use App\Http\Controllers\PengaturanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,6 +65,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['role:admin stnk|admin sim']], function () {
         Route::resource('pembayaran', PembayaranController::class)->except('show');
+        Route::get('pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
+        Route::post('pengaturan', [PengaturanController::class, 'store'])->name('pengaturan.store');
+        Route::get('pengaturan/download-persyaratan-kehilangan-sim', [PengaturanController::class, 'download_persyaratan_kehilangan_sim'])->name('pengaturan.download-persyaratan-kehilangan-sim');
+        Route::get('pengaturan/download-persyaratan-kehilangan-stnk', [PengaturanController::class, 'download_persyaratan_kehilangan_stnk'])->name('pengaturan.download-persyaratan-kehilangan-stnk');
     });
 
     Route::resource('history', HistoryController::class);
