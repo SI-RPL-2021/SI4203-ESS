@@ -41,12 +41,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('article', artikelController::class);
     Route::get('buat-artikel', [artikelController::class, 'upload'])->name('upload');
     Route::post('/artikel/proses', [artikelController::class, 'proses_upload'])->name('proses_upload');
+    Route::resource('history', HistoryController::class);
+
+    //user -----------------------
+    Route::group(['middleware' => ['role:user']], function () {
+    });
 
     //sim -----------------------
     Route::group(['middleware' => ['role:admin sim|user']], function () {
         Route::resource('pembuatan-sim', pembuatanSIM::class);
         Route::get('/pembuatan-sim/{id}/set', [pembuatanSIM::class, 'status'])->name('pembuatan-sim.status');
         Route::resource('kehilangan-sim', kehilanganSIM::class);
+        Route::get('/kehilangan-sim/{id}/download', [kehilanganSIM::class, 'download'])->name('kehilangan-sim.download');
         Route::get('/kehilangan-sim/{id}/set', [kehilanganSIM::class, 'status'])->name('kehilangan-sim.status');
         Route::get('kehilangan-sim/{namafile}/download', [kehilanganSIM::class, 'download'])->name('getFile');
         Route::resource('perpanjangan-sim', perpanjanganSIM::class);
@@ -56,8 +62,10 @@ Route::group(['middleware' => ['auth']], function () {
     // stnk -----------------------
     Route::group(['middleware' => ['role:admin stnk|user']], function () {
         Route::resource('pembuatan-stnk', pembuatanSTNK::class);
+        Route::get('/pembuatan-stnk/{id}/download', [pembuatanSTNK::class, 'download'])->name('pembuatan-stnk.download');
         Route::get('/pembuatan-stnk/{id}/set', [pembuatanSTNK::class, 'status'])->name('pembuatan-stnk.status');
         Route::resource('kehilangan-stnk', kehilanganSTNK::class);
+        Route::get('/kehilangan-stnk/{id}/download', [kehilanganSTNK::class, 'download'])->name('kehilangan-stnk.download');
         Route::get('/kehilangan-stnk/{id}/set', [kehilanganSTNK::class, 'status'])->name('kehilangan-stnk.status');
         Route::resource('perpanjangan-stnk', PerpanjanganStnk::class);
         Route::get('perpanjangan-stnk/{id}/set', [perpanjanganStnk::class, 'status'])->name('perpanjangan-stnk.status');
@@ -71,7 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('pengaturan/download-persyaratan-kehilangan-stnk', [PengaturanController::class, 'download_persyaratan_kehilangan_stnk'])->name('pengaturan.download-persyaratan-kehilangan-stnk');
     });
 
-    Route::resource('history', HistoryController::class);
+
     //download file
     Route::get('/download', function () {
         $file = public_path() . "/suratketeranganhilang.pdf";

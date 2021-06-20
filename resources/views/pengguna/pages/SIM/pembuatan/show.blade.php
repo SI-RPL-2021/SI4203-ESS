@@ -25,7 +25,7 @@
                         </tr>
                         <tr>
                             <th>Masa Berlaku</th>
-                            <td>{{ $data->masa_berlaku }}</td>
+                            <td>{{ $data->masa_berlaku->translatedFormat('l, d F Y') }}</td>
                         </tr>
                         <tr>
                             <th>Polda Kedatangan</th>

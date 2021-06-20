@@ -21,7 +21,9 @@
                         </tr>
                         <tr>
                             <th>File</th>
-                            <td><a href="{{ route('getFile', $data->id) }}">Download</a></td>
+                            <td>
+                                <a href="{{ route('kehilangan-sim.download', $data->id) }}" class="btn btn-sm btn-success"><i class="fas fa-download"></i>Download</a>
+                            </td>
                         </tr>
                         <tr>
                             <th>No. Registrasi</th>

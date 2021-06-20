@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             UsersTableSeeder::class,
             PembayaranTableSeeder::class,
+            StnkTableSeeder::class,
+            PengaturanTableSeeder::class
         ]);
     }
 }

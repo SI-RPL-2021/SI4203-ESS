@@ -20,146 +20,154 @@
                 <div class="table-responsive">
                     <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                         <tr>
+                            <th>Tanggal Hilang</th>
+                            <td>{{ $data->tanggal_hilang->translatedFormat('l, d F Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Keterangan</th>
+                            <td>{{ $data->keterangan }}</td>
+                        </tr>
+                        <tr>
                             <th>File</th>
                             <td>
-                                <a href="{{ route('pembuatan-stnk.download', $data->id) }}" class="btn btn-sm btn-success"><i class="fas fa-download"></i>Download</a>
+                                <a href="{{ route('kehilangan-stnk.download', $data->id) }}" class="btn btn-sm btn-success"><i class="fas fa-download"></i>Download</a>
                             </td>
                         </tr>
                         <tr>
                             <th>No. Registrasi</th>
-                            <td>{{ $data->no_regis }}</td>
+                            <td>{{ $data->stnk->no_regis }}</td>
                         </tr>
                         <tr>
                             <th>No. STNk</th>
-                            <td>{{ $data->no_stnk }}</td>
+                            <td>{{ $data->stnk->no_stnk }}</td>
                         </tr>
                         <tr>
                             <th>Merk Kendaraan</th>
-                            <td>{{ $data->merk }}</td>
+                            <td>{{ $data->stnk->merk }}</td>
                         </tr>
                         <tr>
                             <th>Type Kendaraan</th>
-                            <td>{{ $data->type }}</td>
+                            <td>{{ $data->stnk->type }}</td>
                         </tr>
                         <tr>
                             <th>Jenis</th>
-                            <td>{{ $data->jenis }}</td>
+                            <td>{{ $data->stnk->jenis }}</td>
                         </tr>
                         <tr>
                             <th>Model</th>
-                            <td>{{ $data->model }}</td>
+                            <td>{{ $data->stnk->model }}</td>
                         </tr>
                         <tr>
                             <th>Tahun Pembuatan</th>
-                            <td>{{ $data->thn_pembuatan }}</td>
+                            <td>{{ $data->stnk->thn_pembuatan }}</td>
                         </tr>
                         <tr>
                             <th>Silinder</th>
-                            <td>{{ $data->silinder }}</td>
+                            <td>{{ $data->stnk->silinder }}</td>
                         </tr>
                         <tr>
                             <th>No. Rangka</th>
-                            <td>{{ $data->nmr_rangka }}</td>
+                            <td>{{ $data->stnk->nmr_rangka }}</td>
                         </tr>
                         <tr>
                             <th>No. Mesin</th>
-                            <td>{{ $data->nmr_mesin }}</td>
+                            <td>{{ $data->stnk->nmr_mesin }}</td>
                         </tr>
                         <tr>
                             <th>Warna Kendaraan</th>
-                            <td>{{ $data->warna_kendaraan }}</td>
+                            <td>{{ $data->stnk->warna_kendaraan }}</td>
                         </tr>
                         <tr>
                             <th>Bahan Bakar</th>
-                            <td>{{ $data->bahan_bakar }}</td>
+                            <td>{{ $data->stnk->bahan_bakar }}</td>
                         </tr>
                         <tr>
                             <th>Warna TNKB</th>
-                            <td>{{ $data->warna_tnkb }}</td>
+                            <td>{{ $data->stnk->warna_tnkb }}</td>
                         </tr>
                         <tr>
                             <th>Tahun Registrasi</th>
-                            <td>{{ $data->thn_registrasi }}</td>
+                            <td>{{ $data->stnk->thn_registrasi }}</td>
                         </tr>
                         <tr>
                             <th>Nomor Urut Pendaftaran</th>
-                            <td>{{ $data->nmr_urut }}</td>
+                            <td>{{ $data->stnk->nmr_urut }}</td>
                         </tr>
                         <tr>
                             <th>Nomr Faktur</th>
-                            <td>{{ $data->nmr_faktur }}</td>
+                            <td>{{ $data->stnk->nmr_faktur }}</td>
                         </tr>
                         <tr>
                             <th>APM</th>
-                            <td>{{ $data->apm }}</td>
+                            <td>{{ $data->stnk->apm }}</td>
                         </tr>
                         <tr>
                             <th>Nomor PIB</th>
-                            <td>{{ $data->nmr_pib }}</td>
+                            <td>{{ $data->stnk->nmr_pib }}</td>
                         </tr>
                         <tr>
                             <th>Nomor SUT</th>
-                            <td>{{ $data->nmr_sut }}</td>
+                            <td>{{ $data->stnk->nmr_sut }}</td>
                         </tr>
                         <tr>
                             <th>Nomor Tanda Pendaftaran</th>
-                            <td>{{ $data->nmr_tanda_pendaftaran }}</td>
+                            <td>{{ $data->stnk->nmr_tanda_pendaftaran }}</td>
                         </tr>
                         <tr>
                             <th>Kepemilikan</th>
-                            <td>{{ $data->kepemilikan }}</td>
+                            <td>{{ $data->stnk->kepemilikan }}</td>
                         </tr>
                         <tr>
                             <th>Nama Pemilik</th>
-                            <td>{{ $data->nama_pemilik }}</td>
+                            <td>{{ $data->stnk->nama_pemilik }}</td>
                         </tr>
                         <tr>
                             <th>Alamat Pemilik</th>
-                            <td>{{ $data->alamat_pemilik }}</td>
+                            <td>{{ $data->stnk->alamat_pemilik }}</td>
                         </tr>
                         <tr>
                             <th>Kode POS</th>
-                            <td>{{ $data->kode_pos }}</td>
+                            <td>{{ $data->stnk->kode_pos }}</td>
                         </tr>
                         <tr>
                             <th>No. Telepon</th>
-                            <td>{{ $data->nmr_telepon }}</td>
+                            <td>{{ $data->stnk->nmr_telepon }}</td>
                         </tr>
                         <tr>
                             <th>No. KTP</th>
-                            <td>{{ $data->user->nik }}</td>
+                            <td>{{ $data->stnk->user->nik }}</td>
                         </tr>
                         <tr>
                             <th>KITAS</th>
-                            <td>{{ $data->kitas }}</td>
+                            <td>{{ $data->stnk->kitas }}</td>
                         </tr>
                         <tr>
                             <th>Baru</th>
-                            <td>{{ $data->baru }}</td>
+                            <td>{{ $data->stnk->baru }}</td>
                         </tr>
                         <tr>
                             <th>Perubahan</th>
-                            <td>{{ $data->perubahan }}</td>
+                            <td>{{ $data->stnk->perubahan }}</td>
                         </tr>
                         <tr>
                             <th>Persyaratan Khusu</th>
-                            <td>{{ $data->persyaratan_khusus }}</td>
+                            <td>{{ $data->stnk->persyaratan_khusus }}</td>
                         </tr>
                         <tr>
-                            <th>Masa Berlaku Sampai</th>
+                            <th>Masa Berlaku</th>
                             <td>
-                                @if ($data->masa_berlaku !== NULL)
-                                {{ $data->masa_berlaku->translatedFormat('d-m-Y') }}
+                                @if ($data->stnk->masa_berlaku !== NULL)
+                                {{ $data->stnk->masa_berlaku->translatedFormat('d-m-Y') }}
                                 @else
                                 -
                                 @endif
                             </td>
                         </tr>
                         <tr>
-                            <th>Pajak Kendaraan Berlaku Sampai</th>
+                            <th>Pajak Berlaku</th>
                             <td>
-                                @if ($data->pajak_berlaku !== NULL)
-                                {{ $data->pajak_berlaku->translatedFormat('d-m-Y') }}
+                                @if ($data->stnk->pajak_berlaku !== NULL)
+                                {{ $data->stnk->pajak_berlaku->translatedFormat('d-m-Y') }}
                                 @else
                                 -
                                 @endif
@@ -181,7 +189,7 @@
                         </tr>
                         <tr>
                             <th>Nama Akun</th>
-                            <td>{{ $data->user->username }}</td>
+                            <td>{{ $data->stnk->user->username }}</td>
                         </tr>
                     </table>
                 </div>

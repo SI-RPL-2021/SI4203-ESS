@@ -106,7 +106,11 @@ class pembuatanSTNK extends Controller
         $user = User::where('id', request('user_id'))->first();
         $data = request()->all();
         $data['thn_registrasi'] = Carbon::now()->translatedFormat('Y');
-        $data['status'] = 1;
+        $data['thn_pembuatan'] = Carbon::now()->translatedFormat('Y');
+        $data['status'] = 'MENUNGGU DIPROSES';
+        $data['masa_berlaku'] = NULL;
+        $data['pajak_berlaku'] = NULL;
+        $data['file'] = request()->file('file')->store('pembuatan-sim/pdf', 'public');
         if (auth()->user()->roles->pluck('name')->first() !== 'user') {
             $data['user_id'] = request('user_id');
             $data['nmr_ktp'] = $user->nik;
@@ -114,7 +118,6 @@ class pembuatanSTNK extends Controller
             $data['user_id'] = auth()->id();
             $data['nmr_ktp'] = auth()->user()->nik;
         }
-        $data['pajak_berlaku'] = Carbon::now()->addYears(request('pajak_berlaku'));
         $stnk = pembuatan_stnk::create($data);
         History::create([
             'username' => auth()->user()->username,
@@ -122,20 +125,22 @@ class pembuatanSTNK extends Controller
             'deskripsi' => 'Membuat permohonan pembuatan STNK dengan No. Registrasi ' . $stnk->no_regis
         ]);
 
-        return redirect()->route('pembuatan-stnk.index')->with('success', 'Laporan Kehilangan STNK Berhasil Dibuat');
+        return redirect()->route('pembuatan-stnk.index')->with('success', 'Permohonan pembuatan STNK berhasil dibuat');
     }
 
     public function status($id)
     {
         $pems = pembuatan_stnk::findOrFail($id);
-        $latest = pembuatan_stnk::whereNotNull('no_stnk')->latest()->first();
+        $latest = pembuatan_stnk::whereNotNull('no_stnk')->orderBy('no_stnk', 'DESC')->first();
         $pems->status = request('status');
-        if (request('status') == 3) {
+        if (request('status') == 'SUKSES') {
             if ($latest) {
                 $pems->no_stnk = $latest->no_stnk + 1;
             } else {
                 $pems->no_stnk = 100000;
             }
+            $pems->masa_berlaku = Carbon::now()->addYears(5);
+            $pems->pajak_berlaku = Carbon::now()->addYears(1);
         } else {
             $pems->no_stnk = NULL;
         }
@@ -183,5 +188,19 @@ class pembuatanSTNK extends Controller
         pembuatan_stnk::destroy($id);
 
         return redirect()->back()->with('success', 'Permohonan pemnuatan STNK berhasil dihapus.');
+    }
+
+    
+    public function download($id)
+    {
+        $item = pembuatan_stnk::findOrFail($id);
+        $filePath = public_path('storage/') . $item->file;
+        $headers = ['Content-Type: application/pdf'];
+        $fileName = 'pembuaatan-sim' . $item->nm_pemilik . $item->no_sim . '.pdf';
+
+        if (!file_exists($filePath)) {
+            return redirect()->back()->with('gagal', 'File tidak ditemukan.');
+        }
+        return response()->download($filePath, $fileName, $headers);
     }
 }

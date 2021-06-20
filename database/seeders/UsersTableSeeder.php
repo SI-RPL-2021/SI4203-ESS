@@ -28,9 +28,42 @@ class UsersTableSeeder extends Seeder
             'email' => 'Adminstnk@gmail.com',
             'password' => bcrypt('password')
         ]);
+
+        // $user = User::create([
+        //     'name' => 'User1',
+        //     'nik' => 123456783,
+        //     'username' => 'user1',
+        //     'email' => 'user1@gmail.com',
+        //     'password' => bcrypt('password')
+        // ]);
+
+        // $user = User::create([
+        //     'name' => 'User2',
+        //     'nik' => 123455789,
+        //     'username' => 'user2',
+        //     'email' => 'user2@gmail.com',
+        //     'password' => bcrypt('password')
+        // ]);
+
+        // $user = User::create([
+        //     'name' => 'User3',
+        //     'nik' => 1234689,
+        //     'username' => 'user3',
+        //     'email' => 'user3@gmail.com',
+        //     'password' => bcrypt('password')
+        // ]);
+
+        // $user = User::create([
+        //     'name' => 'User4',
+        //     'nik' => 1244689,
+        //     'username' => 'user4',
+        //     'email' => 'user4@gmail.com',
+        //     'password' => bcrypt('password')
+        // ]);
+
         $user = User::create([
             'name' => 'User',
-            'nik' => 123456789,
+            'nik' => 1254689,
             'username' => 'user',
             'email' => 'user@gmail.com',
             'password' => bcrypt('password')

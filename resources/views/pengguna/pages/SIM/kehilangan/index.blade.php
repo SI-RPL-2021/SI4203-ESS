@@ -27,12 +27,8 @@
                                 <th>No. SIM</th>
                                 <th>No. Regis</th>
                                 <th>Golongan</th>
-                                <th>Alamat</th>
-                                <th>Pekerjaan</th>
                                 <th>Tanggal Hilang</th>
-                                <th>Keterangan</th>
                                 <th>File</th>
-                                <th>Username</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -45,12 +41,8 @@
                                 <td>{{ $item->sim->no_sim }}</td>
                                 <td>{{ $item->sim->no_regis }}</td>
                                 <td>{{ $item->sim->gol_sim }}</td>
-                                <td>{{ $item->sim->alamat }}</td>
-                                <td>{{ $item->sim->pekerjaan }}</td>
                                 <td>{{ $item->tanggal_hilang->translatedFormat('l, d F Y') }}</td>
-                                <td>{{ $item->keterangan }}</td>
-                                <td><a href="{{ route('getFile', $item->id) }}">Download</a></td>
-                                <td>{{ $item->user->username }}</td>
+                                <td><a href="{{ route('kehilangan-sim.download', $item->id) }}" class="btn btn-sm btn-success" title="Download"><i class="fas fa-download"></i></a></td>
                                 <td>
                                     @if ($item->status === 0)
                                     <span class="badge badge-danger">Ditolak</span>

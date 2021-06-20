@@ -102,14 +102,6 @@ class kehilanganSIM extends Controller
         ]);
     }
 
-    function download($id)
-    {
-        $keh = laporan_kehilangan_sim::findOrFail($id);
-        $path = storage_path($keh->file);
-        // return Response::download($keh->file, "Surat Keterangan Hilang.pdf", ['Content-Type: application/pdf']);
-        return response()->download($path, $keh, ['Content-Type: application/pdf']);
-    }
-
     public function status(Request $request, $id)
     {
         $kehilangan_sim = laporan_kehilangan_sim::findOrFail($id);
@@ -120,6 +112,18 @@ class kehilanganSIM extends Controller
         return redirect()->back()->with('success', 'Status berhasil diupdate.');
     }
 
+    public function download($id)
+    {
+        $item = laporan_kehilangan_sim::findOrFail($id);
+        $filePath = public_path('storage/') . $item->file;
+        $headers = ['Content-Type: application/pdf'];
+        $fileName = 'persyaratan-kehilangan-sim' . '-' . $item->sim->no_sim . '.pdf';
+
+        if (!file_exists($filePath)) {
+            return redirect()->back()->with('gagal', 'File tidak ditemukan.');
+        }
+        return response()->download($filePath, $fileName, $headers);
+    }
 
     public function destroy($id)
     {

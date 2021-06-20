@@ -57,7 +57,7 @@
                 <h4 class="card-title text-primary ">Pembuatan STNK</h4>
             </div>
             <div class="card-body">
-                <form id="regForm" action="{{ route('pembuatan-stnk.store') }}" method="post">
+                <form id="regForm" action="{{ route('pembuatan-stnk.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div style="text-align:center;margin-top:20px;margin-bottom:20px;">
                         <span class="step"></span>
@@ -105,15 +105,17 @@
                         </div>
                         <div class="form-group">
                             <label for="jenis">Jenis</label>
-                            <input type="text" name="jenis" class="form-control" id="jenis">
+                            <select name="jenis" id="jenis" class="form-control">
+                                <option value="Mobil Bus">Mobil Bus</option>
+                                <option value="Mobil Barang">Mobil Barang</option>
+                                <option value="Kendaraan Khusus">Kendaraan Khusus</option>
+                                <option value="Mobil Penumpang">Mobil Penumpang</option>
+                                <option value="Sepeda Motor">Sepeda Motor</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="model">Model</label>
                             <input type="text" name="model" class="form-control" id="model">
-                        </div>
-                        <div class="form-group">
-                            <label for="thn_pembuatan">Tahun Pembuatan</label>
-                            <input type="text" name="thn_pembuatan" class="form-control" id="thn_pembuatan">
                         </div>
                         <div class="form-group">
                             <label for="silinder">Isi Silinder</label>
@@ -185,7 +187,7 @@
                                 <legend class="col-form-label col-sm-2 pt-0">Kepemilikan RANMOR</legend>
                                 <div class="col-sm-10">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="kepemilikan" id="pribadi" value="pribadi">
+                                        <input class="form-check-input" type="radio" name="kepemilikan" id="pribadi" value="pribadi" checked>
                                         <label class="form-check-label" for="pribadi">
                                             Milik Pribadi
                                         </label>
@@ -276,7 +278,7 @@
                         <hr>
                         <fieldset class="form-group">
                             <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Perubahanlegend>
+                                <legend class="col-form-label col-sm-2 pt-0">Perubahan</legend>
                             </div>
                             <div class="row">
                                 <div class="col-lg-3">
@@ -399,32 +401,13 @@
                                 </div>
                         </fieldset>
                         <hr>
-                        <fieldset class="form-group">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Perpanjangan</legend>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="pajak_berlaku" type="checkbox" id="23" value="1">
-                                        <label class="form-check-label" for="23">Pengesahan STNK Tahunan</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="pajak_berlaku" type="checkbox" id="24" value="5">
-                                        <label class="form-check-label" for="24">Perpanjangan STNK 5 Tahunan</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
                     </div>
 
 
                     <!-- form 6 -->
 
                     <div class="tab">
-                        <h5>Pengunggahan Surat Keterangan Kehilangan</h5>
+                        <h5>Pengunggahan Surat Keterangan</h5>
                         <fieldset class="form-group">
                             <div class="row">
                                 <legend class="col-form-label col-sm-2 pt-0">Silahkan upload file persyaratan</legend>

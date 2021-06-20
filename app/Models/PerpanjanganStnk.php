@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PerpanjanganStnk extends Model
 {
     use HasFactory;
-    protected $table = 'perpanjangan_pajak_stnk';
+    protected $table = 'perpanjangan_stnk';
     protected $guarded = ['id'];
-    public $dates = ['pajak_berlaku'];
+    public $dates = ['masa_berlaku', 'pajak_berlaku', 'perpanjang_sampai', 'masa_berlaku_sebelumnya'];
 
     public function stnk()
     {

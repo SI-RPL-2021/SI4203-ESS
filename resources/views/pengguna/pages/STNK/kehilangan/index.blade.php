@@ -7,6 +7,13 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
+@elseif (session('gagal'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Gagal!</strong> {{ session('gagal') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 @endif
 <div class="row">
     <div class="col-lg-12">
@@ -23,16 +30,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>No. Registrasi</th>
+                                <th>No. STNK</th>
                                 <th>Nama Pemilik</th>
-                                <th>Merk Kendaraan</th>
                                 <th>Type</th>
                                 <th>Jenis</th>
-                                <th>Model</th>
-                                <th>Warna Kendaraan</th>
                                 <th>Keterangan</th>
                                 <th>File</th>
-                                <th>Username</th>
                                 <th>Status</th>
                                 @role('admin stnk')
                                 <th>Aksi</th>
@@ -43,28 +46,21 @@
                             @foreach ($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->stnk->no_regis }}</td>
+                                <td>{{ $item->stnk->no_stnk }}</td>
                                 <td>{{ $item->stnk->nama_pemilik }}</td>
-                                <td>{{ $item->stnk->merk }}</td>
-                                <td>{{ $item->stnk->type }}</td>
                                 <td>{{ $item->stnk->jenis }}</td>
-                                <td>{{ $item->stnk->model }}</td>
-                                <td>{{ $item->stnk->warna_kendaraan }}</td>
                                 <td>{{ $item->keterangan }}</td>
-                                <td><a href="">Download</a></td>
-                                <td>{{ $item->user->username }}</td>
                                 <td>
-                                    @if ($item->status === 0)
+                                    @if ($item->status === 'GAGAL')
                                     <span class="badge badge-danger">Ditolak</span>
-                                    @elseif ($item->status === 1)
+                                    @elseif ($item->status === 'MENUNGGU DIPROSES')
                                     <span class="badge badge-warning">Menunggu Diproses</span>
-                                    @elseif ($item->status === 2)
+                                    @elseif ($item->status === 'PROSES')
                                     <span class="badge badge-info">Diproses</span>
-                                    @elseif ($item->status === 3)
+                                    @elseif ($item->status === 'SUKSES')
                                     <span class="badge badge-success">Berhasil</span>
                                     @endif
                                 </td>
-                                @role('admin stnk')
                                 <td>
                                     <div class="btn-group mr-1">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -83,7 +79,6 @@
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
-                                @endrole
                             </tr>
                             @endforeach
                         </tbody>

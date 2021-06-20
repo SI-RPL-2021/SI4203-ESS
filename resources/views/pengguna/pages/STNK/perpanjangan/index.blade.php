@@ -7,6 +7,13 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
+@elseif (session('gagal'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Sukses!</strong> {{ session('gagal') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 @endif
 <div class="row">
     <div class="col-lg-12">
@@ -23,16 +30,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>No. STNK</th>
-                                <th>No. Regis</th>
                                 <th>Nama Pemilik</th>
-                                <th>Merk</th>
+                                <th>No. STNK</th>
                                 <th>Jenis</th>
-                                <th>Model</th>
-                                <th>Pajak Berlaku</th>
-                                <th>Perpanjangan Sampai</th>
+                                <th>Masa Berlaku</th>
+                                <th>Perpanjang Sampai</th>
                                 <th>Biaya</th>
-                                <th>Keterangan</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -41,24 +44,20 @@
                             @foreach ($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->stnk->no_stnk }}</td>
-                                <td>{{ $item->stnk->no_regis }}</td>
                                 <td>{{ $item->stnk->nama_pemilik }}</td>
-                                <td>{{ $item->stnk->merk }}</td>
+                                <td>{{ $item->stnk->no_stnk }}</td>
                                 <td>{{ $item->stnk->jenis }}</td>
-                                <td>{{ $item->stnk->model }}</td>
-                                <td>{{ $item->stnk->pajak_berlaku->translatedFormat('d F Y') }}</td>
-                                <td>{{ $item->pajak_berlaku->translatedFormat('d F Y') }}</td>
+                                <td>{{ $item->masa_berlaku_sebelumnya->translatedFormat('d F Y') }}</td>
+                                <td>{{ $item->perpanjang_sampai->translatedFormat('d F Y') }}</td>
                                 <td>Rp. {{ number_format($item->biaya) }}</td>
-                                <td>{{ $item->keterangan }}</td>
                                 <td>
-                                    @if ($item->status === 0)
+                                    @if ($item->status === 'GAGAL')
                                     <span class="badge badge-danger">Ditolak</span>
-                                    @elseif ($item->status === 1)
+                                    @elseif ($item->status === 'MENUNGGU DIPROSES')
                                     <span class="badge badge-warning">Menunggu Diproses</span>
-                                    @elseif ($item->status === 2)
+                                    @elseif ($item->status === 'PROSES')
                                     <span class="badge badge-info">Diproses</span>
-                                    @elseif ($item->status === 3)
+                                    @elseif ($item->status ==='SUKSES')
                                     <span class="badge badge-success">Berhasil</span>
                                     @endif
                                 </td>
@@ -70,10 +69,16 @@
                                             <i class="fas fa-cog"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=0">Set Ditolak</a>
-                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=1">Set Menunggu Proses</a>
-                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=2">Set Proses</a>
-                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=3">Set Berhasil</a>
+                                            @if ($item->status === 'SUKSES')
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=GAGAL">Set Ditolak</a>
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=PROSES">Set Proses</a>
+                                            @elseif($item->status === 'PROSES')
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=GAGAL">Set Ditolak</a>
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=SUKSES">Set Berhasil</a>
+                                            @elseif($item->status === 'GAGAL')
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=PROSES">Set Proses</a>
+                                            <a class="dropdown-item" href="{{ route('perpanjangan-stnk.status',$item->id) }}?status=SUKSES">Set Berhasil</a>
+                                            @endif
                                         </div>
                                     </div>
                                     <form action="{{ route('perpanjangan-stnk.destroy',$item->id) }}" method="post" class="d-inline">

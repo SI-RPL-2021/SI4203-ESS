@@ -53,10 +53,10 @@
     <div class="col-lg">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title text-primary ">Perpanjangan Pajak</h4>
+                <h4 class="card-title text-primary ">Perpanjangan STNK</h4>
             </div>
             <div class="card-body">
-                <form id="regForm" action="{{ route('perpanjangan-stnk.store') }}" method="post" enctype="multipart/form-data">
+                <form id="regForm" action="{{ route('perpanjangan-stnk.store') }}" method="post">
                     @csrf
                     <div style="text-align:center;margin-top:20px;margin-bottom:20px;">
                         <span class="step"></span>
@@ -69,6 +69,29 @@
                     <div class="tab">
                         <h5>Identitas Diri</h5>
                         <hr>
+                        <div class="form-group">
+                            <h5>Keterangan</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Jenis</th>
+                                            <th>Biaya</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Motor</td>
+                                            <td>Rp. {{ number_format($pengaturan['motor']) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mobil</td>
+                                            <td>Rp. {{ number_format($pengaturan['mobil']) }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="stnk_id" class=" form-control-label">Pilih Nama STNK</label></div>
                             <div class="col-12 col-md-9">
@@ -78,29 +101,6 @@
                                     <option value="{{ $stnk->id }}">{{ $stnk->nama_pemilik . ' - ' . $stnk->no_stnk }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                        </div>
-                        @role('admin stnk')
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label for="biaya" class=" form-control-label">Biaya</label></div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" class="form-control" name="biaya">
-                            </div>
-                        </div>
-                        @endrole
-                        <div class="form-group row">
-                            <div class="col-lg-3">
-                                <label for="">Pajak Berlaku</label>
-                            </div>
-                            <div class="col-lg">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="pajak_berlaku" id="inlineRadio1" value="1" checked>
-                                    <label class="form-check-label" for="inlineRadio1">1 Tahun</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="pajak_berlaku" id="inlineRadio2" value="5">
-                                    <label class="form-check-label" for="inlineRadio2">5 Tahun</label>
-                                </div>
                             </div>
                         </div>
                     </div>

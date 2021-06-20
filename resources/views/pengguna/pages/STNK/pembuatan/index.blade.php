@@ -21,7 +21,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Pembuatan STNk</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Pembuatan STNK</h6>
                     <a href="{{ route('pembuatan-stnk.create') }}" class="btn btn-sm btn-primary">Buat Permohonan</a>
                 </div>
             </div>
@@ -32,12 +32,10 @@
                             <tr>
                                 <th>#</th>
                                 <th>Tanggal Permohonan</th>
-                                <th>No. STNk</th>
-                                <th>No. Regis</th>
-                                <th>Pajak Berlaku</th>
+                                <th>No. STNK</th>
                                 <th>Merk</th>
                                 <th>Jenis</th>
-                                <th>Warna Kendaraan</th>
+                                <th>Masa Berlaku</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -48,19 +46,23 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->created_at->translatedFormat('l, d F Y') }}</td>
                                 <td>{{ $item->no_stnk ?? 'Tidak Ada' }}</td>
-                                <td>{{ $item->no_regis }}</td>
-                                <td>{{ $item->pajak_berlaku->translatedFormat('l, d F Y') }}</td>
                                 <td>{{ $item->merk }}</td>
                                 <td>{{ $item->jenis }}</td>
-                                <td>{{ $item->warna_kendaraan }}</td>
                                 <td>
-                                    @if ($item->status === 0)
+                                    @if ($item->masa_berlaku !== NULL)
+                                    {{ $item->masa_berlaku->translatedFormat('d-m-Y') }}
+                                    @else
+                                    -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($item->status === 'GAGAL')
                                     <span class="badge badge-danger">Ditolak</span>
-                                    @elseif ($item->status === 1)
+                                    @elseif ($item->status === 'MENUNGGU DIPROSES')
                                     <span class="badge badge-warning">Menunggu Diproses</span>
-                                    @elseif ($item->status === 2)
+                                    @elseif ($item->status === 'PROSES')
                                     <span class="badge badge-info">Diproses</span>
-                                    @elseif ($item->status === 3)
+                                    @elseif ($item->status ==='SUKSES')
                                     <span class="badge badge-success">Berhasil</span>
                                     @endif
                                 </td>
@@ -72,10 +74,10 @@
                                             <i class="fas fa-cog"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=0">Set Ditolak</a>
-                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=1">Set Menunggu Proses</a>
-                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=2">Set Proses</a>
-                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=3">Set Berhasil</a>
+                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=GAGAL">Set Ditolak</a>
+                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=MENUNGGU DIPROSES">Set Menunggu Proses</a>
+                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=PROSES">Set Proses</a>
+                                            <a class="dropdown-item" href="{{ route('pembuatan-stnk.status',$item->id) }}?status=SUKSES">Set Berhasil</a>
                                         </div>
                                     </div>
                                     <form action="{{ route('pembuatan-stnk.destroy',$item->id) }}" method="post" class="d-inline">

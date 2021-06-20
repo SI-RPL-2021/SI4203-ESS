@@ -7,6 +7,7 @@ use App\Models\History;
 use App\Models\pembuatan_stnk;
 use App\Models\perpanjangan_pajak;
 use App\Models\PerpanjanganStnk as ModelsPerpanjanganStnk;
+use App\Models\Pengaturan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -28,39 +29,38 @@ class PerpanjanganStnk extends Controller
     public function create()
     {
         if (auth()->user()->roles->pluck('name')->first() !== 'user') {
-            $data = pembuatan_stnk::where('status', 3)->orderBy('no_stnk')->get();
+            $data = pembuatan_stnk::where('status', 'SUKSES')->orderBy('no_stnk')->get();
         } else {
-            $data = pembuatan_stnk::where('status', 3)->orderBy('no_stnk')->where('user_id', auth()->id())->get();
+            $data = pembuatan_stnk::where('status', 'SUKSES')->orderBy('no_stnk')->where('user_id', auth()->id())->get();
         }
+        $pengaturan = [
+            'motor' => Pengaturan::first()->biaya_perpanjangan_stnk_motor,
+            'mobil' => Pengaturan::first()->biaya_perpanjangan_stnk_mobil
+        ];
         return view('pengguna.pages.stnk.perpanjangan.create', [
             'title' => 'Buat Perpanjangan STNK',
-            'data' => $data
+            'data' => $data,
+            'pengaturan' => $pengaturan
         ]);
     }
 
     public function store()
     {
+        request()->validate([
+            'stnk_id' => ['required']
+        ]);
         $data = request()->all();
-        $data2 = pembuatan_stnk::where('id', request('stnk_id'))->first();
-        if (request('pajak_berlaku') == 1) {
-            $data['pajak_berlaku'] = $data2->pajak_berlaku->addYears(request('pajak_berlaku'));
-            $data['keterangan'] = '1 Tahun';
+        $stnk = pembuatan_stnk::where('id', request('stnk_id'))->first();
+        if ($stnk->jenis !== 'Sepeda Motor') {
+            $biaya = Pengaturan::first()->biaya_perpanjangan_stnk_motor;
         } else {
-            $data['pajak_berlaku'] = $data2->pajak_berlaku->addYears(request('pajak_berlaku'));
-            $data['keterangan'] = '5 Tahun';
+            $biaya = Pengaturan::first()->biaya_perpanjangan_stnk_mobil;
         }
-        $data['status'] = 1;
-        if (auth()->user()->roles->pluck('name')->first() !== 'user') {
-            $data['user_id'] = $data2->user_id;
-            $data['biaya'] = request('biaya');
-        } else {
-            $data['user_id'] = auth()->id();
-            if (request('pajak_berlaku') == 1) {
-                $data['biaya'] = 1000000;
-            } else {
-                $data['biaya'] = 2500000;
-            }
-        }
+        $data['user_id'] = $stnk->user_id;
+        $data['biaya'] = $biaya;
+        $data['status'] = 'PROSES';
+        $data['masa_berlaku_sebelumnya'] = $stnk->masa_berlaku;
+        $data['perpanjang_sampai'] = $stnk->masa_berlaku->addYears(5);
         $per = ModelsPerpanjanganStnk::create($data);
         if (auth()->user()->roles->pluck('name') !== 'user') {
             $deskripsi = auth()->user()->name . ' membuat laporan perpanjangan STNK atas nama ' . $per->stnk->nama_pemilik . ' dari tanggal ' . $per->stnk->pajak_berlaku->translatedFormat('d F Y') . ' sampai tanggal ' . $per->pajak_berlaku->translatedFormat('d F Y');
@@ -79,28 +79,31 @@ class PerpanjanganStnk extends Controller
     public function status($id)
     {
         $perpanjanganstnk = ModelsPerpanjanganStnk::findOrFail($id);
-
-        $perpanjanganstnk->status = request('status');
-        $perpanjanganstnk->save();
+        $perpan = ModelsPerpanjanganStnk::where('stnk_id', $perpanjanganstnk->stnk->id);
+        $stnk_terakhir = $perpan->latest()->first();
         $stnk = pembuatan_stnk::where('id', $perpanjanganstnk->stnk_id)->first();
+        $perpanjanganstnk->status = request('status');
 
-        if ($perpanjanganstnk->status == 3) {
-            $stnk->update([
-                'pajak_berlaku' => $perpanjanganstnk->pajak_berlaku
-            ]);
-        } else {
-            if ($perpanjanganstnk->keterangan === '1 Tahunan') {
-                $stnk->update([
-                    'pajak_berlaku' => $perpanjanganstnk->pajak_berlaku->subYears(1)
-                ]);
-            } else {
-                $stnk->update([
-                    'pajak_berlaku' => $perpanjanganstnk->pajak_berlaku->subYears(5)
-                ]);
-            }
+        // cek apakah data yang diedit itu tidak sama tidak dengan data stnk terakhir (berdasarkan user_id)
+        if ($stnk_terakhir->id !== $perpanjanganstnk->id) {
+            // jika tidak sama
+            return redirect()->route('perpanjangan-stnk.index')->with('gagal', 'Status gagal diupdate, dikarenakan bukan data terakhir.');
         }
 
-        return redirect()->back()->with('success', 'Status berhasil diupdate.');
+        // cek apakah statusnya akan dirubah menjadi sukses/berhasil
+        if (request('status') === 'SUKSES') {
+            // edit perpanjangan nya
+            $perpanjanganstnk->masa_berlaku_sebelumnya = $stnk->masa_berlaku;
+            $perpanjanganstnk->perpanjang_sampai = $stnk->masa_berlaku->addYears(5);
+
+            // update data dari pembuatan stnk
+            $stnk->update(['masa_berlaku' => $perpanjanganstnk->perpanjang_sampai]);
+        } else {
+            // jika statusnya tidak sama dengan SUKSES, maka
+            $stnk->update(['masa_berlaku' => $stnk_terakhir->masa_berlaku_sebelumnya]);
+        }
+        $perpanjanganstnk->save();
+        return redirect()->back()->with('success', 'STNK berhasil diperpanjang.');
     }
 
     public function show($id)

@@ -23,8 +23,8 @@ class CreatePembuatanStnkTable extends Migration
             $table->string('model');
             $table->integer('thn_pembuatan');
             $table->string('silinder');
-            $table->bigInteger('nmr_rangka');
-            $table->bigInteger('nmr_mesin');
+            $table->string('nmr_rangka');
+            $table->string('nmr_mesin');
             $table->string('warna_kendaraan');
             $table->string('bahan_bakar');
             $table->string('warna_tnkb');
@@ -45,9 +45,10 @@ class CreatePembuatanStnkTable extends Migration
             $table->string('baru')->nullable();
             $table->string('perubahan')->nullable();
             $table->string('persyaratan_khusus')->nullable();
-            $table->date('pajak_berlaku');
+            $table->date('masa_berlaku')->nullable();
+            $table->date('pajak_berlaku')->nullable();
             $table->string('file');
-            $table->integer('status');
+            $table->string('status');
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });

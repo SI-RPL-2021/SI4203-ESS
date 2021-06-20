@@ -211,7 +211,7 @@ class pembuatanSIM extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
         pembuatan_sim::destroy($id);
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\History;
 use App\Models\pembuatan_sim;
+use App\Models\Pengaturan;
 use App\Models\perpanjangan_sim;
 use Carbon\Carbon;
 
@@ -61,12 +62,17 @@ class perpanjanganSIM extends Controller
             'sim_id' => ['required ']
         ]);
         $sim = pembuatan_sim::where('id', $request->sim_id)->first();
+        $biaya = [
+            'biaya_perpanjangan_sim_a' => Pengaturan::first()->biaya_perpanjangan_sim_a,
+            'biaya_perpanjangan_sim_b' => Pengaturan::first()->biaya_perpanjangan_sim_b,
+            'biaya_perpanjangan_sim_c' => Pengaturan::first()->biaya_perpanjangan_sim_c,
+        ];
         if ($sim->gol_sim === 'A') {
-            $biaya = 2000000;
+            $biaya = $biaya['biaya_perpanjangan_sim_a'];
         } elseif ($sim->gol_sim === 'B') {
-            $biaya = 1500000;
+            $biaya = $biaya['biaya_perpanjangan_sim_b'];
         } elseif ($sim->gol_sim === 'C') {
-            $biaya = 500000;
+            $biaya = $biaya['biaya_perpanjangan_sim_c'];
         };
         $per = perpanjangan_sim::create([
             'sim_id' => $request->sim_id,

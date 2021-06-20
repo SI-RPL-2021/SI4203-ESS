@@ -35,10 +35,7 @@
                                 <th>No. SIM</th>
                                 <th>No. Regis</th>
                                 <th>Golongan SIM</th>
-                                <th>Masa Berlaku</th>
                                 <th>Nama Lengkap</th>
-                                <th>NIK</th>
-                                <th>Username</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -51,10 +48,7 @@
                                 <td>{{ $item->no_sim ?? 'Tidak Ada' }}</td>
                                 <td>{{ $item->no_regis }}</td>
                                 <td>{{ $item->gol_sim }}</td>
-                                <td>{{ $item->masa_berlaku->translatedFormat('l, d F Y') }}</td>
                                 <td>{{ $item->nm_lngkp }}</td>
-                                <td>{{ $item->nik }}</td>
-                                <td>{{ $item->user->username }}</td>
                                 <td>
                                     @if ($item->status === 0)
                                     <span class="badge badge-danger">Ditolak</span>

@@ -74,7 +74,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('pembuatan-stnk.index') }}">Pembuatan STNK</a>
                 <a class="collapse-item" href="{{ route('kehilangan-stnk.index') }}">Kehilangan STNK</a>
-                <a class="collapse-item" href="{{ route('perpanjangan-stnk.index') }}">Perpanjang Pajak</a>
+                <a class="collapse-item" href="{{ route('perpanjangan-stnk.index') }}">Perpanjangan STNK</a>
             </div>
         </div>
     </li>

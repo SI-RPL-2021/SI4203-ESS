@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePerpanjanganPajakStnkTable extends Migration
+class CreatePerpanjanganStnkTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreatePerpanjanganPajakStnkTable extends Migration
      */
     public function up()
     {
-        Schema::create('perpanjangan_pajak_stnk', function (Blueprint $table) {
+        Schema::create('perpanjangan_stnk', function (Blueprint $table) {
             $table->id();
             $table->foreignId('stnk_id')->constrained('pembuatan_stnk')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->date('pajak_berlaku');
+            $table->date('masa_berlaku_sebelumnya')->nullable();
+            $table->date('perpanjang_sampai')->nullable();
             $table->bigInteger('biaya');
             $table->string('keterangan');
-            $table->integer('status');
+            $table->string('status');
             $table->foreignId('user_id')->constrained('users')->cascadeOndUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ class CreatePerpanjanganPajakStnkTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perpanjangan_pajak_stnk');
+        Schema::dropIfExists('perpanjangan_stnk');
     }
 }

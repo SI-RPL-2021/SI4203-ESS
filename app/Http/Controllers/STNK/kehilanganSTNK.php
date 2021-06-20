@@ -43,9 +43,9 @@ class kehilanganSTNK extends Controller
     public function create()
     {
         if (auth()->user()->roles->pluck('name')->first() !== 'user') {
-            $data = pembuatan_stnk::where('status', 3)->latest()->get();
+            $data = pembuatan_stnk::where('status', 'SUKSES')->latest()->get();
         } else {
-            $data = pembuatan_stnk::where('status', 3)->where('user_id', auth()->id())->get();
+            $data = pembuatan_stnk::where('status', 'SUKSES')->where('user_id', auth()->id())->get();
         }
         return view('pengguna.pages.stnk.kehilangan.create', [
             'title' => 'Laporan Kehilangan STNK',
@@ -63,10 +63,11 @@ class kehilanganSTNK extends Controller
     public function store(Request $request)
     {
         $data = request()->all();
-        $user = pembuatan_stnk::with('user')->where('status', 3)->where('id', $request->stnk_id)->first();
-        $data['status'] = 1;
+        $stnk = pembuatan_stnk::with('user')->where('status', 'SUKSES')->where('id', $request->stnk_id)->first();
+        $data['status'] = 'MENUNGGU DIPROSES';
+        $data['file'] = request()->file('file')->store('kehilangan-stnk.pdf', 'public');
         if (auth()->user()->roles->pluck('name')->first() !== 'user') {
-            $data['user_id'] = $user->id;
+            $data['user_id'] = $stnk->user->id;
         } else {
             $data['user_id'] = auth()->id();
         }
@@ -94,9 +95,13 @@ class kehilanganSTNK extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        //
+        $data = laporan_kehilangan_stnk::findOrFail($id);
+        return view('pengguna.pages.stnk.kehilangan.show', [
+            'title' => 'Detail kehilangan stnk',
+            'data' => $data
+        ]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -120,7 +125,24 @@ class kehilanganSTNK extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
+        $data = laporan_kehilangan_stnk::findOrFail($id);
+        $data->delete();
+
+        return redirect()->back()->with('success', 'Laporan kehilangan berhasil dihapus.');
+    }
+
+    public function download($id)
+    {
+        $item = laporan_kehilangan_stnk::findOrFail($id);
+        $filePath = public_path('storage/') . $item->file;
+        $headers = ['Content-Type: application/pdf'];
+        $fileName = 'persyaratan-kehilangan-stnk' . '-' . $item->stnk->no_stnk . '.pdf';
+
+        if (!file_exists($filePath)) {
+            return redirect()->back()->with('gagal', 'File tidak ditemukan.');
+        }
+        return response()->download($filePath, $fileName, $headers);
     }
 }

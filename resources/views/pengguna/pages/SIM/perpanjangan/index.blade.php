@@ -26,10 +26,6 @@
                                 <th>Nama</th>
                                 <th>No. SIM</th>
                                 <th>Golongan</th>
-                                <th>No. Regis</th>
-                                <th>Alamat</th>
-                                <th>Pekerjaan</th>
-                                <th>Username</th>
                                 <th>Masa Berlaku</th>
                                 <th>Biaya</th>
                                 <th>Status</th>
@@ -42,11 +38,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->sim->nm_lngkp }}</td>
                                 <td>{{ $item->sim->no_sim }}</td>
-                                <td>{{ $item->sim->no_regis }}</td>
-                                <td>{{ $item->sim->alamat }}</td>
-                                <td>{{ $item->sim->pekerjaan }}</td>
                                 <td>{{ $item->sim->gol_sim }}</td>
-                                <td>{{ $item->sim->user->username }}</td>
                                 <td>{{ $item->masa_berlaku->translatedFormat('l, d F Y') }}</td>
                                 <td>Rp. {{ number_format($item->biaya) }}</td>
                                 <td>
