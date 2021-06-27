@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\History;
 use App\Models\laporan_kehilangan_stnk;
 use App\Models\pembuatan_stnk;
+use App\Models\Pengaturan;
 
 class kehilanganSTNK extends Controller
 {
@@ -47,9 +48,13 @@ class kehilanganSTNK extends Controller
         } else {
             $data = pembuatan_stnk::where('status', 'SUKSES')->where('user_id', auth()->id())->get();
         }
+        $pengaturan = [
+            'persyaratan' => Pengaturan::first()->persyaratan_kehilangan_stnk
+        ];
         return view('pengguna.pages.stnk.kehilangan.create', [
             'title' => 'Laporan Kehilangan STNK',
-            'data' => $data
+            'data' => $data,
+            'pengaturan' => $pengaturan
         ]);
     }
 

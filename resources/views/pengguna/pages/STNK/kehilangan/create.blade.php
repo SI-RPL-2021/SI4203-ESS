@@ -1,5 +1,13 @@
 @extends('pengguna.templates.default')
 @section('content')
+@if (session('gagal'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Gagal!</strong> {{ session('gagal') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 <style>
     input.invalid {
         background-color: #ffdddd;
@@ -74,7 +82,8 @@
                                 <label for="">Persyaratan</label>
                             </div>
                             <div class="col-lg">
-                                <a class="btn btn-primary " href="/download">Download</a>
+                                <a class="btn btn-success btn-sm" href="{{ route('pengaturan.download-persyaratan-kehilangan-stnk') }}"><i class="fas fa-download"></i>Download</a>
+
                             </div>
                         </div>
 

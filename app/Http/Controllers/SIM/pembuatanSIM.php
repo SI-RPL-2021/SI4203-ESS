@@ -8,6 +8,8 @@ use App\Models\pembuatan_sim;
 use App\Models\Sim;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Models\Pengaturan;
+use App\Models\Keranjang;
 use Illuminate\Http\Request;
 
 class pembuatanSIM extends Controller
@@ -132,6 +134,27 @@ class pembuatanSIM extends Controller
         $pembuatanSIM->jenis_pelayanan = $request->jenis_pelayanan;
         $pembuatanSIM->user_id = $request->user_id;
         $pembuatanSIM->save();
+
+
+        // insert ke keranjang
+
+        if ($pembuatanSIM->gol_sim === 'A') {
+            $biaya = Pengaturan::first()->biaya_pembuatan_sim_a;
+        } elseif ($pembuatanSIM->gol_sim === 'B') {
+            $biaya = Pengaturan::first()->biaya_pembuatan_sim_b;
+        } elseif ($pembuatanSIM->gol_sim === 'C') {
+            $biaya = Pengaturan::first()->biaya_pembuatan_sim_c;
+        }
+        $data = [
+            'jenis_layanan' => 'Pembuatan SIM',
+            'keterangan' => 'Pembuatan SIM ' . $pembuatanSIM->gol_sim . ' dengan nama ' . $pembuatanSIM->nm_lngkp,
+            'biaya' => $biaya,
+            'user_id' => $pembuatanSIM->user_id
+        ];
+        Keranjang::create($data);
+
+        // insert ke history
+
 
         History::create([
             'username' => auth()->user()->username,

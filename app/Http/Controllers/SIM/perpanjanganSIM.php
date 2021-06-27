@@ -8,6 +8,7 @@ use App\Models\History;
 use App\Models\pembuatan_sim;
 use App\Models\Pengaturan;
 use App\Models\perpanjangan_sim;
+use App\Models\Keranjang;
 use Carbon\Carbon;
 
 class perpanjanganSIM extends Controller
@@ -78,9 +79,29 @@ class perpanjanganSIM extends Controller
             'sim_id' => $request->sim_id,
             'masa_berlaku' => $sim->masa_berlaku->addYears(5),
             'biaya' => $biaya,
-            'status' => 1,
+            'status' => 'MENUNGGU DIPROSES',
             'user_id' => $sim->user_id
         ]);
+
+        // insert ke keranjang
+
+        if ($sim->gol_sim === 'A') {
+            $biaya = Pengaturan::first()->biaya_perpanjangan_sim_a;
+        } elseif ($sim->gol_sim === 'B') {
+            $biaya = Pengaturan::first()->biaya_perpanjangan_sim_b;
+        } elseif ($sim->gol_sim === 'C') {
+            $biaya = Pengaturan::first()->biaya_perpanjangan_sim_c;
+        }
+        $data = [
+            'jenis_layanan' => 'Perpanjangan SIM',
+            'keterangan' => 'Perpanjangan SIM ' . $sim->gol_sim . ' dengan nama ' . $sim->nm_lngkp,
+            'biaya' => $biaya,
+            'user_id' => $sim->user_id
+        ];
+        Keranjang::create($data);
+
+        //  insert ke history
+
 
         History::create([
             'username' => auth()->user()->username,

@@ -1,5 +1,13 @@
 @extends('pengguna.templates.default')
 @section('content')
+@if (session('gagal'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Gagal!</strong> {{ session('gagal') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 <style>
     input.invalid {
         background-color: #ffdddd;
@@ -70,7 +78,8 @@
                                 <label for="">Persyaratan</label>
                             </div>
                             <div class="col-lg">
-                                <a class="btn btn-primary " href="/download">Download</a>
+                                <a class="btn btn-success btn-sm" href="{{ route('pengaturan.download-persyaratan-kehilangan-sim') }}"><i class="fas fa-download"></i>Download</a>
+
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -84,58 +93,58 @@
                                 </select>
                             </div>
 
-                          </div>
+                        </div>
                         {{-- <div class="form-group">
                             <label for="no_sim">No SIM</label>
                             <input type="text" name="no_sim" class="form-control" value="{{ $sim->no_sim }}" id="no_sim" readonly>
-                        </div> --> --}}
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="tanggal_hilang" class=" form-control-label">Tanggal Hilang</label></div>
-                                <div class="col-12 col-md-9">
-                                    <input type="date" class="form-control" name="tanggal_hilang">
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="keterangan" class=" form-control-label">Keterangan</label></div>
-                                <div class="col-12 col-md-9">
-                                    <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
-                                </div>
+                    </div> --> --}}
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="tanggal_hilang" class=" form-control-label">Tanggal Hilang</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="date" class="form-control" name="tanggal_hilang">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="keterangan" class=" form-control-label">Keterangan</label></div>
+                        <div class="col-12 col-md-9">
+                            <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="no_sim">No SIM</label>
+                        <input type="text" name="no_sim" class="form-control" value="{{ $sim->no_sim }}" id="no_sim" readonly>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col col-md-3"><label for="tanggal_hilang" class=" form-control-label">Tanggal Hilang</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="date" class="form-control" name="tanggal_hilang">
 
                         </div>
-                        <div class="form-group">
-                            <label for="no_sim">No SIM</label>
-                            <input type="text" name="no_sim" class="form-control" value="{{ $sim->no_sim }}" id="no_sim" readonly>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col col-md-3"><label for="tanggal_hilang" class=" form-control-label">Tanggal Hilang</label></div>
-                            <div class="col-12 col-md-9">
-                                <input type="date" class="form-control" name="tanggal_hilang">
-
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label for="keterangan" class=" form-control-label">Keterangan</label></div>
-                            <div class="col-12 col-md-9">
-                                <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
-                            </div>
-                        </div>
-                        <fieldset class="form-group">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Silahkan upload file persyaratan</legend>
-                            </div>
-                            <div class="row col-sm-2 pt-0">
-                                <input type="file" name="file" class="custom-file-inpuit" id="file">
-                            </div>
-                        </fieldset>
                     </div>
-                    <div style="float:right;margin-top:50px;">
-                        <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>
-                        <button type="button" class="tombol" id="nextBtn" onclick="nextPrev(1)"> Selanjutnya </button>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="keterangan" class=" form-control-label">Keterangan</label></div>
+                        <div class="col-12 col-md-9">
+                            <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
+                        </div>
                     </div>
-                </form>
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Silahkan upload file persyaratan</legend>
+                        </div>
+                        <div class="row col-sm-2 pt-0">
+                            <input type="file" name="file" class="custom-file-inpuit" id="file">
+                        </div>
+                    </fieldset>
             </div>
+            <div style="float:right;margin-top:50px;">
+                <button type="button" class="tombol" id="prevBtn" onclick="nextPrev(-1)"> Kembali </button>
+                <button type="button" class="tombol" id="nextBtn" onclick="nextPrev(1)"> Selanjutnya </button>
+            </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 
 <script>

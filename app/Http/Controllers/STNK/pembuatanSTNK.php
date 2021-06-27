@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\History;
 use App\Models\pembuatan_stnk;
 use App\Models\User;
+use App\Models\Pengaturan;
+use App\Models\Keranjang;
 use Carbon\Carbon;
 
 class pembuatanSTNK extends Controller
@@ -27,7 +29,7 @@ class pembuatanSTNK extends Controller
         if (auth()->user()->roles->pluck('name')->first() !== 'user') {
             $data = pembuatan_stnk::latest()->get();
         } else {
-            $data = pembuatan_stnk::where('user_id', auth()->id())->get();
+            $data = pembuatan_stnk::where('user_id', auth()->id())->latest()->get();
         }
         return view('pengguna.pages.stnk.pembuatan.index', [
             'title' => 'Pembuatan STNK',
@@ -119,6 +121,23 @@ class pembuatanSTNK extends Controller
             $data['nmr_ktp'] = auth()->user()->nik;
         }
         $stnk = pembuatan_stnk::create($data);
+
+        // insert ke keranjang
+        if ($stnk->jenis !== 'Sepeda Motor') {
+            $biaya = Pengaturan::first()->biaya_pembuatan_stnk_motor;
+        } else {
+            $biaya = Pengaturan::first()->biaya_pembuatan_stnk_mobil;
+        }
+        $data = [
+            'jenis_layanan' => 'Pembuatan STNK',
+            'keterangan' => 'Pembuatan STNK ' . $stnk->jenis . ' atas nama ' . $stnk->nama_pemilik,
+            'biaya' => $biaya,
+            'user_id' => $stnk->user_id
+        ];
+        Keranjang::create($data);
+
+        // insert ke history
+
         History::create([
             'username' => auth()->user()->username,
             'jenis_pelayanan' => 'Pembuatan STNK',
@@ -190,7 +209,7 @@ class pembuatanSTNK extends Controller
         return redirect()->back()->with('success', 'Permohonan pemnuatan STNK berhasil dihapus.');
     }
 
-    
+
     public function download($id)
     {
         $item = pembuatan_stnk::findOrFail($id);

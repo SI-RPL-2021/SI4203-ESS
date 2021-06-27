@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\History;
 use App\Models\laporan_kehilangan_sim;
 use App\Models\pembuatan_sim;
+use App\Models\Pengaturan;
 use Illuminate\Support\Facades\Storage;
 use File;
 use Illuminate\Http\Response as HttpResponse;
@@ -53,9 +54,13 @@ class kehilanganSIM extends Controller
         } else {
             $data = pembuatan_sim::where('user_id', auth()->id())->where('status', 3)->latest()->get();
         }
+        $pengaturan = [
+            'persyaratan' => Pengaturan::first()->persyaratan_kehilangan_sim
+        ];
         return view('pengguna.pages.sim.kehilangan.create', [
             'title' => 'Buat Laporan Kehilangan SIM',
-            'data' => $data
+            'data' => $data,
+            'pengaturan' => $pengaturan
         ]);
     }
 

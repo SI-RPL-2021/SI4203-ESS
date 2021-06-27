@@ -13,8 +13,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Perpanjangan SIM</h6>
-                    <a href="{{ route('perpanjangan-sim.create') }}" class="btn btn-sm btn-primary">Tambah Data</a>
+                    <h6 class="m-0 font-weight-bold text-primary">Transaksi</h6>
                 </div>
             </div>
             <div class="card-body">
@@ -23,49 +22,49 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Kode</th>
                                 <th>Nama</th>
-                                <th>No. SIM</th>
-                                <th>Golongan</th>
-                                <th>Masa Berlaku</th>
-                                <th>Biaya</th>
+                                <th>Email</th>
+                                <th>Pembayaran</th>
+                                <th>Bukti Pembayaran</th>
+                                <th>Jumlah Bayar</th>
                                 <th>Status</th>
-                                <th>Aksi</th>
+                                <th width=150>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $item)
+                            @foreach ($items as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->sim->nm_lngkp }}</td>
-                                <td>{{ $item->sim->no_sim }}</td>
-                                <td>{{ $item->sim->gol_sim }}</td>
-                                <td>{{ $item->masa_berlaku->translatedFormat('l, d F Y') }}</td>
-                                <td>Rp. {{ number_format($item->biaya) }}</td>
+                                <td>{{ $item->kode }}</td>
+                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->user->email }}</td>
+                                <td>{{ $item->metode_pembayaran }}</td>
+                                <td><a href="{{ route('transaksi.download', $item->id) }}" class="btn btn-sm btn-success" title="Download"><i class="fas fa-download"></i>Download</a></td>
+                                <td>Rp. {{ number_format($item->jumlah_bayar) }}</td>
                                 <td>
                                     @if ($item->status === 'GAGAL')
-                                    <span class="badge badge-danger">Ditolak</span>
-                                    @elseif ($item->status === 'MENUNGGU DIPROSES')
-                                    <span class="badge badge-warning">Menunggu Diproses</span>
-                                    @elseif ($item->status === 'PROSES')
-                                    <span class="badge badge-info">Diproses</span>
-                                    @elseif ($item->status === 'BERHASIL')
+                                    <span class="badge badge-danger">GAGAL</span>
+                                    @elseif ($item->status === 'MENUNGGU VERIFIKASI')
+                                    <span class="badge badge-warning">Menunggu Verifikasi</span>
+                                    @elseif ($item->status === 'SUKSES')
                                     <span class="badge badge-success">Berhasil</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="btn-group mr-1">
+                                    <a href="{{ route('transaksi.show', $item->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
+                                    @role('admin sim|admin stnk')
+                                    <div class="btn-group">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <i class="fas fa-cog"></i>
                                         </button>
-                                        @role('admin sim')
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('perpanjangan-sim.status',$item->id) }}?status=GAGAL">Set Ditolak</a>
-                                            <a class="dropdown-item" href="{{ route('perpanjangan-sim.status',$item->id) }}?status=MENUNGGU DIPROSES">Set Menunggu Proses</a>
-                                            <a class="dropdown-item" href="{{ route('perpanjangan-sim.status',$item->id) }}?status=PROSES">Set Proses</a>
-                                            <a class="dropdown-item" href="{{ route('perpanjangan-sim.status',$item->id) }}?status=BERHASIL">Set Berhasil</a>
+                                            <a class="dropdown-item" href="{{ route('transaksi.status',$item->id) }}?status=GAGAL">Set Gagal</a>
+                                            <a class="dropdown-item" href="{{ route('transaksi.status',$item->id) }}?status=MENUNGGU VERIFIKASI">Menunggu Verifikasi</a>
+                                            <a class="dropdown-item" href="{{ route('transaksi.status',$item->id) }}?status=SUKSES">Set Berhasil</a>
                                         </div>
                                     </div>
-                                    <form action="{{ route('perpanjangan-sim.destroy',$item->id) }}" method="post" class="d-inline">
+                                    <form action="{{ route('transaksi.destroy', $item->id) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>

@@ -60,8 +60,6 @@
     </li>
     @endrole
 
-
-
     @role('admin stnk|user')
     <hr class="sidebar-divider d-none d-md-block">
     <!-- Nav Item - Pages Collapse Menu -->
@@ -96,6 +94,7 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>Pengaturan</span></a>
     </li>
+
     @endrole
 
     @role('user')
@@ -109,9 +108,6 @@
             <span>Feedback</span></a>
     </li>
 
-    @endrole
-
-    @role('user')
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
@@ -122,7 +118,22 @@
             <span>History</span></a>
     </li>
 
+    <!-- Nav Item - History -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('keranjang.index') }}">
+            <i class="fas fa-fw fa-shopping-cart"></i>
+            <span>Keranjang</span></a>
+    </li>
+
     @endrole
+
+
+    <!-- Nav Item - History -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('transaksi.index') }}">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Transaksi</span></a>
+    </li>
 
 
     <!-- Divider -->

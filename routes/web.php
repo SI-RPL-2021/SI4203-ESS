@@ -14,8 +14,13 @@ use App\Http\Controllers\STNK\pembuatanSTNK;
 use App\Http\Controllers\STNK\PerpanjanganStnk;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\feedbackController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\KeranjangController;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -75,10 +80,24 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('pembayaran', PembayaranController::class)->except('show');
         Route::get('pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
         Route::post('pengaturan', [PengaturanController::class, 'store'])->name('pengaturan.store');
-        Route::get('pengaturan/download-persyaratan-kehilangan-sim', [PengaturanController::class, 'download_persyaratan_kehilangan_sim'])->name('pengaturan.download-persyaratan-kehilangan-sim');
-        Route::get('pengaturan/download-persyaratan-kehilangan-stnk', [PengaturanController::class, 'download_persyaratan_kehilangan_stnk'])->name('pengaturan.download-persyaratan-kehilangan-stnk');
     });
 
+    // persyaratan -----------------------
+
+    Route::get('pengaturan/download-persyaratan-kehilangan-sim', [PengaturanController::class, 'download_persyaratan_kehilangan_sim'])->name('pengaturan.download-persyaratan-kehilangan-sim');
+    Route::get('pengaturan/download-persyaratan-kehilangan-stnk', [PengaturanController::class, 'download_persyaratan_kehilangan_stnk'])->name('pengaturan.download-persyaratan-kehilangan-stnk');
+
+    // -----------------------
+
+    Route::get('keranjang/{keranjang:id}/getUser', [KeranjangController::class, 'getUser'])->name('keranjang.getUser');
+    Route::get('keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
+    Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+    Route::get('transaksi/{id}', [TransaksiController::class, 'show'])->name('transaksi.show');
+    Route::delete('transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
+    Route::get('transaksi/{id}/download', [TransaksiController::class, 'download'])->name('transaksi.download');
+    Route::get('transaksi/{id}/set', [TransaksiController::class, 'status'])->name('transaksi.status');
+
+    Route::post('checkout', [CheckoutController::class, 'store'])->name('checkout');
 
     //download file
     Route::get('/download', function () {

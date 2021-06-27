@@ -8,6 +8,7 @@ use App\Models\pembuatan_stnk;
 use App\Models\perpanjangan_pajak;
 use App\Models\PerpanjanganStnk as ModelsPerpanjanganStnk;
 use App\Models\Pengaturan;
+use App\Models\Keranjang;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -62,6 +63,24 @@ class PerpanjanganStnk extends Controller
         $data['masa_berlaku_sebelumnya'] = $stnk->masa_berlaku;
         $data['perpanjang_sampai'] = $stnk->masa_berlaku->addYears(5);
         $per = ModelsPerpanjanganStnk::create($data);
+
+
+        // insert ke keranjang
+        if ($stnk->jenis !== 'Sepeda Motor') {
+            $biaya = Pengaturan::first()->biaya_perpanjangan_stnk_motor;
+        } else {
+            $biaya = Pengaturan::first()->biaya_perpanjangan_stnk_mobil;
+        }
+        $data = [
+            'jenis_layanan' => 'Perpanjangan STNK',
+            'keterangan' => 'Perpanjangan STNK ' . $stnk->jenis . ' atas nama ' . $stnk->nama_pemilik,
+            'biaya' => $biaya,
+            'user_id' => $stnk->user_id
+        ];
+        Keranjang::create($data);
+
+        // insert ke history
+
         if (auth()->user()->roles->pluck('name') !== 'user') {
             $deskripsi = auth()->user()->name . ' membuat laporan perpanjangan STNK atas nama ' . $per->stnk->nama_pemilik . ' dari tanggal ' . $per->stnk->pajak_berlaku->translatedFormat('d F Y') . ' sampai tanggal ' . $per->pajak_berlaku->translatedFormat('d F Y');
             History::create([
