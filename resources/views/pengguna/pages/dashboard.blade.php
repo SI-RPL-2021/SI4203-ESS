@@ -108,12 +108,12 @@
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Data Permohonan SIM E-SS</h6>
-                
+
             </div>
             <!-- Card Body -->
             <div class="card-body">
                 <div class="chart-area" id="o">
-                    
+
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div class="chart-pie pt-4 pb-2" id="container">
-                  
+
                 </div>
                 <div class="mt-4 text-center small">
                     <span class="mr-2">
@@ -281,7 +281,7 @@
 </div>
 
 <script type="text/javascript">
-    var users =  <?php echo json_encode($datas) ?>;
+    var users = <?php echo json_encode($datas) ?>;
     Highcharts.chart('container', {
         title: {
             text: ''
@@ -289,7 +289,7 @@
         subtitle: {
             text: ''
         },
-         xAxis: {
+        xAxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         },
         yAxis: {
@@ -325,185 +325,188 @@
                 }
             }]
         }
-});
+    });
 
-Highcharts.chart('o', {
-  chart: {
-    type: 'column'
-  },
-  title: {
-    text: ''
-  },
-  subtitle: {
-    text: 'Click the columns to view the details'
-  },
-  accessibility: {
-    announceNewData: {
-      enabled: true
-    }
-  },
-  xAxis: {
-    type: 'category'
-  },
-  yAxis: {
-    title: {
-      text: 'Total percent Permohonan'
-    }
-
-  },
-  legend: {
-    enabled: false
-  },
-  plotOptions: {
-    series: {
-      borderWidth: 0,
-      dataLabels: {
-        enabled: true,
-        format: '{point.y:.1f}%'
-      }
-    }
-  },
-
-  tooltip: {
-    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-  },
-
-  series: [
-    {
-      name: "Jumlah Permohonan",
-      colorByPoint: true,
-      data: [
-        {
-          name: "Pembuatan SIM",
-          y: {!!json_encode($items1)!!},
-          drilldown: "pembuatan-sim"
+    Highcharts.chart('o', {
+        chart: {
+            type: 'column'
         },
-        {
-          name: "Kehilanagn SIM",
-          y: 10.57,
-          drilldown: "kehilangan-sim"
-        },
-        {
-          name: "Perpanjangan SIM",
-          y: 7.23,
-          drilldown: "perpanjangan-sim"
-        }
-      ]
-    }
-  ],
-  drilldown: {
-    series: [
-      {
-        name: "Pembuatan SIM",
-        id: "pembuatan-sim",
-        data: [
-          [
-            "Januari",
-            1.3
-          ],
-          [
-            "Februari",
-            53.02
-          ],
-          [
-            "Maret",
-            1.4
-          ],
-        ]
-      },
-      {
-        name: "Kehilangan SIM",
-        id: "kehilangan-sim",
-        data: [
-          [
-            "v58.0",
-            1.02
-          ],
-          [
-            "v57.0",
-            7.36
-          ],
-          [
-            "v56.0",
-            0.35
-          ],
-        ]
-      },
-      {
-        name: "Perpanjangan SIM",
-        id: "perpanjangan-sim",
-        data: [
-          [
-            "v11.0",
-            6.2
-          ],
-          [
-            "v10.0",
-            0.29
-          ],
-          [
-            "v9.0",
-            0.27
-          ],
-          [
-            "v8.0",
-            0.47
-          ]
-        ]
-      },
-      
-    ]
-  }
-});
-
-Highcharts.chart('pembuatan', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: ''
-    },
-    subtitle: {
-        text: ''
-    },
-    xAxis: {
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
         title: {
             text: ''
+        },
+        subtitle: {
+            text: 'Click the columns to view the details'
+        },
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: 'Total percent Permohonan'
+            }
+
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        },
+
+        series: [{
+            name: "Jumlah Permohonan",
+            colorByPoint: true,
+            data: [{
+                    name: "Pembuatan SIM",
+                    y: {
+                        !!json_encode($items1) !!
+                    },
+                    drilldown: "pembuatan-sim"
+                },
+                {
+                    name: "Kehilanagn SIM",
+                    y: 10.57,
+                    drilldown: "kehilangan-sim"
+                },
+                {
+                    name: "Perpanjangan SIM",
+                    y: 7.23,
+                    drilldown: "perpanjangan-sim"
+                }
+            ]
+        }],
+        drilldown: {
+            series: [{
+                    name: "Pembuatan SIM",
+                    id: "pembuatan-sim",
+                    data: [
+                        [
+                            "Januari",
+                            1.3
+                        ],
+                        [
+                            "Februari",
+                            53.02
+                        ],
+                        [
+                            "Maret",
+                            1.4
+                        ],
+                    ]
+                },
+                {
+                    name: "Kehilangan SIM",
+                    id: "kehilangan-sim",
+                    data: [
+                        [
+                            "v58.0",
+                            1.02
+                        ],
+                        [
+                            "v57.0",
+                            7.36
+                        ],
+                        [
+                            "v56.0",
+                            0.35
+                        ],
+                    ]
+                },
+                {
+                    name: "Perpanjangan SIM",
+                    id: "perpanjangan-sim",
+                    data: [
+                        [
+                            "v11.0",
+                            6.2
+                        ],
+                        [
+                            "v10.0",
+                            0.29
+                        ],
+                        [
+                            "v9.0",
+                            0.27
+                        ],
+                        [
+                            "v8.0",
+                            0.47
+                        ]
+                    ]
+                },
+
+            ]
         }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px"></span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Pembuatan',
-        data: {!!json_encode($items1)!!}
+    });
 
-    }, {
-        name: 'Perpanjangan',
-        data: {!!json_encode($items2)!!}
+    Highcharts.chart('pembuatan', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px"></span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Pembuatan',
+            data: {
+                !!json_encode($items1) !!
+            }
 
-    }, {
-        name: 'Kehilangan',
-        data: {!!json_encode($items3)!!}
+        }, {
+            name: 'Perpanjangan',
+            data: {
+                !!json_encode($items2) !!
+            }
 
-    }]
-});
+        }, {
+            name: 'Kehilangan',
+            data: {
+                !!json_encode($items3) !!
+            }
 
+        }]
+    });
 </script>
 @endsection

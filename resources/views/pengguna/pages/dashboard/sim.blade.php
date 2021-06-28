@@ -108,12 +108,12 @@
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Data Permohonan SIM E-SS</h6>
-                
+
             </div>
             <!-- Card Body -->
             <div class="card-body">
                 <div class="chart-area" id="o">
-                    
+
                 </div>
             </div>
         </div>
@@ -129,10 +129,10 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div class="chart-pie pt-4 pb-2" id="container">
-                  
+
                 </div>
                 <div class="mt-4 text-center small">
-                    
+
                 </div>
             </div>
         </div>
@@ -151,10 +151,10 @@
                 <h6 class="m-0 font-weight-bold text-primary">Data Permohonan SIM E-SS/month</h6>
             </div>
             <div class="card-body">
-                
-                <div class="chart-area" id="by_month"> </div>  
+
+                <div class="chart-area" id="by_month"> </div>
+            </div>
         </div>
-    </div>
 
 
         <!-- Color System -->
@@ -257,8 +257,8 @@
 </div>
 
 <script type="text/javascript">
-//  Data user
-    var users =  <?php echo json_encode($datas) ?>;
+    //  Data user
+    var users = <?php echo json_encode($datas) ?>;
     Highcharts.chart('container', {
         title: {
             text: ''
@@ -266,7 +266,7 @@
         subtitle: {
             text: ''
         },
-         xAxis: {
+        xAxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         },
         yAxis: {
@@ -302,240 +302,242 @@
                 }
             }]
         }
-});
+    });
 
-// ini ngk jelas
-Highcharts.chart('q', {
-  chart: {
-    type: 'column'
-  },
-  title: {
-    text: ''
-  },
-  subtitle: {
-    text: 'Click the columns to view the details'
-  },
-  accessibility: {
-    announceNewData: {
-      enabled: true
-    }
-  },
-  xAxis: {
-    type: 'category'
-  },
-  yAxis: {
-    title: {
-      text: 'Total percent Permohonan'
-    }
-
-  },
-  legend: {
-    enabled: false
-  },
-  plotOptions: {
-    series: {
-      borderWidth: 0,
-      dataLabels: {
-        enabled: true,
-        format: '{point.y:.1f}%'
-      }
-    }
-  },
-
-  tooltip: {
-    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-  },
-
-  series: [
-    {
-      name: "Jumlah Permohonan",
-      colorByPoint: true,
-      data: [
-        {
-          name: "Pembuatan SIM",
-          y: 30,
-          drilldown: "pembuatan-sim"
+    // ini ngk jelas
+    Highcharts.chart('q', {
+        chart: {
+            type: 'column'
         },
-        {
-          name: "Kehilanagn SIM",
-          y: 10.57,
-          drilldown: "kehilangan-sim"
-        },
-        {
-          name: "Perpanjangan SIM",
-          y: 7.23,
-          drilldown: "perpanjangan-sim"
-        }
-      ]
-    }
-  ],
-  drilldown: {
-    series: [
-      {
-        name: "Pembuatan SIM",
-        id: "pembuatan-sim",
-        data: [
-          [
-            "Januari",
-            1.3
-          ],
-          [
-            "Februari",
-            53.02
-          ],
-          [
-            "Maret",
-            1.4
-          ],
-        ]
-      },
-      {
-        name: "Kehilangan SIM",
-        id: "kehilangan-sim",
-        data: [
-          [
-            "v58.0",
-            1.02
-          ],
-          [
-            "v57.0",
-            7.36
-          ],
-          [
-            "v56.0",
-            0.35
-          ],
-        ]
-      },
-      {
-        name: "Perpanjangan SIM",
-        id: "perpanjangan-sim",
-        data: [
-          [
-            "v11.0",
-            6.2
-          ],
-          [
-            "v10.0",
-            0.29
-          ],
-          [
-            "v9.0",
-            0.27
-          ],
-          [
-            "v8.0",
-            0.47
-          ]
-        ]
-      },
-      
-    ]
-  }
-});
-
-
-// data permohonan pie chart
-// Highcharts.chart('o', {
-//             chart: {
-//                 plotBackgroundColor: null,
-//                 plotBorderWidth: null,
-//                 plotShadow: false,
-//                 type: 'pie'
-//             },
-//             title: {
-//                 text: 'Grafik Mahasiswa Baru Per Fakultas Tahun 2018'
-//             },
-//             tooltip: {
-//                 pointFormat: '{series.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
-//             },
-//             plotOptions: {
-//                 pie: {
-//                     allowPointSelect: true,
-//                     cursor: 'pointer',
-//                     dataLabels: {
-//                         enabled: true,
-//                         format: '<b>{point.name}</b>: {point.y} ({point.percentage:.1f}%)',
-//                         style: {
-//                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-//                         }
-//                     }
-//                 }
-//             },
-//             series: [{
-//                 name: 'Pembuatan',
-//                 colorByPoint: true,
-//                 data: [{
-//                     name: 'Ekonomi',
-//                     y: 570
-//                 }, {
-//                     name: 'Pertanian',
-//                     y: 180
-//                 }, {
-//                     name: 'Kesehatan',
-//                     y: 350
-//                 }, {
-//                     name: 'KIP',
-//                     y: 280
-//                 }]
-//             }]
-//         });
-
-
-// data permohonan bar
-Highcharts.chart('o', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: ''
-    },
-    subtitle: {
-        text: ''
-    },
-    xAxis: {
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
         title: {
             text: ''
+        },
+        subtitle: {
+            text: 'Click the columns to view the details'
+        },
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: 'Total percent Permohonan'
+            }
+
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        },
+
+        series: [{
+            name: "Jumlah Permohonan",
+            colorByPoint: true,
+            data: [{
+                    name: "Pembuatan SIM",
+                    y: 30,
+                    drilldown: "pembuatan-sim"
+                },
+                {
+                    name: "Kehilanagn SIM",
+                    y: 10.57,
+                    drilldown: "kehilangan-sim"
+                },
+                {
+                    name: "Perpanjangan SIM",
+                    y: 7.23,
+                    drilldown: "perpanjangan-sim"
+                }
+            ]
+        }],
+        drilldown: {
+            series: [{
+                    name: "Pembuatan SIM",
+                    id: "pembuatan-sim",
+                    data: [
+                        [
+                            "Januari",
+                            1.3
+                        ],
+                        [
+                            "Februari",
+                            53.02
+                        ],
+                        [
+                            "Maret",
+                            1.4
+                        ],
+                    ]
+                },
+                {
+                    name: "Kehilangan SIM",
+                    id: "kehilangan-sim",
+                    data: [
+                        [
+                            "v58.0",
+                            1.02
+                        ],
+                        [
+                            "v57.0",
+                            7.36
+                        ],
+                        [
+                            "v56.0",
+                            0.35
+                        ],
+                    ]
+                },
+                {
+                    name: "Perpanjangan SIM",
+                    id: "perpanjangan-sim",
+                    data: [
+                        [
+                            "v11.0",
+                            6.2
+                        ],
+                        [
+                            "v10.0",
+                            0.29
+                        ],
+                        [
+                            "v9.0",
+                            0.27
+                        ],
+                        [
+                            "v8.0",
+                            0.47
+                        ]
+                    ]
+                },
+
+            ]
         }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px"></span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.1,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Pembuatan',
-        data: {!!json_encode($items1)!!}
+    });
 
-    }, {
-        name: 'Perpanjangan',
-        data: {!!json_encode($items2)!!}
 
-    }, {
-        name: 'Kehilangan',
-        data: {!!json_encode($items3)!!}
+    // data permohonan pie chart
+    // Highcharts.chart('o', {
+    //             chart: {
+    //                 plotBackgroundColor: null,
+    //                 plotBorderWidth: null,
+    //                 plotShadow: false,
+    //                 type: 'pie'
+    //             },
+    //             title: {
+    //                 text: 'Grafik Mahasiswa Baru Per Fakultas Tahun 2018'
+    //             },
+    //             tooltip: {
+    //                 pointFormat: '{series.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
+    //             },
+    //             plotOptions: {
+    //                 pie: {
+    //                     allowPointSelect: true,
+    //                     cursor: 'pointer',
+    //                     dataLabels: {
+    //                         enabled: true,
+    //                         format: '<b>{point.name}</b>: {point.y} ({point.percentage:.1f}%)',
+    //                         style: {
+    //                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+    //                         }
+    //                     }
+    //                 }
+    //             },
+    //             series: [{
+    //                 name: 'Pembuatan',
+    //                 colorByPoint: true,
+    //                 data: [{
+    //                     name: 'Ekonomi',
+    //                     y: 570
+    //                 }, {
+    //                     name: 'Pertanian',
+    //                     y: 180
+    //                 }, {
+    //                     name: 'Kesehatan',
+    //                     y: 350
+    //                 }, {
+    //                     name: 'KIP',
+    //                     y: 280
+    //                 }]
+    //             }]
+    //         });
 
-    }]
-});
 
-// Data by month
-var pembuatan_sim =  <?php echo json_encode($data1) ?>;
-var laporan_kehilangan_sim =  <?php echo json_encode($data2) ?>;
-var perpanjangan_sim =  <?php echo json_encode($data3) ?>;
+    // data permohonan bar
+    Highcharts.chart('o', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px"></span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.1,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Pembuatan',
+            data: {
+                !!json_encode($items1) !!
+            }
+
+        }, {
+            name: 'Perpanjangan',
+            data: {
+                !!json_encode($items2) !!
+            }
+
+        }, {
+            name: 'Kehilangan',
+            data: {
+                !!json_encode($items3) !!
+            }
+
+        }]
+    });
+
+    // Data by month
+    var pembuatan_sim = <?php echo json_encode($data1) ?>;
+    var laporan_kehilangan_sim = <?php echo json_encode($data2) ?>;
+    var perpanjangan_sim = <?php echo json_encode($data3) ?>;
     Highcharts.chart('by_month', {
         title: {
             text: ''
@@ -543,7 +545,7 @@ var perpanjangan_sim =  <?php echo json_encode($data3) ?>;
         subtitle: {
             text: ''
         },
-         xAxis: {
+        xAxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         },
         yAxis: {
@@ -562,17 +564,18 @@ var perpanjangan_sim =  <?php echo json_encode($data3) ?>;
             }
         },
         series: [{
-            name: 'Pembuatan',
-            data: pembuatan_sim
-        },
-        {
-            name: 'Perpanjangan',
-            data: perpanjangan_sim
-        },
-        {
-            name: 'Laporan Kehilangan',
-            data: laporan_kehilangan_sim
-        }],
+                name: 'Pembuatan',
+                data: pembuatan_sim
+            },
+            {
+                name: 'Perpanjangan',
+                data: perpanjangan_sim
+            },
+            {
+                name: 'Laporan Kehilangan',
+                data: laporan_kehilangan_sim
+            }
+        ],
         responsive: {
             rules: [{
                 condition: {
@@ -587,6 +590,6 @@ var perpanjangan_sim =  <?php echo json_encode($data3) ?>;
                 }
             }]
         }
-});
+    });
 </script>
 @endsection
